@@ -31,7 +31,7 @@ conversion_dwg:
   version_dxf: ACAD2018
 
 repositorio:
-  url: ""               # ej. https://github.com/<usuario>/tramites-carmen-viboral
+  url: "https://github.com/primero263494/PRUEBA2"
   rama: main
 
 normograma:
