@@ -121,6 +121,8 @@ def _regla_suelos(regla: str, exp: dict, tr: dict) -> tuple[str, str]:
     """Estudio de suelos o apique según el listado de la Secretaría."""
     d = tr.get("datos") or {}
     pisos = _num(d.get("n_pisos"))
+    if P.valor("requisitos.criterios.criterio_suelos_baja_altura") == "nsr10":
+        return "estudio_suelos", "Criterio NSR-10 H.1.1.2: estudio geotécnico para todas las edificaciones"
     if regla == "suelos_urbano":
         lim = P.valor("requisitos.criterios.urbano_pisos_estudio_suelos")
         if pisos is None or pisos == 0:

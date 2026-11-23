@@ -341,8 +341,11 @@ def _estudio_suelos(exp, tr):
     nombre = {"estudio_suelos": "Se exige estudio de suelos según NSR-10", "apique": "Se exige apique según NSR-10"}.get(
         doc, "Falta definir estudio de suelos o apique")
     clave = "urbano_pisos_estudio_suelos" if regla == "suelos_urbano" else "rural_area_estudio_suelos"
-    return [_r("Estudio de suelos", INFO if "|" not in doc else REVISAR, f"{nombre}: {motivo}.",
-               P.obtener(f"requisitos.criterios.{clave}").fuente)]
+    estado = REVISAR if "|" in doc else INFO
+    if doc == "apique":
+        estado = REVISAR
+        motivo += ". Ojo: la NSR-10 H.1.1.2 exige estudio geotécnico; el apique sale del listado de la Secretaría"
+    return [_r("Estudio de suelos", estado, f"{nombre}: {motivo}.", P.obtener(f"requisitos.criterios.{clave}").fuente)]
 
 
 def _termino(tr):
