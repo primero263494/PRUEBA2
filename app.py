@@ -4,7 +4,7 @@ Ejecutar:  streamlit run app.py   (o doble clic en iniciar.bat)
 """
 import streamlit as st
 
-from core import auth, chequeo, db, documentos, expedientes
+from core import auth, calculadoras, chequeo, db, documentos, expedientes
 
 st.set_page_config(page_title="Trámites urbanísticos · El Carmen de Viboral",
                    page_icon="🏛️", layout="wide")
@@ -13,8 +13,9 @@ db.migrar()
 expedientes.migrar()
 documentos.migrar()
 chequeo.migrar()
+calculadoras.migrar()
 
-from paginas import (auditoria_pag, cartografia_pag, chequeo_pag, configuracion_pag, consulta_pag,  # noqa: E402
+from paginas import (auditoria_pag, calculadoras_pag, cartografia_pag, chequeo_pag, configuracion_pag, consulta_pag,  # noqa: E402
                      documentos_pag, expedientes_pag, inicio_pag, normas_pag, parametros_pag, planos_pag, usuarios_pag)
 
 PAGINAS = [
@@ -23,6 +24,7 @@ PAGINAS = [
     ("Expedientes y trámites", expedientes_pag.mostrar, "ver_norma"),
     ("Gestión documental", documentos_pag.mostrar, "expedientes"),
     ("Listas de chequeo", chequeo_pag.mostrar, "expedientes"),
+    ("Calculadoras", calculadoras_pag.mostrar, "ver_norma"),
     ("Consulta normativa", consulta_pag.mostrar, "ver_norma"),
     ("Parámetros normativos", parametros_pag.mostrar, "ver_parametros"),
     ("Normas cargadas", normas_pag.mostrar, "ver_norma"),

@@ -203,7 +203,7 @@ rural:
 
 plusvalia:
   tasa_participacion:
-    valor: 0.40
+    valor: "0.40"
     opciones:
       - {id: "0.40", valor: 0.40, etiqueta: "40 % — tasa del Concejo (PBOT art. 319)"}
       - {id: "0.30", valor: 0.30, etiqueta: "30 % — mínimo legal (Ley 388 art. 79)"}

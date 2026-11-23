@@ -27,6 +27,12 @@ def test_parametros_cargan_con_fuente():
     assert sin_fuente == [], sin_fuente
 
 
+def test_opciones_tienen_eleccion_valida():
+    for c, p in P.todos().items():
+        if p.opciones:
+            assert p.opcion_elegida() is not None, c
+
+
 def test_valores_clave():
     assert P.valor("pbot.cesiones_urbanas.tipo_b_porcentaje_area_neta") == 0.20
     assert P.valor("pbot.plusvalia.tasa_participacion") == 0.40

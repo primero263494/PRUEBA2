@@ -31,8 +31,8 @@ def mostrar():
         st.warning("Cartografía por cargar: " + ", ".join(cartografia.ROLES[r][0] for r in faltan) +
                    ". Vaya a Cartografía → Cargar capa.")
     st.markdown(
-        "**Módulos disponibles:** expedientes y trámites (con verificación contra la norma), gestión documental (carga, vista previa, documentos exigidos), listas de chequeo (con avance y sugerencias), consulta normativa (buscador, fichas por zona, usos del suelo, cesiones), "
+        "**Módulos disponibles:** expedientes y trámites (con verificación contra la norma), gestión documental (carga, vista previa, documentos exigidos), listas de chequeo (con avance y sugerencias), calculadoras (científica, IO/IC, cuadro de áreas, cesiones, plusvalía, liquidación), consulta normativa (buscador, fichas por zona, usos del suelo, cesiones), "
         "parámetros normativos, normas y normograma, cartografía y cruce del predio, configuración, usuarios y "
         "auditoría. **En desarrollo:** "
-        "calculadoras, análisis de planos e informes."
+        "análisis de planos completo e informes."
     )

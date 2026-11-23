@@ -14,8 +14,8 @@ y producir conceptos técnicos de la Secretaría de Planeación.
 | 2. Expedientes y trámites (radicado, predio, trámites, eliminación con copia, verificación contra la norma, términos en días hábiles) | Listo |
 | 3. Gestión documental (carga por trámite, clasificación automática, versiones, vista previa PDF/imagen/Word/Excel/DXF, documentos exigidos, papelera) | Listo |
 | 5. Listas de chequeo (por tipo de trámite, cumple/no cumple/no aplica con observaciones, sugerencias automáticas, avance, Excel) | Listo |
-| 6. Calculadoras (IO/IC, cuadro de áreas, cesiones, plusvalía, liquidación) | Siguiente |
-| Análisis de planos (DXF/DWG, IFC, .e2k/.s2k, PDF/OCR/IA, cruce) | Versión inicial: verificación sísmica y geotécnica rápida |
+| 6. Calculadoras (científica, IO/IC con ficha y planos, cuadro de áreas con Excel/Word, cesiones, plusvalía paso a paso, liquidación) | Listo |
+| Análisis de planos (DXF/DWG, IFC, .e2k/.s2k, PDF/OCR/IA, cruce) | Siguiente (versión inicial: verificación sísmica y geotécnica rápida) |
 | 7. Informes Word/PDF | Pendiente |
 
 ## Principio
