@@ -69,8 +69,10 @@ def _documentos(tr):
     dias = P.valor("tramites.general.vigencia_documentos_dias")
     fuente = P.obtener("tramites.general.vigencia_documentos_dias").fuente
     fr = _fecha(tr["fecha_radicacion"])
-    for campo, nombre in (("fecha_cert_tradicion", "Certificado de tradición"), ("fecha_paz_salvo", "Paz y salvo predial")):
-        f = _fecha(tr["datos"].get(campo))
+    from core import documentos
+    for campo, nombre, tipo_doc in (("fecha_cert_tradicion", "Certificado de tradición", "cert_tradicion"),
+                                    ("fecha_paz_salvo", "Paz y salvo predial", "paz_salvo")):
+        f = _fecha(tr["datos"].get(campo)) or _fecha(documentos.fecha_documento(tr["id"], tipo_doc))
         if not f:
             salida.append(_r(nombre, NO_VERIF, "Sin fecha de expedición registrada.", fuente))
         else:
@@ -330,6 +332,19 @@ def _termino(tr):
                p.fuente)]
 
 
+def _documentos_cargados(exp, tr):
+    from core import documentos
+    try:
+        f = documentos.faltantes(exp, tr)
+    except Exception:
+        return []
+    faltan = [x["nombre"] for x in f if not x["cargado"]]
+    fuente = "Manual de trámites interno, cap. 4.1 y 4.2"
+    return [_r("Documentos exigidos", CUMPLE if not faltan else NO_CUMPLE,
+               ("Completos (" + str(len(f)) + ").") if not faltan else
+               f"Faltan {len(faltan)} de {len(f)}: " + "; ".join(faltan), fuente)]
+
+
 # ------------------------------------------------------------- principal
 def verificar(expediente: dict, tramite: dict) -> list[dict]:
     cat = P.valor("tramites.tipos").get(tramite["tipo"], {})
@@ -338,6 +353,7 @@ def verificar(expediente: dict, tramite: dict) -> list[dict]:
     res = _obligatorios(expediente, tramite, cat)
     if "documentos" in v:
         res += _documentos(tramite)
+        res += _documentos_cargados(expediente, tramite)
     if "plan_parcial" in v or expediente.get("clase_suelo") == "expansion":
         res += _plan_parcial(expediente, fila)
     if "indices" in v:

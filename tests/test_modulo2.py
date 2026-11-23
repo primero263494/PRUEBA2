@@ -11,11 +11,12 @@ from core import ajustes  # noqa: E402
 _tmp = Path(tempfile.mkdtemp()) / "prueba2.db"
 ajustes.ruta_bd = lambda: _tmp
 
-from core import auditoria, calendario, db, expedientes as E, verificacion as V  # noqa: E402
+from core import auditoria, calendario, db, documentos, expedientes as E, verificacion as V  # noqa: E402
 from core import parametros as P  # noqa: E402
 
 db.migrar()
 E.migrar()
+documentos.migrar()
 
 HOY = date.today()
 

@@ -172,3 +172,81 @@ campos:
     fecha_cert_tradicion: {etiqueta: Expedición del certificado de tradición, unidad: fecha}
     fecha_paz_salvo: {etiqueta: Expedición del paz y salvo predial, unidad: fecha}
   fuente: {norma: Manual de trámites interno, articulo: "4.1 y 4.2"}
+
+# =============================================================================
+# DOCUMENTOS — catálogo, palabras para clasificar archivos automáticamente y
+# documentos exigidos por tipo de trámite (manual de trámites, caps. 4.1–4.3).
+# =============================================================================
+documentos:
+  catalogo:
+    valor:
+      fun: {nombre: Formulario Único Nacional (FUN), claves: [fun, formulario unico, formulario], vigencia_dias: null}
+      paz_salvo: {nombre: Paz y salvo municipal (predial), claves: [paz y salvo, paz_salvo, pazysalvo, predial], vigencia_dias: 30}
+      cert_tradicion: {nombre: Certificado de tradición y libertad, claves: [tradicion, libertad, ctl, certificado de tradicion], vigencia_dias: 30}
+      escritura: {nombre: Escritura pública, claves: [escritura], vigencia_dias: null}
+      identificacion: {nombre: Cédula de los propietarios, claves: [cedula, cc ], vigencia_dias: null}
+      camara_comercio: {nombre: Certificado de existencia y representación legal, claves: [camara, existencia, representacion legal, rut], vigencia_dias: 30}
+      poder: {nombre: Poder especial con firma original, claves: [poder], vigencia_dias: null}
+      autorizacion_notificacion: {nombre: Autorización de notificación por correo, claves: [autorizacion, notificacion], vigencia_dias: null}
+      profesionales: {nombre: Cédula y matrícula de los profesionales, claves: [matricula profesional, tarjeta profesional, copnia, cpnaa], vigencia_dias: null}
+      planos_arquitectonicos: {nombre: Planos arquitectónicos, claves: [arquitect, arq, planta, fachada, corte], vigencia_dias: null}
+      planos_estructurales: {nombre: Planos estructurales, claves: [estructur, est-, despiece, cimentacion], vigencia_dias: null}
+      memorias_calculo: {nombre: Memorias de cálculo y formatos de revisión, claves: [memoria, calculo, etabs, sap, e2k, s2k], vigencia_dias: null}
+      estudio_suelos: {nombre: Estudio de suelos (NSR-10 Título H), claves: [suelo, geotecn, geotecnico], vigencia_dias: null}
+      apique: {nombre: Apique, claves: [apique], vigencia_dias: null}
+      planos_hidrosanitarios: {nombre: Planos hidrosanitarios y desagües, claves: [hidrosanit, sanitari, desague], vigencia_dias: null}
+      factibilidad_servicios: {nombre: Alineamiento / factibilidades de servicios (EPM, La Cimarrona), claves: [factibilidad, epm, cimarrona, acueducto, alineamiento], vigencia_dias: null}
+      autorizacion_copropiedad: {nombre: Autorización de copropiedad (PH), claves: [copropiedad, propiedad horizontal, asamblea], vigencia_dias: null}
+      foto_valla: {nombre: Fotografía de la valla informativa, claves: [valla], vigencia_dias: null}
+      vecinos: {nombre: Cartas / direcciones de vecinos colindantes, claves: [vecino, colindante], vigencia_dias: null}
+      pma: {nombre: Plan de manejo ambiental (movimiento de tierras y escombros), claves: [pma, manejo ambiental, escombro], vigencia_dias: null}
+      levantamiento_topografico: {nombre: Levantamiento topográfico, claves: [topograf, levantamiento], vigencia_dias: null}
+      diseno_urbanistico: {nombre: Diseño urbanístico (vías, loteo, secciones), claves: [urbanis, loteo, parcelacion, seccion vial], vigencia_dias: null}
+      icanh: {nombre: Radicado ICANH (arqueología preventiva), claves: [icanh, arqueolog], vigencia_dias: null}
+      vertimientos: {nombre: Permiso de vertimientos Cornare, claves: [vertimiento, cornare], vigencia_dias: null}
+      pozo_septico: {nombre: Diseño o ficha técnica del pozo séptico, claves: [septico, pozo], vigencia_dias: null}
+      licencia_anterior: {nombre: Copia de la licencia o resolución anterior, claves: [licencia, resolucion], vigencia_dias: null}
+      certificado_estructural: {nombre: Certificado / peritaje estructural, claves: [peritaje, vulnerabilidad, certificado estructural], vigencia_dias: null}
+      levantamiento_arquitectonico: {nombre: Levantamiento arquitectónico de lo construido, claves: [levantamiento arq, construido], vigencia_dias: null}
+      declaracion_extrajuicio: {nombre: Declaración extrajuicio, claves: [extrajuicio, declaracion], vigencia_dias: null}
+      facturas_servicios: {nombre: Facturas de servicios públicos, claves: [factura], vigencia_dias: null}
+      solicitud_prorroga: {nombre: Solicitud escrita de prórroga, claves: [prorroga, solicitud], vigencia_dias: null}
+      cuadro_areas: {nombre: Cuadro de áreas y linderos, claves: [cuadro de areas, linderos], vigencia_dias: null}
+      polizas: {nombre: Pólizas de estabilidad y calidad, claves: [poliza], vigencia_dias: null}
+      planos_record: {nombre: Planos récord, claves: [record], vigencia_dias: null}
+      actas_empresas: {nombre: Actas de recibo de redes (EPM, La Cimarrona), claves: [acta de recibo, recibo de redes], vigencia_dias: null}
+      presupuesto: {nombre: Presupuesto financiero firmado por contador, claves: [presupuesto], vigencia_dias: null}
+      otro: {nombre: Otro documento, claves: [], vigencia_dias: null}
+    fuente: {norma: Manual de trámites interno, articulo: "4.1 a 4.3"}
+  base_comunes:
+    valor: [fun, paz_salvo, cert_tradicion, escritura, identificacion, poder, autorizacion_notificacion, profesionales]
+    nota: "Ítems 1 a 7 del manual. El certificado de cámara de comercio y el poder aplican solo si corresponde (persona jurídica / apoderado)."
+    fuente: {norma: Manual de trámites interno, articulo: "4.1"}
+  requeridos_por_tipo:
+    valor:
+      construccion_urbana: [planos_arquitectonicos, planos_estructurales, memorias_calculo, estudio_suelos, planos_hidrosanitarios, factibilidad_servicios, foto_valla, vecinos, pma]
+      construccion_rural: [planos_arquitectonicos, planos_estructurales, memorias_calculo, estudio_suelos, planos_hidrosanitarios, factibilidad_servicios, pozo_septico, foto_valla]
+      urbanizacion: [levantamiento_topografico, diseno_urbanistico, estudio_suelos, factibilidad_servicios, pma]
+      parcelacion: [levantamiento_topografico, diseno_urbanistico, estudio_suelos, factibilidad_servicios, pma, vertimientos]
+      adicion_modificacion_cambio_uso: [planos_arquitectonicos, factibilidad_servicios, licencia_anterior]
+      subdivision: [levantamiento_topografico, cuadro_areas]
+      cerramiento: [planos_arquitectonicos, planos_estructurales, memorias_calculo, factibilidad_servicios]
+      reconocimiento: [levantamiento_arquitectonico, certificado_estructural, declaracion_extrajuicio, facturas_servicios]
+      legalizacion: [planos_arquitectonicos, certificado_estructural, factibilidad_servicios]
+      prorroga: [solicitud_prorroga, licencia_anterior]
+      recibo_obras_urbanismo: [actas_empresas, polizas, planos_record]
+      permiso_ventas: [presupuesto, licencia_anterior]
+      concepto_norma: []
+      concepto_uso: []
+      alineamiento: []
+      certificado_riesgo: []
+      aprobacion_ph: [planos_arquitectonicos]
+    nota: "Condicionales que el programa agrega solo: ICANH si el lote ≥ 10.000 m² (urbanización/parcelación); copropiedad si hay PH; cámara de comercio si es persona jurídica."
+    fuente: {norma: Manual de trámites interno, articulo: "4.2 y 4.3"}
+  base_reducida_prorroga:
+    valor: [fun, paz_salvo, cert_tradicion, escritura, identificacion]
+    fuente: {norma: Manual de trámites interno, articulo: "4.2 núm. 10 (ítems 1 al 5)"}
+  extensiones_permitidas:
+    valor: [pdf, png, jpg, jpeg, tif, tiff, bmp, webp, doc, docx, xls, xlsx, csv, txt, dwg, dxf, ifc, e2k, s2k, f2k, zip, kml, kmz, geojson, gpkg, shp, shx, dbf, prj]
+    fuente: {norma: Manual de trámites interno, articulo: "4 (regla general: medio magnético con .dwg y .pdf)"}
+  tamano_maximo_mb: {valor: 200, unidad: MB por archivo, fuente: {norma: Ajuste del programa, articulo: "—"}}

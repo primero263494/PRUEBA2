@@ -155,7 +155,9 @@ def eliminar_expediente(eid: int, usuario: str, motivo: str) -> None:
     exp = obtener(eid)
     if not exp:
         return
-    copia = {"expediente": exp, "tramites": tramites(eid)}
+    from core import documentos  # import tardío para evitar ciclo
+    copia = {"expediente": exp, "tramites": tramites(eid), "documentos": documentos.listar(eid)}
+    copia["papelera"] = documentos.carpeta_a_papelera(exp)
     db.ejecutar("DELETE FROM expedientes WHERE id=?", (eid,))
     auditoria.registrar(usuario, "eliminar", "expediente", eid, antes=copia, motivo=motivo)
 
