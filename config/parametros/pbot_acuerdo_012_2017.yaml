@@ -1,0 +1,235 @@
+# =============================================================================
+# PARÁMETROS DEL PBOT — Acuerdo Municipal 012 de 2017, El Carmen de Viboral
+# Primer nivel de prevalencia municipal.
+#
+# Convención: cada parámetro es un bloque con "valor". Opcionales:
+#   unidad, fuente (norma + articulo), nota, opciones (lista elegible),
+#   editable (por defecto true). Los grupos sin "valor" solo organizan.
+# Si cambia la norma, edite este archivo (o use la página "Parámetros" del
+# programa, que guarda el cambio con usuario, fecha y motivo).
+# =============================================================================
+
+metadatos:
+  norma: Acuerdo Municipal 012 de 2017 (PBOT)
+  fecha_norma: "2017-10-17"
+  prevalencia: 1
+
+aprovechamientos:
+  tabla_poligonos:
+    valor: aprovechamientos_art138.csv
+    nota: >-
+      Tabla de 59 polígonos extraída del art. 138 (verificada contra la imagen de
+      la pág. 156). Columnas: densidad básica y adicional, pisos base y
+      adicionales, IC, IO urbanismos, IO lotes individuales.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "138"}
+  pisos_maximos_lote_mayor_800:
+    valor: 8
+    unidad: pisos
+    nota: >-
+      Lotes > 800 m² en consolidación y desarrollo urbano, si cumplen cesiones
+      A, B y C y pagan plusvalía.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "138 nota (****)"}
+  area_lote_para_8_pisos:
+    valor: 800
+    unidad: m²
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "138 nota (****)"}
+  tanque_agua_desde_niveles:
+    valor: 3
+    unidad: niveles
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "138 par. 2"}
+  altura_unidad_piso_residencial:
+    valor: 2.50
+    unidad: m
+    nota: Piso acabado a enrase de techo o cielo raso acabado.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "193"}
+  semisotano_altura_maxima_sobre_anden:
+    valor: 1.50
+    unidad: m
+    nota: Si la supera, cuenta como piso. Se mide desde el nivel 0:0 del andén.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "179 y 193"}
+  parqueaderos_cubiertos_sin_cerramiento_en_io:
+    valor: 0.50
+    unidad: fracción
+    nota: Se contabiliza el 50 % del área de parqueaderos cubiertos sin cerramientos laterales.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "137 (Índice de Ocupación)"}
+
+# -----------------------------------------------------------------------------
+# DEFINICIONES EN CONFLICTO: el programa ofrece las versiones como lista.
+# La opción elegida por defecto es la del PBOT (prevalencia) salvo que la
+# Secretaría escoja otra en la página "Parámetros".
+# -----------------------------------------------------------------------------
+definiciones:
+  area_neta:
+    valor: pbot_art137
+    opciones:
+      - id: pbot_art137
+        etiqueta: "PBOT art. 137 / Decreto 1077 art. 2.2.1.1"
+        formula: "Área bruta − (sistema vial principal + redes primarias + áreas de conservación y protección)"
+        nota: >-
+          No se descuentan cesiones, retiros a vías, laterales, de fondo ni a
+          quebradas. Coincide con la definición nacional.
+      - id: decreto_tarifas_2026
+        etiqueta: "Decreto 001 de 2026 (liquidación de urbanización y parcelación)"
+        formula: "Área total del lote − (retiros + vías obligadas)"
+        nota: Úsela solo para liquidar la expensa de urbanización/parcelación.
+      - id: manual_tramites
+        etiqueta: "Manual de trámites interno (cap. 3.1)"
+        formula: "Área bruta − (afectaciones viales arteriales + redes primarias + suelos de protección/EEP)"
+        nota: Variante del manual interno; no es norma.
+    nota: >-
+      Tres definiciones distintas. El programa calcula las tres y muestra cuál
+      se aplicó. Criterio por jerarquía: Ley 388/Decreto 1077 > PBOT > decretos
+      municipales.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "137"}
+  base_indice_ocupacion:
+    valor: area_total_predio
+    opciones:
+      - id: area_total_predio
+        etiqueta: "Área total del predio (PBOT art. 137; Decreto 1077 art. 2.2.1.1)"
+      - id: area_neta_descontada
+        etiqueta: "Área bruta − vías principales, redes primarias, protección y demás afectaciones (Decreto 1077 art. 2.2.6.2.5)"
+      - id: manual_neta_menos_retiros
+        etiqueta: "Área neta menos afectaciones y retiros (manual interno)"
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "137"}
+  base_indice_construccion:
+    valor: segun_tramite
+    opciones:
+      - id: segun_tramite
+        etiqueta: "Urbanizaciones: área bruta; lotes de urbanizaciones existentes: área neta (PBOT art. 137)"
+      - id: area_util
+        etiqueta: "Área útil (PBOT art. 137, primera frase)"
+      - id: area_total_predio
+        etiqueta: "Área total del predio (Decreto 1077 art. 2.2.1.1)"
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "137"}
+
+indice_construccion_maximo:
+  valor: 2.5
+  opciones:
+    - id: "2.5"
+      valor: 2.5
+      etiqueta: "2,5 — tabla de tratamientos (PBOT art. 138)"
+    - id: "4.0"
+      valor: 4.0
+      etiqueta: "4,0 — autorización especial de Planeación (D152 art. 39 par. 7)"
+      advertencia: >-
+        El Decreto 152 es de menor jerarquía que el PBOT. Use esta opción solo
+        con acto de autorización y soporte jurídico; nunca supera la altura del
+        polígono ni la del art. 57 del D152.
+  unidad: veces
+  fuente: {norma: Acuerdo 012 de 2017, articulo: "138"}
+
+cesiones_urbanas:
+  tipo_b_porcentaje_area_neta:
+    valor: 0.20
+    unidad: fracción del área neta
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "144 lit. b"}
+  tipo_b_minimo_en_sitio:
+    valor: 0.50
+    unidad: fracción de la cesión B
+    nota: El resto se paga para suplir espacio público municipal.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "144 lit. b"}
+  tipo_c_m2_por_vivienda:
+    valor: 1.5
+    unidad: m² construidos por vivienda
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "144 lit. c"}
+  tipo_c_porcentaje_otros_usos:
+    valor: 0.015
+    unidad: fracción del área total construida
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "144 lit. c"}
+  multifamiliar_lote_minimo:
+    valor: 300
+    unidad: m²
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "144 par. 1"}
+  multifamiliar_porcentaje_area_construida:
+    valor: 0.02
+    unidad: fracción del área total construida
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "144 par. 1"}
+  vis_vip_total_area_neta_urbanizable:
+    valor: 0.20
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "145"}
+  vis_vip_espacio_publico:
+    valor: 0.15
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "145"}
+  vis_vip_equipamiento:
+    valor: 0.05
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "145"}
+  antejardines_retiros_max_en_cesion:
+    valor: 0.20
+    unidad: fracción de la obligación total
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "148 lit. b"}
+  valor_compensacion_tipo_a_m2:
+    valor: null
+    unidad: $/m² de terreno urbanizado (zona homogénea)
+    nota: PENDIENTE. Valor comercial por zona homogénea (Dec. 1420/1998, Res. 762/1998).
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "143 par. 1 lit. b"}
+  valor_compensacion_tipo_b_m2:
+    valor: null
+    unidad: $/m² construido cubierto (CAMACOL o precio municipal)
+    nota: PENDIENTE. Hasta la inscripción a CAMACOL, lo fija el alcalde por decreto.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "143 par. 1 lit. b"}
+
+rural:
+  densidad_suburbana: {valor: 4, unidad: viv/ha, fuente: {norma: Acuerdo 012 de 2017, articulo: "245"}}
+  densidad_parcelacion_vivienda_campestre: {valor: 3, unidad: viv/ha, fuente: {norma: Acuerdo 012 de 2017, articulo: "245"}, nota: "Verificar contra Acuerdo Cornare 392 (densidad vivienda campestre)."}
+  densidad_centro_poblado: {valor: 30, unidad: viv/ha, fuente: {norma: Acuerdo 012 de 2017, articulo: "245"}}
+  densidad_uso_sostenible: {valor: 1, unidad: viv/ha, fuente: {norma: Acuerdo 012 de 2017, articulo: "245"}}
+  densidad_agroforestal: {valor: 1, unidad: viv/ha, fuente: {norma: Acuerdo 012 de 2017, articulo: "245"}}
+  io_produccion_forestal_agropecuaria: {valor: 0.20, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "246 lit. a"}}
+  io_uso_sostenible: {valor: 0.10, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "246 lit. c"}}
+  io_turistico: {valor: 0.10, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "246 lit. d"}}
+  io_desarrollo_restringido: {valor: 0.30, unidad: fracción del área neta, fuente: {norma: Acuerdo 012 de 2017, articulo: "246 lit. e"}}
+  io_industrial_suburbano: {valor: 0.30, unidad: fracción del área neta, fuente: {norma: Acuerdo 012 de 2017, articulo: "246 par. 1"}}
+  io_parques_industriales_con_cesion_adicional: {valor: 0.50, unidad: fracción del área neta, fuente: {norma: Acuerdo 012 de 2017, articulo: "246 par. 1"}}
+  pisos_vivienda: {valor: 2, unidad: pisos + mansarda, fuente: {norma: Acuerdo 012 de 2017, articulo: "247 lit. a"}}
+  pisos_comercio_servicios: {valor: 4, unidad: pisos, fuente: {norma: Acuerdo 012 de 2017, articulo: "247 lit. b"}, nota: "El D152 art. 144 omite este literal; prevalece el PBOT."}
+  pisos_industria: {valor: 1, unidad: piso (2 internos si hay oficinas), fuente: {norma: Acuerdo 012 de 2017, articulo: "247 lit. c"}}
+  altura_piso_rural: {valor: 2.80, unidad: m al caballete, fuente: {norma: Acuerdo 012 de 2017, articulo: "247 par. 1"}}
+  altura_industrial: {valor: 14, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "247 par. 2"}}
+  aislamiento_vivienda_rural: {valor: 10, unidad: m (5 m con autorización del vecino), fuente: {norma: Acuerdo 012 de 2017, articulo: "252 lit. a"}}
+  aislamiento_parcelacion_a_lindero: {valor: 10, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "252 lit. b"}}
+  aislamiento_comercio_suburbano: {valor: 5, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "250"}}
+  aislamiento_comercio_rural: {valor: 10, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "250"}}
+  aislamiento_industrial: {valor: 10, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "251"}}
+  aislamiento_pozo_septico_ptar: {valor: 15, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "252 par. 2 y 3"}}
+  subdivision_max_predios_sin_parcelacion: {valor: 4, unidad: predios, fuente: {norma: Acuerdo 012 de 2017, articulo: "248"}}
+  subdivision_minima_proteccion: {valor: 10000, unidad: m², fuente: {norma: Acuerdo 012 de 2017, articulo: "248 lit. a y 266"}}
+  cesion_parcelacion_tipo_b: {valor: 0.20, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "257"}}
+  cesion_parcelacion_tipo_c_suelo: {valor: 0.02, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "257"}}
+  cesion_parcelacion_tipo_c_m2_por_parcela: {valor: 5, unidad: m² de edificación por parcela, fuente: {norma: Acuerdo 012 de 2017, articulo: "257"}}
+  cesion_no_residencial_tipo_b: {valor: 0.20, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "257"}}
+  cesion_no_residencial_tipo_c_suelo: {valor: 0.01, unidad: fracción del área bruta, fuente: {norma: Acuerdo 012 de 2017, articulo: "257"}}
+  cesion_vivienda_individual_tipo_b: {valor: 0, unidad: fracción, nota: "PENDIENTE. La norma solo define la obligación tipo A para vivienda individual (PBOT 257, D152 142). Confirmar.", fuente: {norma: Acuerdo 012 de 2017, articulo: "257"}}
+  suburbano_cesiones_compensables_en_dinero: {valor: false, fuente: {norma: Acuerdo 012 de 2017, articulo: "253"}}
+
+plusvalia:
+  tasa_participacion:
+    valor: 0.40
+    opciones:
+      - {id: "0.40", valor: 0.40, etiqueta: "40 % — tasa del Concejo (PBOT art. 319)"}
+      - {id: "0.30", valor: 0.30, etiqueta: "30 % — mínimo legal (Ley 388 art. 79)"}
+      - {id: "0.50", valor: 0.50, etiqueta: "50 % — máximo legal (Ley 388 art. 79)"}
+    nota: >-
+      El municipio adoptó 40 %. Las demás opciones solo sirven para simular
+      escenarios o si un nuevo acuerdo cambia la tasa (rango legal 30–50 %).
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "319"}
+  hechos_generadores:
+    valor:
+      - incorporacion_suelo_rural_a_expansion_o_suburbano
+      - cambio_o_modificacion_de_uso
+      - mayor_aprovechamiento_edificabilidad
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "314"}
+  descuento_pago_en_obras_o_suelo: {valor: 0.05, fuente: {norma: Acuerdo 012 de 2017, articulo: "322"}}
+  descuento_titulos_anticipados: {valor: 0.10, fuente: {norma: Acuerdo 012 de 2017, articulo: "322"}}
+  mayor_aprovechamiento_solo_multifamiliar_y_urbanismos: {valor: true, fuente: {norma: Acuerdo 012 de 2017, articulo: "138 par. 3"}}
+
+ambiental:
+  ronda_cimarronas_minima: {valor: 30, unidad: m (o la mancha TR100 si es mayor), fuente: {norma: Acuerdo 012 de 2017, articulo: "19"}}
+  ronda_cimarronas_amortiguacion: {valor: 20, unidad: m adicionales a cada lado, fuente: {norma: Acuerdo 012 de 2017, articulo: "19"}}
+  ronda_la_madera: {valor: 40, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "40"}}
+  ronda_la_madera_minima_con_concepto_cornare: {valor: 30, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "40 par. 1"}}
+  ronda_rural_minima: {valor: 10, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "19 (Acuerdo Cornare 251/2011)"}}
+  pendiente_proteccion: {valor: 0.75, unidad: fracción (75 %), fuente: {norma: Acuerdo 012 de 2017, articulo: "19 (Acuerdo Cornare 250/2011)"}}
+  pendiente_plan_manejo_min: {valor: 0.25, fuente: {norma: Acuerdo 012 de 2017, articulo: "19 (Acuerdo Cornare 265/2011)"}}
+  pendiente_plan_manejo_max: {valor: 0.60, fuente: {norma: Acuerdo 012 de 2017, articulo: "19 (Acuerdo Cornare 265/2011)"}}
+  retiro_ptar_villa_maria_residencial: {valor: 200, unidad: m, fuente: {norma: Manual de trámites interno, articulo: "2.5"}, nota: "Del manual interno; verificar fuente normativa."}
+  arqueologia_preventiva_area_minima: {valor: 10000, unidad: m², fuente: {norma: Acuerdo 012 de 2017, articulo: "205"}}

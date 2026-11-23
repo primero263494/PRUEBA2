@@ -1,0 +1,75 @@
+# =============================================================================
+# NORMA NACIONAL — Ley 388 de 1997 y Decreto Único 1077 de 2015
+# Textos cargados: Ley 388 (Función Pública, compilación 2026-04-21) y
+# Decreto 1077 (versión integrada con modificaciones a 2023-12-05).
+# Las modificaciones posteriores a esas fechas están en "normograma".
+# Prevalencia: la norma nacional prima sobre la municipal.
+# =============================================================================
+
+metadatos:
+  prevalencia: 0
+
+definiciones_decreto_1077:
+  area_bruta:
+    valor: Área total del predio o predios objeto de la licencia de urbanización o delimitados por un plan parcial.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.1.1"}
+  area_neta_urbanizable:
+    valor: Área bruta menos sistema vial principal y de transporte, redes primarias de servicios públicos y áreas de conservación y protección.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.1.1"}
+  area_util:
+    valor: Área neta urbanizable menos cesiones obligatorias para vías locales, espacio público y equipamientos.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.1.1"}
+  indice_construccion:
+    valor: Área permitida de construcción / área total del predio.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.1.1"}
+  indice_ocupacion:
+    valor: Área ocupable en primer piso bajo cubierta / área total del predio.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.1.1"}
+  calculo_io_descontando_afectaciones:
+    valor: El IO se calcula sobre el área bruta descontadas vías principales, redes primarias, áreas de protección y demás afectaciones del predio.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.2.5"}
+
+licencias:
+  termino_resolver_dias_habiles: {valor: 45, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.3.1"}}
+  prorroga_termino_fraccion: {valor: 0.5, nota: "Una sola vez, hasta la mitad del término, por complejidad.", fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.3.1"}}
+  silencio_administrativo_positivo: {valor: true, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.3.1"}}
+  vigencia_meses_urbanizacion_parcelacion_obra_nueva: {valor: 36, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.4.1"}}
+  vigencia_meses_otras_modalidades: {valor: 24, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.4.1"}}
+  vigencia_meses_saneamiento: {valor: 12, nota: "No prorrogable.", fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.4.1"}}
+  prorroga_meses: {valor: 12, nota: "Una sola vez. El Decreto 074 de 2025 permitió una segunda prórroga transitoria de 12 meses (hasta junio de 2026).", fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.4.1 (par. 7 transitorio, Decreto 074 de 2025)"}}
+  plazo_pago_impuestos_dias_habiles: {valor: 30, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.6.8.2"}}
+  documentos_solicitud: {valor: Los fija el Ministerio de Vivienda por resolución (FUN y anexos)., fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.1.7"}}
+
+reconocimiento:
+  antiguedad:
+    valor: Edificación concluida como mínimo 5 años antes de la entrada en vigencia de la Ley 1848 de 2017.
+    nota: >-
+      DIFERENCIA: el manual interno exige 5 años antes de la solicitud. La
+      norma nacional exige 5 años antes de la Ley 1848 de 2017 (salvo orden
+      judicial o administrativa). Prevalece la norma nacional.
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.4.1.1 (mod. Decreto 1333 de 2020)"}
+
+plusvalia_ley_388:
+  hechos_generadores: {valor: [incorporacion_suelo_rural_a_expansion_o_suburbano, cambio_de_uso, mayor_aprovechamiento], fuente: {norma: Ley 388 de 1997, articulo: "74"}}
+  tasa_rango: {valor: [0.30, 0.50], fuente: {norma: Ley 388 de 1997, articulo: "79"}}
+  area_objeto: {valor: Área del inmueble destinada al nuevo uso o mayor aprovechamiento menos cesiones de espacio público y afectaciones del plan vial u otras obras., fuente: {norma: Ley 388 de 1997, articulo: "78"}}
+  ajuste_ipc: {valor: true, fuente: {norma: Ley 388 de 1997, articulo: "79 par. 2"}}
+  calculo_efecto: {valor: IGAC, catastro o peritos de la Lonja calculan el efecto por zonas o subzonas., fuente: {norma: Ley 388 de 1997, articulo: "80"}}
+
+suelo_rural_suburbano:
+  franja_aislamiento_corredor_suburbano: {valor: 5, unidad: m, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.2.2.2.3"}}
+  calzada_desaceleracion_ancho_min: {valor: 8, unidad: m, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.2.2.2.3"}}
+  accesos_calzada_cada: {valor: 300, unidad: m, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.2.2.2.3"}}
+
+normograma:
+  # Registro de normas con fecha de consulta. Use la página "Normas" para
+  # cargar versiones nuevas; el programa marca en rojo lo que lleve más de
+  # 6 meses sin verificar.
+  valor:
+    - {norma: Ley 388 de 1997, version: "Compilación Función Pública 2026-04-21", modificaciones: "Entre otras: Leyes 507/1999, 614/2000, 902/2004, 2037/2020, 2079/2021 (arts. 8, 85 y otros); Decreto Ley 019/2012; Decreto Ley 2106/2019", url: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=339", verificado: "2026-11-23"}
+    - {norma: Decreto 1077 de 2015, version: "Integrada a 2023-12-05", modificaciones: "Posteriores: Decreto 073/2025 (art. 303 Ley 2294/2023), Decreto 074/2025 (2.ª prórroga transitoria de licencias), Decreto 584/2025 (valor VIS), Decreto 670/2025, Decreto 1107/2026 (concurso de curadores)", url: "https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=73841", verificado: "2026-11-23"}
+    - {norma: Decreto 1783 de 2021, version: "Original", modificaciones: "Modifica 1077 en licencias (modalidades, requisitos, revisión)", url: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=175086", verificado: "2026-11-23"}
+    - {norma: Decreto 1333 de 2020, version: "Original", modificaciones: "Reconocimiento de edificaciones (Cap. 4, Tít. 6, 1077)", url: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=143009", verificado: "2026-11-23"}
+    - {norma: NSR-10, version: "Decreto 926/2010 + modificaciones", modificaciones: "Entre otros: Decretos 092/2011, 1711/2021, 1401/2023", url: "https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf", verificado: "2026-11-23"}
+    - {norma: Ley 400 de 1997 / Ley 1796 de 2016, version: "Vigente", modificaciones: "Revisión independiente de diseños estructurales y supervisión técnica", url: "", verificado: "pendiente"}
+    - {norma: Acuerdos Cornare 250, 251 y 265 de 2011; Acuerdo 392, version: "Pendiente de cargar", modificaciones: "Determinantes ambientales", url: "https://www.cornare.gov.co", verificado: "pendiente"}

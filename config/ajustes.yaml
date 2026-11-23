@@ -1,0 +1,38 @@
+# =============================================================================
+# AJUSTES DEL PROGRAMA — se pueden cambiar desde la página "Configuración".
+# =============================================================================
+
+municipio: El Carmen de Viboral
+departamento: Antioquia
+
+base_datos:
+  motor: sqlite            # sqlite (un computador) | postgresql (red, futuro)
+  ruta_sqlite: datos/bd/tramites.db
+
+lectura_escaneos:
+  # local : solo OCR en el equipo (Tesseract, español). Sin internet.
+  # ia    : modelo de visión por API. Requiere internet y clave. Los planos
+  #         salen del equipo hacia el proveedor.
+  # auto  : usa IA si hay internet y clave; si no, cae a local sin error.
+  modo: auto
+  idioma_ocr: spa
+  ia_proveedor: anthropic
+  ia_modelo: claude-sonnet-5-5
+  ia_variable_clave: ANTHROPIC_API_KEY   # la clave NUNCA se guarda en este archivo
+  ia_tiempo_espera_s: 60
+
+conversion_dwg:
+  # oda      : ODA File Converter (gratuito, propietario) — mejor compatibilidad
+  # libredwg : dwg2dxf de LibreDWG (libre, GPL)
+  # auto     : intenta ODA y luego LibreDWG
+  motor: auto
+  ruta_oda: ""          # ej. C:/Program Files/ODA/ODAFileConverter 25.12.0/ODAFileConverter.exe
+  ruta_libredwg: ""     # ej. C:/libredwg/dwg2dxf.exe
+  version_dxf: ACAD2018
+
+repositorio:
+  url: ""               # ej. https://github.com/<usuario>/tramites-carmen-viboral
+  rama: main
+
+normograma:
+  meses_alerta_verificacion: 6

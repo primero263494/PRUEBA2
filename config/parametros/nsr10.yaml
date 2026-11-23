@@ -1,0 +1,136 @@
+# =============================================================================
+# NSR-10 — Reglamento Colombiano de Construcción Sismo Resistente
+# Decreto 926 de 2010 y sus modificaciones (entre otras: Decretos 092/2011,
+# 1711/2021 y 1401/2023).
+#
+# Valores tomados del texto publicado en línea (Títulos A y H, versión que
+# hospeda el IDRD), consultados el 2026-11-23. Ninguno se escribió de memoria.
+# Antes de un concepto definitivo, verifique que ninguna modificación posterior
+# cambió el valor del municipio (Apéndice A-4) o la tabla citada.
+# =============================================================================
+
+metadatos:
+  norma: NSR-10 (Decreto 926 de 2010 y modificaciones)
+  consultado: "2026-11-23"
+  fuentes_en_linea:
+    titulo_a: https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf
+    titulo_h: https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/8titulo-h-nsr-100.pdf
+  modificaciones_conocidas:
+    - Decreto 1711 de 2021 (modifica, entre otros, Apéndice A-4 para Supía y Apéndice F.4-A)
+    - Decreto 1401 de 2023 (modificación parcial)
+    - Directiva Procuraduría 015 de 2026 (seguimiento a la actualización; NSR-10 sigue vigente)
+  nota: >-
+    En 2025 la AIS entregó el borrador AIS 100-24 a la Comisión Asesora
+    Permanente; mientras no se adopte por decreto rige la NSR-10.
+
+amenaza_sismica_municipio:
+  municipio: {valor: "El Carmen de Viboral", editable: false, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  codigo_dane: {valor: "05148", editable: false, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  Aa: {valor: 0.15, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  Av: {valor: 0.20, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  zona_amenaza: {valor: Intermedia, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  Ae: {valor: 0.11, nota: "Umbral de daño — para evaluación de edificaciones existentes.", fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  Ad: {valor: 0.06, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
+  microzonificacion: {valor: null, nota: "El municipio no tiene estudio de microzonificación cargado; se usan los valores del Apéndice A-4.", editable: true, fuente: {norma: NSR-10, articulo: "A.2.9 (microzonificación)"}}
+
+municipios_vecinos_referencia:
+  valor:
+    - {municipio: Rionegro, codigo: "05615", Aa: 0.15, Av: 0.20, zona: Intermedia, Ae: 0.12, Ad: 0.06}
+    - {municipio: Marinilla, codigo: "05440", Aa: 0.15, Av: 0.20, zona: Intermedia, Ae: 0.11, Ad: 0.06}
+    - {municipio: La Ceja, codigo: "05376", Aa: 0.15, Av: 0.20, zona: Intermedia, Ae: 0.13, Ad: 0.07}
+    - {municipio: El Santuario, codigo: "05697", Aa: 0.15, Av: 0.20, zona: Intermedia, Ae: 0.11, Ad: 0.06}
+    - {municipio: Medellín, codigo: "05001", Aa: 0.15, Av: 0.20, zona: Intermedia, Ae: 0.13, Ad: 0.07}
+  nota: Para verificar memorias que citen por error otro municipio.
+  fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}
+
+perfiles_suelo:
+  valor:
+    A: {descripcion: Roca competente, vs_min: 1500}
+    B: {descripcion: Roca de rigidez media, vs_min: 760, vs_max: 1500}
+    C: {descripcion: Suelos muy densos o roca blanda, vs_min: 360, vs_max: 760, N_min: 50, su_min_kPa: 100}
+    D: {descripcion: Suelos rígidos, vs_min: 180, vs_max: 360, N_min: 15, N_max: 50, su_min_kPa: 50, su_max_kPa: 100}
+    E: {descripcion: Suelos blandos, vs_max: 180, N_max: 15, su_max_kPa: 50}
+    F: {descripcion: "Requiere evaluación específica de sitio (A.2.10)"}
+  fuente: {norma: NSR-10, articulo: "Tablas A.2.4-1 y A.2.4-2"}
+
+Fa:
+  columnas: {valor: [0.1, 0.2, 0.3, 0.4, 0.5], nota: "Aa ≤ 0,1 … Aa ≥ 0,5; interpolación lineal permitida", fuente: {norma: NSR-10, articulo: "Tabla A.2.4-3"}}
+  tabla:
+    valor: {A: [0.8, 0.8, 0.8, 0.8, 0.8], B: [1.0, 1.0, 1.0, 1.0, 1.0], C: [1.2, 1.2, 1.1, 1.0, 1.0], D: [1.6, 1.4, 1.2, 1.1, 1.0], E: [2.5, 1.7, 1.2, 0.9, 0.9]}
+    fuente: {norma: NSR-10, articulo: "Tabla A.2.4-3"}
+
+Fv:
+  columnas: {valor: [0.1, 0.2, 0.3, 0.4, 0.5], nota: "Av ≤ 0,1 … Av ≥ 0,5; interpolación lineal permitida", fuente: {norma: NSR-10, articulo: "Tabla A.2.4-4"}}
+  tabla:
+    valor: {A: [0.8, 0.8, 0.8, 0.8, 0.8], B: [1.0, 1.0, 1.0, 1.0, 1.0], C: [1.7, 1.6, 1.5, 1.4, 1.3], D: [2.4, 2.0, 1.8, 1.6, 1.5], E: [3.5, 3.2, 2.8, 2.4, 2.4]}
+    fuente: {norma: NSR-10, articulo: "Tabla A.2.4-4"}
+
+coeficiente_importancia:
+  valor: {I: 1.00, II: 1.10, III: 1.25, IV: 1.50}
+  nota: Claves = grupo de uso.
+  fuente: {norma: NSR-10, articulo: "Tabla A.2.5-1"}
+
+espectro_diseno:
+  formulas:
+    valor:
+      T0: "0.10 * Av * Fv / (Aa * Fa)"
+      TC: "0.48 * Av * Fv / (Aa * Fa)"
+      TL: "2.4 * Fv"
+      Sa_meseta: "2.5 * Aa * Fa * I"
+      Sa_TC_TL: "1.2 * Av * Fv * I / T"
+      Sa_mayor_TL: "1.2 * Av * Fv * TL * I / T**2"
+    fuente: {norma: NSR-10, articulo: "A.2.6 (ecs. A.2.6-1 a A.2.6-6)"}
+
+periodo_aproximado:
+  formula: {valor: "Ta = Ct * hn ** alfa", fuente: {norma: NSR-10, articulo: "A.4.2.2 (ec. A.4.2-3)"}}
+  Ct_alfa:
+    valor:
+      porticos_concreto: {Ct: 0.047, alfa: 0.9}
+      porticos_acero: {Ct: 0.072, alfa: 0.8}
+      porticos_acero_arriostramiento_excentrico_brb: {Ct: 0.073, alfa: 0.75}
+      otros_sistemas_muros: {Ct: 0.049, alfa: 0.75}
+    fuente: {norma: NSR-10, articulo: "Tabla A.4.2-1"}
+
+derivas:
+  concreto_acero_madera_mamposteria_A6422: {valor: 0.010, unidad: fracción de hpi, fuente: {norma: NSR-10, articulo: "Tabla A.6.4-1"}}
+  mamposteria_A6423: {valor: 0.005, unidad: fracción de hpi, fuente: {norma: NSR-10, articulo: "Tabla A.6.4-1"}}
+
+separacion_sismica_cubierta:
+  valor:
+    "1-2 pisos": {losas_coinciden: 0.0, losas_no_coinciden: 0.0, sin_vecino: 0.0}
+    "3 pisos": {losas_coinciden: 0.0, losas_no_coinciden: 0.01, sin_vecino: 0.0}
+    "mas de 3 pisos": {losas_coinciden: 0.02, losas_no_coinciden: 0.03, sin_vecino: 0.01}
+  unidad: fracción de la altura de la edificación nueva (hn)
+  nota: Para pisos distintos a la cubierta, multiplicar por la altura del piso sobre el terreno (nota 1). No aplica a reconocimientos.
+  fuente: {norma: NSR-10, articulo: "A.6.5.2 y Tabla A.6.5-1"}
+
+geotecnia:
+  obligatoriedad:
+    valor: Estudio geotécnico definitivo obligatorio para todas las edificaciones urbanas y suburbanas.
+    nota: El manual interno admite apique para viviendas de 1–2 pisos; esa excepción no aparece en H.1.1.2. Confirmar criterio.
+    fuente: {norma: NSR-10, articulo: "H.1.1.2"}
+  categorias_unidad_construccion:
+    valor:
+      Baja: {niveles_max: 3, carga_columna_max_kN: 800}
+      Media: {niveles_min: 4, niveles_max: 10, carga_columna_min_kN: 801, carga_columna_max_kN: 4000}
+      Alta: {niveles_min: 11, niveles_max: 20, carga_columna_min_kN: 4001, carga_columna_max_kN: 8000}
+      Especial: {niveles_min: 21, carga_columna_min_kN: 8001}
+    nota: Se toma la categoría más desfavorable entre niveles y carga.
+    fuente: {norma: NSR-10, articulo: "Tabla H.3.1-1"}
+  sondeos_minimos:
+    valor:
+      Baja: {numero: 3, profundidad_m: 6}
+      Media: {numero: 4, profundidad_m: 15}
+      Alta: {numero: 4, profundidad_m: 25}
+      Especial: {numero: 5, profundidad_m: 30}
+    fuente: {norma: NSR-10, articulo: "Tabla H.3.2-1"}
+  fs_taludes_estatico:
+    valor: {diseno: 1.50, construccion: 1.25}
+    fuente: {norma: NSR-10, articulo: "Tabla H.2.4-1"}
+  fs_taludes_seudoestatico:
+    valor: {diseno: 1.05, construccion: 1.00}
+    fuente: {norma: NSR-10, articulo: "Tabla H.2.4-1"}
+  fs_indirectos_capacidad_portante:
+    valor: null
+    nota: "PENDIENTE: Tabla H.4.7-1 no se pudo leer completa en línea. Cargue el Título H en 'Normas' para completarla."
+    fuente: {norma: NSR-10, articulo: "Tabla H.4.7-1"}

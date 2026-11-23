@@ -1,0 +1,91 @@
+# =============================================================================
+# PARÁMETROS DEL DECRETO MUNICIPAL 152 DE 2018 — Manual de Urbanismo y
+# Espacio Público. Segundo nivel de prevalencia municipal.
+# Fuente leída por OCR del escaneado; los ítems marcados PENDIENTE no fueron
+# legibles y deben transcribirse del documento físico.
+# =============================================================================
+
+metadatos:
+  norma: Decreto Municipal 152 de 2018
+  fecha_norma: "2018-11-23"
+  prevalencia: 2
+
+vias:
+  seccion_arteria: {valor: {calzada: 7.0, anden: 1.5, zona_verde: 1.0, seccion_publica: 12.0, pendiente_long_max: 0.12, pendiente_transv_min: 0.01}, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "15"}}
+  seccion_colectora: {valor: {calzada: 6.0, anden: 1.2, zona_verde: 1.0, seccion_publica: 10.4, pendiente_long_max: 0.12, pendiente_transv_min: 0.01}, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "15"}}
+  seccion_servicio: {valor: {calzada: 6.0, anden: 1.2, zona_verde: 0.8, seccion_publica: 10.0, pendiente_long_max: 0.12, pendiente_transv_min: 0.01}, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "15"}}
+  seccion_peatonal: {valor: {calzada: 5.0, anden: 1.5, seccion_publica: 8.0, pendiente_long_max: 0.12, pendiente_transv_min: 0.01}, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "15"}}
+  via_sin_salida_longitud_max: {valor: 80, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "17 par."}}
+  retorno_circular_diametro: {valor: 16, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "17 num. 1"}}
+  retorno_rectangular: {valor: [9, 18], unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "17 num. 2"}}
+  angulo_interseccion_min: {valor: 60, unidad: grados, fuente: {norma: Decreto 152 de 2018, articulo: "18"}}
+  angulo_interseccion_max: {valor: 90, unidad: grados, fuente: {norma: Decreto 152 de 2018, articulo: "18"}}
+  distancia_min_entre_ejes: {valor: 33, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "18"}}
+  sendero_peatonal_longitud_max: {valor: 80, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "19"}}
+  formula_ochava_vias:
+    valor: null
+    nota: "PENDIENTE: la fórmula del radio R (vías ≥ 12 m y < 12 m) está en imagen; transcribir de la pág. 28 del decreto."
+    fuente: {norma: Decreto 152 de 2018, articulo: "22"}
+
+andenes:
+  ancho_libre_min: {valor: 1.20, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "21 num. 1"}}
+  bordillo_min: {valor: 0.15, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "21 num. 2"}}
+  bordillo_max: {valor: 0.20, unidad: m, nota: "0,20 m en vías arterias.", fuente: {norma: Decreto 152 de 2018, articulo: "21 num. 2"}}
+  pendiente_escalas_desde: {valor: 0.16, fuente: {norma: Decreto 152 de 2018, articulo: "21 num. 4"}}
+  rampa_esquina_retiro: {valor: 3.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "21 num. 5"}}
+  rampa_esquina_ancho_min: {valor: 1.20, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "21 num. 5"}}
+  ochava_edificacion_radio_min: {valor: 2.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "23 par. 1"}}
+
+edificacion:
+  ic_maximo_autorizacion_especial: {valor: 4.0, nota: "Ver pbot.indice_construccion_maximo: opción condicionada.", fuente: {norma: Decreto 152 de 2018, articulo: "39 par. 7"}}
+  areas_excluidas_del_ic:
+    valor: [balcones, marquesinas, parasoles, recreacion_y_servicios_colectivos, instalaciones_mecanicas, tanques, piscinas, parqueaderos_privados_y_visitantes, zonas_comunes]
+    nota: "Se excluyen del IC pero sí se liquidan en el impuesto de construcción. Los parqueaderos sí cuentan para la altura."
+    fuente: {norma: Decreto 152 de 2018, articulo: "39 par. 4"}
+  semisotano_altura_max: {valor: 1.50, unidad: m sobre el nivel más bajo del andén, fuente: {norma: Decreto 152 de 2018, articulo: "41"}}
+  escalera_formula: {valor: "2c + h = 0.64", fuente: {norma: Decreto 152 de 2018, articulo: "54 num. 1"}}
+  escalera_contrahuella_max: {valor: 0.18, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "54 num. 1"}}
+  escalera_huella_min: {valor: 0.28, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "54 num. 1"}}
+  escalera_ancho_1_vivienda: {valor: 0.90, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "54 num. 2"}}
+  escalera_ancho_2_viviendas: {valor: 1.10, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "54 num. 2"}}
+  escalera_ancho_mas_2_viviendas: {valor: 1.20, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "54 num. 2"}}
+  puerta_circulacion_min_residencial: {valor: 1.20, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "55"}}
+  rampa_pendiente_max: {valor: 0.11, fuente: {norma: Decreto 152 de 2018, articulo: "55"}}
+  rampa_ancho_min: {valor: 1.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "55"}}
+  rampa_tramo_max: {valor: 9.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "55"}}
+  rampa_descanso_min: {valor: 1.50, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "55"}}
+  ascensor_desde_niveles: {valor: 6, unidad: niveles (más de 5), fuente: {norma: Decreto 152 de 2018, articulo: "56"}}
+  patio_lado_min: {valor: 3.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "52"}}
+  patio_area_min_por_pisos:
+    valor: {"1": 7.5, "2": 7.5, "3": 7.5, "4": null, "5": null, "6": null, "7": 10.5, "8": 10.5}
+    unidad: m²
+    nota: "PENDIENTE: filas de 4, 5 y 6 pisos ilegibles en el OCR; transcribir del original."
+    fuente: {norma: Decreto 152 de 2018, articulo: "52"}
+  distancia_ventanas_con_registro: {valor: 6.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "52"}}
+  mansarda_max_fraccion_piso_inferior: {valor: 0.70, fuente: {norma: Decreto 152 de 2018, articulo: "57 par. 5"}}
+  via_menor_8m_altura_max: {valor: {pisos: 2, metros: 6}, fuente: {norma: Decreto 152 de 2018, articulo: "57 par. 4"}}
+  seccion_requerida_3_pisos_o_mas: {valor: 10, unidad: m entre paramentos, fuente: {norma: Decreto 152 de 2018, articulo: "57 par. 4 y 62"}}
+  apartamento_area_min: {valor: 45, unidad: m², fuente: {norma: Decreto 152 de 2018, articulo: "60"}}
+  apartaestudio_area_min: {valor: 40, unidad: m², fuente: {norma: Decreto 152 de 2018, articulo: "61"}}
+  retiro_medianeria_fachada_abierta: {valor: 6, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "62"}}
+  retiro_medianeria_fachada_semicerrada: {valor: 3, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "62"}}
+  retiro_medianeria_fachada_cerrada: {valor: 0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "62"}}
+  frente_minimo_local_y_vivienda_mixta: {valor: 3.0, unidad: m, fuente: {norma: Decreto 152 de 2018, articulo: "57 par. 3"}}
+
+tipologias_vivienda:
+  valor:
+    - {tipologia: unifamiliar, area_min: 60, area_max: 71, frente_min: 6.0, pisos: "2 + mansarda", unidades: 1}
+    - {tipologia: bifamiliar, area_min: 72, area_max: 94, frente_min: 7.0, pisos: "3 + mansarda si el 1.er piso es parqueadero/comercio; si no 2 + mansarda", unidades: 2}
+    - {tipologia: trifamiliar, area_min: 95, area_max: 119, frente_min: 7.0, pisos: "4 + mansarda si el 1.er piso es parqueadero/comercio; si no 3 + mansarda", unidades: 3}
+    - {tipologia: multifamiliar, area_min: 120, area_max: 799, frente_min: 8.0, frente_adicional_por_piso_sobre_5: 1.0, pisos: "según art. 138 PBOT", unidades: "4 o más"}
+  fuente: {norma: Decreto 152 de 2018, articulo: "57 (y PBOT art. 165)"}
+
+urbanizacion:
+  lote_obliga_licencia_urbanizacion: {valor: 800, unidad: m², fuente: {norma: Decreto 152 de 2018, articulo: "76 lit. a"}}
+
+rural:
+  io_centro_poblado_lote_hasta_120: {valor: 0.85, fuente: {norma: Decreto 152 de 2018, articulo: "143 lit. e"}}
+  io_centro_poblado_lote_mayor_120: {valor: 0.60, fuente: {norma: Decreto 152 de 2018, articulo: "143 lit. e"}}
+  io_areas_protegidas_drmi_rfpr: {valor: 0.20, unidad: fracción del área neta, fuente: {norma: Decreto 152 de 2018, articulo: "143 lit. f"}}
+  pisos_areas_protegidas: {valor: 2, unidad: pisos, fuente: {norma: Decreto 152 de 2018, articulo: "144 lit. c"}}
+  pergolas_cuentan_en_io: {valor: true, fuente: {norma: Decreto 152 de 2018, articulo: "143 par. 4"}}

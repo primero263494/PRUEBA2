@@ -1,0 +1,60 @@
+sector,tratamiento,codigo,tipologia,densidad_viv_ha_basica,densidad_adicional,altura_base_pisos,altura_adicional_pisos,ic,io_urbanismos,io_lotes_individuales
+1 Norte,Conservación,S1-C-1,N/A,N/A,,N/A,N/A,N/A,N/A,N/A
+1 Norte,Conservación,S1-C-2,N/A,N/A,,N/A,N/A,N/A,N/A,N/A
+1 Norte,Conservación,S1-C-3,N/A,N/A,,N/A,N/A,N/A,N/A,N/A
+1 Norte,Consolidación,S1-CN-1,UNI-BI-TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+1 Norte,Consolidación,S1-CN-2,UNI-BI-TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+1 Norte,Consolidación,S1-CN-21,UNI_BI_TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+1 Norte,Consolidación,S1-CN-22,UNI-BI_TRI_MULTI_FAMILIAR(**),90,,5,3,2.5,85%,85%
+1 Norte,Consolidación,S1-CN-23,UNI-BI_TRI_MULTI_FAMILIAR(**),90,,5,3,2.5,85%,85%
+1 Norte,Consolidación,S1-CN-3,UNI-BI_TRI_MULTI_FAMILIAR(**),90,,5,3,2.5,85%,85%
+1 Norte,Consolidación,S1-CN-4,N/A,N/A,,N/A,N/A,N/A,N/A,N/A
+1 Norte,Desarrollo en Expansión,S1-DE-1,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+1 Norte,Desarrollo en Expansión,S1-DE-2,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+1 Norte,Desarrollo en Expansión,S1-DE-3,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+1 Norte,Desarrollo en Expansión,S1-DE-4,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+1 Norte,Desarrollo en Expansión,S1-DE-5,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+1 Norte,Desarrollo en Expansión,S1-DE-11,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+1 Norte,Desarrollo Urbano,S1-DU-1,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+1 Norte,Desarrollo Urbano,S1-DU-2,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+1 Norte,Desarrollo Urbano,S1-DU-3,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+1 Norte,Desarrollo Urbano,S1-DU-4,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+1 Norte,Mejoramiento Integral,S1-MI-1,UNI-BI_TRI_MULTI_FAMILIAR,90,,2,1,2.5,75%,85%
+1 Norte,Mejoramiento Integral,S1-MI-4,UNI-BII_TRI_MULTI_FAMILIAR,90,,3,2,2.5,75%,85%
+1 Norte,Mejoramiento Integral,S1-MI-5,UNI-BI_TRI_MULTI_FAMILIAR,90,,3,2,2.5,75%,85%
+2 Centro,Conservación,S2-C-4,N/A,N/A,,N/A,N/A,N/A,N/A,N/A
+2 Centro,Conservación,S2-C-5,UNI-BI-TRI_FAMILIAR_MUL,N/A,,3,2,2.5,85%,85%
+2 Centro,Conservación,S2-C-6,N/A,N/A,,N/A,N/A,N/A,N/A,N/A
+2 Centro,Consolidación,S2-CN-19,UNI_BI_TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+2 Centro,Consolidación,S2-CN-20,UNI-BI-TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+2 Centro,Consolidación,S2-CN-5,UNI-BI-TRI_MULTI_(**),90,,5,3,2.5,85%,85%
+2 Centro,Consolidación,S2-CN-6,UNI-BI-TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+2 Centro,Consolidación,S2-CN-7,UNI-BI_TRI_MULTI_FAMILIAR(**),90,,5,3,2.5,85%,85%
+2 Centro,Consolidación,S2-CN-8,UNI-BI_TRI_MULTI_FAMILIAR(**),90,,5,3,2.5,85%,85%
+3 Sur,Desarrollo Urbano,S2-DE-11,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S2-DE-5,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S2-DE-6,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+2 Centro,Desarrollo en Expansión,S2-DE-7,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+2 Centro,Mejoramiento Integral,S2-MI-2,UNI-BI_TRI_MULTI_FAMILIAR,90,,5,3,2.5,85%,85%
+2 Centro,Mejoramiento Integral,S2-MI-3,UNI-BI_TRI_MULTIFAMILIAR,90,,3,2,2.5,75%,N/A
+3 Sur,Conservación,S3-C-7,N/A,N/A,,4,N/A,N/A,N/A,85%
+3 Sur,Consolidación,S3-CN-10,UNI–BI_TRI_MULTI_FAMILIAR(**),90,,3,3,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-11,UNI–BIFAMILIAR,N/A,,2,N/A,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-12,UNI–BI_FAMILIAR,N/A,,2,N/A,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-13,UNI-BI-TRI_MULTI_FAMILIAR,90,,3,3,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-14,UNI-BI-TRI_MULTI_FAMILIAR,90,,3,1,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-15,UNI-BI-TRI_MULTI_FAMILIAR,90,,3,1,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-16,UNFAMILIAR,N/A,,2,N/A,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-17,UNI-BI_TRI_MULTI_FAMILIAR(**),90,,5,3,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-18,UNI-BIFAMILIAR,90,,3,N/A,2.5,85%,85%
+3 Sur,Consolidación,S3-CN-9,UNI-BI__TRI_MULTI_FAMILIAR(**),90,,3,3,2.5,85%,85%
+3 Sur,Desarrollo en Expansión,S3-DE-10,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+3 Sur,Desarrollo en Expansión,S3-DE-11,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+3 Sur,Desarrollo en Expansión,S3-DE-8,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+3 Sur,Desarrollo en Expansión,S3-DE-9,UNI_BI_TRI_MULTI_FAMILIAR,110,10,6,2,2.5,60%,85%
+3 Sur,Desarrollo Urbano,S3-DU-10,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S3-DU-12,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S3-DU-13,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S3-DU-7,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S3-DU-8,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
+3 Sur,Desarrollo Urbano,S3-DU-9,UNI_BI_TRI_MULTI_FAMILIAR,100,10,5,3,2.5,70%,85%
