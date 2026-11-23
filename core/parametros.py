@@ -31,10 +31,11 @@ ARCHIVOS = {
     "d152": "decreto_152_2018.yaml",
     "tarifas": "tarifas_decreto_001_2026.yaml",
     "nsr10": "nsr10.yaml",
+    "tramites": "tramites.yaml",
 }
 
 # Orden de prevalencia para resolver conflictos (menor = prima)
-PREVALENCIA = {"nacional": 0, "nsr10": 0, "pbot": 1, "d152": 2, "tarifas": 3}
+PREVALENCIA = {"nacional": 0, "nsr10": 0, "tramites": 0, "pbot": 1, "d152": 2, "tarifas": 3}
 
 _CAMPOS_BASE = {"valor", "unidad", "fuente", "nota", "opciones", "editable"}
 

@@ -1,0 +1,174 @@
+# =============================================================================
+# CATÁLOGO DE TRÁMITES — tipos, modalidades, campos obligatorios y
+# verificaciones que aplica el programa. Basado en el Decreto 1077 de 2015
+# (licencias y modalidades), la matriz de requisitos del manual de trámites
+# de la Secretaría (cap. 4.2) y el Decreto 001 de 2026 (otras actuaciones).
+# =============================================================================
+
+metadatos:
+  norma: Decreto 1077 de 2015 y manual de trámites interno
+  prevalencia: 0
+
+general:
+  formato_radicado:
+    valor: "{dane}-0-{aa}-{consecutivo:04d}"
+    nota: "Ej. 05148-0-26-0001. Cámbielo si la Secretaría usa otro formato; también se puede escribir el radicado a mano."
+    fuente: {norma: Manual de trámites interno, articulo: "Radicación"}
+  codigo_dane: {valor: "05148", fuente: {norma: DANE DIVIPOLA, articulo: "El Carmen de Viboral"}}
+  estados:
+    valor: [radicado, en_revision, acta_observaciones, en_correcciones, viable, liquidado, licencia_expedida, negado, desistido, archivado]
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.2 y ss. (trámite)"}
+  vigencia_documentos_dias:
+    valor: 30
+    unidad: días calendario (1 mes)
+    nota: Certificado de tradición, paz y salvo y certificado de existencia con expedición no mayor a 1 mes.
+    fuente: {norma: Manual de trámites interno, articulo: "4.1"}
+  reconocimiento_fecha_limite_conclusion:
+    valor: "2012-07-17"
+    nota: "La edificación debe estar concluida 5 años antes de la entrada en vigencia de la Ley 1848 (18-jul-2017). MinVivienda: no procede si se culminó después del 17-jul-2012."
+    fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.4.1.1 (Ley 1848 de 2017, art. 6)"}
+
+tipos:
+  valor:
+    construccion_urbana:
+      nombre: Licencia de construcción — zona urbana
+      modalidades: [obra_nueva, ampliacion, adecuacion, modificacion, restauracion, reforzamiento_estructural, demolicion, reconstruccion]
+      campos: [area_lote, area_ocupada_piso1, area_construida, n_pisos, uso_principal]
+      verificaciones: [indices, altura, densidad, tipologia_lote, usos, documentos, otros_usos_residencial]
+      vigencia: vigencia_meses_urbanizacion_parcelacion_obra_nueva
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.7; manual 4.2 núm. 1"
+    construccion_rural:
+      nombre: Licencia de construcción — zona rural
+      modalidades: [obra_nueva, ampliacion, adecuacion, modificacion, reforzamiento_estructural, demolicion, reconstruccion]
+      campos: [area_lote, area_ocupada_piso1, area_construida, n_pisos, uso_principal, categoria_rural]
+      verificaciones: [indices_rural, altura_rural, documentos]
+      vigencia: vigencia_meses_urbanizacion_parcelacion_obra_nueva
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.7; manual 4.2 núm. 2"
+    urbanizacion:
+      nombre: Licencia de urbanización
+      modalidades: [desarrollo, saneamiento, reurbanizacion]
+      campos: [area_lote, area_neta, n_viviendas]
+      verificaciones: [plan_parcial, densidad, arqueologia, documentos]
+      vigencia: vigencia_meses_urbanizacion_parcelacion_obra_nueva
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.4; manual 4.2 núm. 3"
+    parcelacion:
+      nombre: Licencia de parcelación
+      modalidades: [parcelacion, saneamiento]
+      campos: [area_lote, n_parcelas]
+      verificaciones: [arqueologia, documentos]
+      vigencia: vigencia_meses_urbanizacion_parcelacion_obra_nueva
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.5; manual 4.2 núm. 4"
+    adicion_modificacion_cambio_uso:
+      nombre: Adición, modificación y/o cambio de uso
+      modalidades: [ampliacion, modificacion, cambio_de_uso]
+      campos: [area_lote, area_ocupada_piso1, area_construida, n_pisos, uso_principal]
+      verificaciones: [indices, altura, usos, documentos]
+      vigencia: vigencia_meses_otras_modalidades
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.7; manual 4.2 núm. 5"
+    subdivision:
+      nombre: Subdivisión predial / reloteo
+      modalidades: [subdivision_rural, subdivision_urbana, reloteo]
+      campos: [area_lote, n_unidades_resultantes]
+      verificaciones: [subdivision, documentos]
+      vigencia: null
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.6; manual 4.2 núm. 6"
+    cerramiento:
+      nombre: Cerramiento
+      modalidades: [cerramiento]
+      campos: [area_lote]
+      verificaciones: [documentos]
+      vigencia: vigencia_meses_otras_modalidades
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.1.7; manual 4.2 núm. 7"
+    reconocimiento:
+      nombre: Reconocimiento de edificación
+      modalidades: [urbano, rural]
+      campos: [area_lote, area_construida, n_pisos, fecha_conclusion_obra]
+      verificaciones: [reconocimiento, usos, documentos]
+      vigencia: null
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.4.1.1; manual 4.2 núm. 8"
+    legalizacion:
+      nombre: Legalización urbanística / arquitectónica
+      modalidades: [urbanistica, arquitectonica]
+      campos: [area_lote, area_construida]
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Manual 4.2 núm. 9"
+    prorroga:
+      nombre: Prórroga de licencia
+      modalidades: [prorroga]
+      campos: [licencia_anterior, fecha_vencimiento_licencia]
+      verificaciones: [prorroga]
+      vigencia: prorroga_meses
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.2.4.1; manual 4.2 núm. 10"
+    recibo_obras_urbanismo:
+      nombre: Recibo de obras de urbanismo
+      modalidades: [recibo]
+      campos: [licencia_anterior]
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Manual 4.3"
+    permiso_ventas:
+      nombre: Permiso de ventas (radicación de documentos)
+      modalidades: [radicacion]
+      campos: [licencia_anterior]
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Decreto 1077 de 2015, art. 2.2.5.3.1 (Decreto Ley 019 de 2012, art. 185); manual 4.3"
+    concepto_norma:
+      nombre: Concepto de norma urbanística
+      modalidades: [concepto]
+      campos: []
+      verificaciones: []
+      vigencia: null
+      fuente: "Decreto 001 de 2026; Decreto 1077 de 2015, art. 2.2.6.1.3.1"
+    concepto_uso:
+      nombre: Concepto de uso del suelo
+      modalidades: [concepto]
+      campos: [uso_principal]
+      verificaciones: [usos]
+      vigencia: null
+      fuente: "Decreto 001 de 2026; Decreto 1077 de 2015, art. 2.2.6.1.3.1"
+    alineamiento:
+      nombre: Alineamiento (hilos)
+      modalidades: [alineamiento]
+      campos: []
+      verificaciones: []
+      vigencia: null
+      fuente: "Decreto 001 de 2026"
+    certificado_riesgo:
+      nombre: Certificado de riesgo del predio
+      modalidades: [certificado]
+      campos: []
+      verificaciones: []
+      vigencia: null
+      fuente: "Decreto 001 de 2026"
+    aprobacion_ph:
+      nombre: Aprobación de planos de propiedad horizontal
+      modalidades: [ph]
+      campos: [area_construida]
+      verificaciones: []
+      vigencia: null
+      fuente: "Decreto 1077 de 2015, art. 2.2.6.1.3.1; Decreto 001 de 2026"
+  fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.1.1 a 2.2.6.1.1.7 y 2.2.6.1.3.1"}
+
+campos:
+  valor:
+    area_lote: {etiqueta: Área del lote, unidad: m²}
+    area_neta: {etiqueta: Área neta urbanizable, unidad: m²}
+    area_ocupada_piso1: {etiqueta: Área ocupada en primer piso, unidad: m²}
+    area_construida: {etiqueta: Área construida total, unidad: m²}
+    area_otros_usos: {etiqueta: Área construida en usos distintos a vivienda, unidad: m²}
+    n_pisos: {etiqueta: Número de pisos, unidad: pisos}
+    n_viviendas: {etiqueta: Número de viviendas, unidad: unidades}
+    n_parcelas: {etiqueta: Número de parcelas, unidad: unidades}
+    n_unidades_resultantes: {etiqueta: Predios resultantes, unidad: unidades}
+    frente_lote: {etiqueta: Frente del lote, unidad: m}
+    seccion_via: {etiqueta: Sección de la vía entre paramentos, unidad: m}
+    uso_principal: {etiqueta: Uso principal (código CIIU o "residencial"), unidad: ""}
+    categoria_rural: {etiqueta: Categoría del suelo rural, unidad: ""}
+    fecha_conclusion_obra: {etiqueta: Fecha de conclusión de la obra, unidad: fecha}
+    licencia_anterior: {etiqueta: Número de la licencia anterior, unidad: ""}
+    fecha_vencimiento_licencia: {etiqueta: Vencimiento de la licencia, unidad: fecha}
+    fecha_cert_tradicion: {etiqueta: Expedición del certificado de tradición, unidad: fecha}
+    fecha_paz_salvo: {etiqueta: Expedición del paz y salvo predial, unidad: fecha}
+  fuente: {norma: Manual de trámites interno, articulo: "4.1 y 4.2"}

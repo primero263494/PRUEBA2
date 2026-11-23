@@ -13,6 +13,7 @@ NOMBRES = {
     "pbot": "PBOT (Acuerdo 012/2017)",
     "d152": "Decreto 152/2018",
     "tarifas": "Tarifas 2026",
+    "tramites": "Catálogo de trámites",
 }
 
 # Parámetros con varias opciones normativas (decisiones de la Secretaría)

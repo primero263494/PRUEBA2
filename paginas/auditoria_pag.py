@@ -8,7 +8,7 @@ from core import auditoria
 def mostrar():
     st.title("Auditoría")
     c1, c2 = st.columns(2)
-    entidad = c1.selectbox("Entidad", ["(todas)", "parametro", "norma", "capa", "usuario", "ajuste", "sesion"])
+    entidad = c1.selectbox("Entidad", ["(todas)", "expediente", "tramite", "parametro", "norma", "capa", "usuario", "ajuste", "sesion"])
     usuario = c2.text_input("Usuario")
     filas = auditoria.listar(entidad=None if entidad.startswith("(") else entidad, usuario=usuario or None)
     df = pd.DataFrame(filas)
