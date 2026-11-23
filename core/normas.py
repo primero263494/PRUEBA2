@@ -70,6 +70,23 @@ def cargar(archivo_origen: Path, nombre: str, ambito: str, disciplina: str,
             "caracteres": len(res["texto"])}
 
 
+def cargar_base(usuario: str) -> list[dict]:
+    """Importa al buscador los textos de config/normas_base que aún no estén cargados."""
+    import yaml
+    from core.rutas import CONFIG
+    carpeta = CONFIG / "normas_base"
+    catalogo = yaml.safe_load((carpeta / "catalogo.yaml").read_text(encoding="utf-8"))
+    ya = {n["nombre"] for n in listar()}
+    resultados = []
+    for item in catalogo:
+        if item["nombre"] in ya:
+            continue
+        r = cargar(carpeta / item["archivo"], item["nombre"], item["ambito"], item["disciplina"],
+                   item["version"], usuario)
+        resultados.append({"nombre": item["nombre"], **r})
+    return resultados
+
+
 def listar() -> list[dict]:
     return db.consultar(
         "SELECT n.*, (SELECT COUNT(*) FROM normas_articulos a WHERE a.norma_id=n.id) AS n_articulos "

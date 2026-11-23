@@ -11,12 +11,13 @@ st.set_page_config(page_title="Trámites urbanísticos · El Carmen de Viboral",
 
 db.migrar()
 
-from paginas import (auditoria_pag, cartografia_pag, configuracion_pag, inicio_pag,  # noqa: E402
-                     normas_pag, parametros_pag, planos_pag, usuarios_pag)
+from paginas import (auditoria_pag, cartografia_pag, configuracion_pag, consulta_pag,  # noqa: E402
+                     inicio_pag, normas_pag, parametros_pag, planos_pag, usuarios_pag)
 
 PAGINAS = [
     # (título, función, permiso requerido)
     ("Inicio", inicio_pag.mostrar, None),
+    ("Consulta normativa", consulta_pag.mostrar, "ver_norma"),
     ("Parámetros normativos", parametros_pag.mostrar, "ver_parametros"),
     ("Normas cargadas", normas_pag.mostrar, "ver_norma"),
     ("Cartografía", cartografia_pag.mostrar, "ver_cartografia"),

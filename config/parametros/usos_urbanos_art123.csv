@@ -1,0 +1,327 @@
+clase,descripcion,uso_social_obligado,residencial,comercio_servicios,artesanal,pagina
+1011,Procesamiento y conservación de carne y productos cárnicos,R,PH,PH,P,132
+1012,"Procesamiento y conservación de pescados, crustáceos y moluscos",PH,PH,PH,P,132
+1020,"legumbres, hortalizas y tubérculos",C,PH,PH,P,133
+1030,origen vegetal y animal,PH,PH,PH,P,133
+1040,derivados del almidón,PH,PH,PH,P,133
+1051,Elaboración de productos de molinería,PH,PH,PH,P,133
+1052,Elaboración de almidones y productos derivados del almidón,PH,PH,PH,P,133
+1061,Trilla de café,PH,PH,PH,P,133
+1062,"Descafeinado, tostión y molienda del café",PH,PH,PH,P,133
+1063,Otros derivados del café,PH,PH,PH,P,133
+1071,Elaboración y refinación de azúcar,PH,PH,PH,P,133
+1072,Elaboración de panela alimenticios,PH,PH,PH,P,133
+1081,Elaboración de productos de panadería,PH,R,P,P,133
+1082,"Elaboración de cacao, chocolate y productos de confitería",PH,PH,P,P,133
+1083,"Elaboración de macarrones, fideos, alcuzcuz y productos farináceos similares",PH,PH,R,P,133
+1084,Elaboración de comidas y platos preparados,C,C,P,C,133
+1089,Elaboración de otros productos alimenticios n.c.p.,PH,PH,PH,P,133
+1090,para animales acabado de productos textiles,PH,PH,PH,P,133
+1311,Preparación e hilatura de fibras textiles,C,PH,PH,P,133
+1312,Tejeduría de productos textiles,C,PH,PH,P,133
+1313,Acabado de productos textiles,C,PH,PH,P,133
+1391,Fabricación de tejidos de punto y ganchillo,C,PH,PH,P,133
+1392,"Confección de artículos con materiales textiles, excepto prendas de vestir",P,PH,PH,P,133
+1393,Fabricación de tapetes y alfombras para pisos,PH,PH,PH,P,133
+1394,"Fabricación de cuerdas, cordeles, cables, bramantes y redes",PH,PH,PH,P,133
+1399,Fabricación de otros artículos textiles n.c.p.,PH,PH,PH,P,133
+1410,excepto prendas de piel,PH,PH,PH,P,133
+1420,Fabricación de artículos de piel,PH,PH,PH,PH,133
+1430,"ganchillo fabricación de calzado; fabricación de artículos de viaje, maletas, bolsos de mano y artículos similares, y fabricación de artículos de talabartería",PH,PH,PH,P,133
+1511,Curtido y recurtido de cueros; recurtido y teñido de pieles,PH,PH,PH,PH,134
+1512,"Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería",PH,PH,PH,P,134
+1513,"Fabricación de artículos de viaje, bolsos de mano y artículos similares; artículos de talabartería y guarnicionería elaborados en otros materiales",PH,PH,PH,P,134
+1521,"Fabricación de calzado de cuero y piel, con cualquier tipo de suela",PH,PH,PH,P,134
+1522,"Fabricación de otros tipos de calzado, excepto calzado de cuero y piel",PH,PH,PH,P,134
+1523,"Fabricación de partes del calzado fabricación de productos de madera y de corcho, excepto muebles; fabricación de artículos de cestería y espartería",PH,PH,PH,P,134
+1610,la madera,PH,PH,PH,P,134
+1620,"enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles",PH,PH,PH,P,134
+1630,"madera, de carpintería y ebanistería para la construcción",PH,PH,PH,P,134
+1640,Fabricación de recipientes de madera,PH,PH,PH,P,134
+1690,"madera; fabricación de artículos de corcho, cestería y espartería productos de papel y cartón productos de papel y cartón",PH,PH,PH,P,134
+1701,Fabricación de pulpas (pastas) celulósicas; papel y cartón,PH,PH,PH,P,134
+1702,"Fabricación de papel y cartón ondulado (corrugado); fabricación de envases, empaques y de embalajes de papel y cartón",PH,PH,PH,P,134
+1709,Fabricación de otros artículos de papel y cartón producción de copias a partir de grabaciones originales de servicios relacionados con la impresión,PH,PH,PH,P,134
+1811,Actividades de impresión,C,C,P,P,134
+1812,Actividades de servicios relacionados con la impresión,C,C,P,P,134
+1820,"grabaciones originales farmacéuticos, sustancias químicas",C,C,P,P,134
+2100,"farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico minerales no metálicos",PH,PH,PH,P,135
+2310,vidrio metálicos n.c.p.,PH,PH,PH,PH,135
+2391,Fabricación de productos refractarios,PH,PH,PH,P,135
+2392,Fabricación de materiales de arcilla para la construcción,PH,PH,PH,P,135
+2393,Fabricación de otros productos de cerámica y porcelana,PH,PH,PH,P,135
+2394,"Fabricación de cemento, cal y yeso",PH,PH,PH,PH,135
+2395,"Fabricación de artículos de hormigón, cemento y yeso",PH,PH,PH,P,135
+2396,"Corte, tallado y acabado de la piedra",PH,PH,PH,P,135
+2399,Fabricación de otros productos minerales no metálicos n.c.p somieres,PH,PH,PH,PH,135
+3110,Fabricación de muebles,PH,PH,PH,P,135
+3120,Fabricación de colchones y somieres,PH,PH,PH,P,135
+3210,artículos conexos,PH,PH,R,P,135
+3220,Fabricación de instrumentos musicales,PH,PH,R,P,135
+3230,la práctica del deporte,PH,PH,R,P,135
+3240,rompecabezas,PH,PH,R,P,135
+3250,y materiales médicos y odontológicos (incluido mobiliario),PH,PH,PH,P,135
+3290,residuales,PH,PH,PH,PH,135
+3700,"residuales de desechos, recuperación de materiales",P,PH,PH,PH,135
+3830,y otros servicios de gestión de desechos,P,PH,PH,PH,135
+3900,y otros servicios de gestión de desechos,P,PH,PH,PH,135
+4111,Construcción de edificios residenciales,R,P,P,R,135
+4112,Construcción de edificios no residenciales,P,C,P,P,135
+4210,ferrocarril,P,P,P,P,135
+4220,público,P,P,P,P,136
+4290,ingeniería civil construcción de edificios y obras de ingeniería civil,P,P,P,P,136
+4311,Demolición,P,P,P,P,136
+4312,Preparación del terreno y otras instalaciones especializadas,P,P,P,P,136
+4321,Instalaciones eléctricas,P,P,P,P,136
+4322,"Instalaciones de fontanería, calefacción y aire acondicionado",P,P,P,P,136
+4329,Otras instalaciones especializadas,P,P,P,P,136
+4330,obras de ingeniería civil,P,P,P,P,136
+4390,"construcción de edificios y obras de ingeniería civil Comercio, mantenimiento y reparación de vehículos automotores y motocicletas, sus partes, piezas y accesorios",P,P,P,P,136
+4511,Comercio de vehículos automotores nuevos,PH,PH,R,P,136
+4512,Comercio de vehículos automotores usados,PH,PH,R,P,136
+4520,vehículos automotores,PH,PH,P,P,136
+4530,"(autopartes) y accesorios (lujos) para vehículos automotores de motocicletas y de sus partes, piezas y accesorios",PH,R,P,P,136
+4541,"Comercio de motocicletas y de sus partes, piezas y accesorios",PH,R,P,P,136
+4542,"Mantenimiento y reparación de motocicletas y de sus partes y piezas Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas Comercio al por mayor a cambio de una retribución o por contrata",PH,PH,P,P,136
+4610,primas agropecuarias; animales vivos,PH,PH,PH,R,136
+4620,bebidas y tabaco,PH,PH,P,PH,136
+4631,Comercio al por mayor de productos alimenticios,PH,PH,P,P,136
+4632,Comercio al por mayor de bebidas y tabaco enseres domésticos (incluidas prendas de vestir),PH,PH,P,PH,136
+4641,"Comercio al por mayor de productos textiles, productos confeccionados para uso doméstico",PH,PH,P,PH,136
+4642,Comercio al por mayor de prendas de vestir,PH,PH,P,PH,136
+4643,Comercio al por mayor de calzado,PH,PH,P,PH,136
+4644,Comercio al por mayor de aparatos y equipo de uso doméstico,PH,PH,P,PH,136
+4645,"Comercio al por mayor de productos farmacéuticos, medicinales, cosméticos y de tocador",PH,R,P,PH,137
+4649,Comercio al por mayor de otros utensilios domésticos n.c.p. y equipo,PH,PH,PH,PH,137
+4651,"Comercio al por mayor de computadores, equipo periférico y programas de informática",PH,C,P,C,137
+4652,"Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomunicaciones",PH,C,P,C,137
+4653,Comercio al por mayor de maquinaria y equipo agropecuarios,PH,PH,P,R,137
+4659,Comercio al por mayor de otros tipos de maquinaria y equipo n.c.p. de otros productos,PH,PH,PH,PH,137
+4661,"Comercio al por mayor de combustibles sólidos, líquidos, gaseosos y productos conexos",PH,PH,PH,PH,137
+4662,Comercio al por mayor de metales y productos metalíferos,PH,PH,PH,PH,137
+4663,"Comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipo y materiales de fontanería y calefacción",PH,PH,PH,P,137
+4664,"Comercio al por mayor de productos químicos básicos, cauchos y plásticos en formas primarias y productos químicos de uso agropecuario",PH,PH,PH,PH,137
+4665,"Comercio al por mayor de desperdicios, desechos y chatarra",PH,PH,PH,PH,137
+4669,Comercio al por mayor de otros productos n.c.p.,PH,PH,R,R,137
+4690,"especializado comercio al por menor de combustibles), excepto el de vehículos automotores y motocicletas establecimientos no especializados",PH,PH,R,PH,137
+4711,"Comercio al por menor en establecimientos no especializados con surtido compuesto principalmente por alimentos, bebidas o tabaco",PH,R,P,R,137
+4719,"Comercio al por menor en establecimientos no especializados, con surtido compuesto principalmente por productos diferentes de alimentos (víveres en general), bebidas y tabaco (víveres en general), bebidas y tabaco, en establecimientos especializados",PH,R,P,R,137
+4721,Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados,PH,PH,PH,PH,137
+4722,"Comercio al por menor de leche, productos lácteos y huevos, en establecimientos especializados",C,C,P,C,137
+4723,"Comercio al por menor de carnes (incluye aves de corral), productos cárnicos, pescados y productos de mar, en establecimientos especializados",C,C,P,C,137
+4724,"Comercio al por menor de bebidas y productos del tabaco, en establecimientos especializados",PH,PH,P,PH,137
+4729,Comercio al por menor de otros,P,PH,PH,R,137
+4731,Comercio al por menor de combustible para automotores,H,PH,PH,PH,138
+4732,"Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores informática y de comunicaciones, en establecimientos especializados",PH,PH,P,PH,138
+4741,"Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados",R,C,P,R,138
+4742,"Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados Comercio al por menor (incluso el comercio al por menor de combustibles), excepto el de vehículos automotores y motocicletas enseres domésticos en establecimientos especializados",R,C,P,R,138
+4751,Comercio al por menor de productos textiles en establecimientos especializados,PH,C,P,R,138
+4752,"Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados",PH,PH,P,P,138
+4753,"Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados",PH,PH,P,P,138
+4754,"Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación",PH,C,P,R,138
+4755,Comercio al por menor de artículos y utensilios de uso doméstico,PH,C,P,R,138
+4759,"Comercio al por menor de otros artículos domésticos en establecimientos especializados culturales y de entretenimiento, en establecimientos especializados",PH,C,P,R,138
+4761,"Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados",PH,C,P,R,138
+4762,"Comercio al por menor de artículos deportivos, en establecimientos especializados",PH,C,P,R,138
+4769,Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados productos en establecimientos especializados,PH,C,P,R,138
+4771,Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados,PH,C,P,R,138
+4772,Comercio al por menor de todo tipo de calzado y artículos de cuero y,P,C,P,R,138
+4773,"Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados",H,C,P,C,139
+4774,Comercio al por menor de otros productos nuevos en establecimientos especializados,PH,R,P,R,139
+4775,Comercio al por menor de artículos de segunda mano venta móviles,PH,C,P,R,139
+4781,"Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles",PH,PH,P,PH,139
+4782,"Comercio al por menor de productos textiles, prendas de vestir y calzado, en puestos de venta móviles",PH,PH,P,PH,139
+4789,"Comercio al por menor de otros productos en puestos de venta móviles establecimientos, puestos de venta o mercados",PH,PH,PH,PH,139
+4791,Comercio al por menor realizado a través de internet,C,C,P,C,139
+4792,Comercio al por menor realizado a través de casas de venta o por correo,C,C,P,C,139
+4799,"Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados Transporte terrestre; transporte por tuberías",PH,PH,PH,PH,139
+4921,Transporte de pasajeros,P,C,P,R,139
+4922,Transporte mixto,P,C,P,R,139
+4923,Transporte de carga por carretera,P,R,R,P,139
+4930,complementarias al transporte,P,P,P,P,139
+5210,"servicios complementarios para el transporte Actividades de estaciones, vías y",PH,PH,R,P,139
+5221,servicios complementarios para el transporte terrestre,C,R,P,P,139
+5224,Manipulación de carga,PH,PH,PH,P,139
+5229,Otras actividades complementarias al transporte,PH,PH,PH,P,139
+5310,Actividades postales nacionales,C,C,P,C,139
+5320,cortas,C,C,P,C,139
+5511,Alojamiento en hoteles,R,R,P,P,139
+5512,Alojamiento en aparta-hoteles,R,R,P,P,139
+5513,Alojamiento en centros vacacionales,R,R,P,P,139
+5519,Otros tipos de alojamientos para visitantes bebidas y servicio móvil de comidas,PH,R,P,P,139
+5611,Expendio a la mesa de comidas preparadas,C,C,P,C,139
+5612,Expendio por autoservicio de comidas preparadas,C,C,P,C,140
+5613,Expendio de comidas preparadas en cafeterías,C,C,P,C,140
+5619,Otros tipos de expendio de comidas preparadas n.c.p.,SC,SC,SC,SC,140
+5621,Catering para eventos,C,C,P,C,140
+5629,Actividades de otros servicios de comidas,C,C,P,C,140
+5630,el consumo dentro del establecimiento Actividades de edición periódicas y otras actividades de edición,PH,PH,P,R,140
+5811,Edición de libros,PH,C,P,C,140
+5812,Edición de directorios y listas de correo,PH,C,P,C,140
+5813,"Edición de periódicos, revistas y otras publicaciones periódicas",PH,C,P,C,140
+5819,Otros trabajos de edición,PH,C,P,C,140
+5820,"(software) y producción de programas de televisión, grabación de sonido y edición de música cinematográficas, video y producción de programas, anuncios y comerciales de televisión",PH,C,P,C,140
+5911,"Actividades de producción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",C,C,P,C,140
+5912,"Actividades de posproducción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",C,C,P,C,140
+5913,"Actividades de distribución de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",C,C,P,C,140
+5914,Actividades de exhibición de películas cinematográficas y videos,C,C,P,C,140
+5920,edición de música transmisión y/o difusión,C,R,P,C,140
+6010,transmisión en el servicio de radiodifusión sonora,C,C,P,C,140
+6020,transmisión de televisión,C,C,P,C,140
+6110,alámbricas,R,R,R,R,140
+6120,inalámbricas,R,R,R,R,140
+6130,satelital,R,R,R,R,140
+6190,"telecomunicaciones (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas (planificación, análisis, diseño,",R,R,R,R,140
+6201,"Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas)",C,C,P,C,141
+6202,Actividades de consultoría informática y actividades de administración de instalaciones informáticas,C,C,P,C,141
+6209,Otras actividades de tecnologías de información y actividades de servicios informáticos (hosting) y actividades relacionadas; portales web,C,C,P,C,141
+6311,"Procesamiento de datos, alojamiento (hosting) y actividades relacionadas",C,C,P,C,141
+6312,Portales web información,C,C,P,C,141
+6391,Actividades de agencias de noticias,C,C,P,C,141
+6399,"Otras actividades de servicio de información n.c.p. Actividades de servicios financieros, excepto las de seguros y de pensiones",C,C,P,C,141
+6411,Banco Central,C,C,P,C,141
+6412,Bancos comerciales monetaria,C,C,P,C,141
+6421,Actividades de las corporaciones financieras excepto las de seguros y de pensiones monetaria,C,C,P,C,141
+6422,Actividades de las compañías de financiamiento,C,C,P,C,141
+6423,Banca de segundo piso,C,C,P,C,141
+6424,Actividades de las cooperativas financieras de cesantías) y entidades financieras similares,C,C,P,C,141
+6431,"Fideicomisos, fondos y entidades financieras similares",C,C,P,C,141
+6432,Fondos de cesantías excepto las de seguros y pensiones,C,C,P,C,141
+6491,Leasing financiero (arrendamiento financiero),C,C,P,C,141
+6492,Actividades financieras de fondos de empleados y otras formas asociativas del sector solidario,C,C,P,C,141
+6493,Actividades de compra de cartera o factoring,C,C,P,C,141
+6494,Otras actividades de distribución de fondos,C,C,P,C,141
+6495,Instituciones especiales oficiales,P,C,P,C,141
+6499,"Otras actividades de servicio financiero, excepto las de seguros y pensiones n.c.p. Seguros (incluso el reaseguro), seguros la seguridad social",C,C,P,C,141
+6511,Seguros generales,C,C,P,C,141
+6512,Seguros de vida,C,C,P,C,141
+6513,Reaseguros,C,C,P,C,141
+6514,Capitalización riesgos profesionales,C,C,P,C,141
+6521,Servicios de seguros sociales de salud,C,C,P,C,142
+6522,Servicios de seguros sociales de riesgos profesionales pensiones,C,C,P,C,142
+6531,Régimen de prima media con prestación definida (RPM),C,C,P,C,142
+6532,"Régimen de ahorro individual (RAI) de servicios financieros de servicios financieros, excepto las de seguros y pensiones",C,C,P,C,142
+6611,Administración de mercados financieros,C,C,P,C,142
+6612,Corretaje de valores y de contratos de productos básicos,C,C,P,C,142
+6613,Otras actividades relacionadas con el mercado de valores,C,C,P,C,142
+6614,Actividades de las casas de cambio,C,C,P,C,142
+6615,Actividades de los profesionales de compra y venta de divisas,C,C,P,C,142
+6619,Otras actividades auxiliares de las actividades de servicios financieros n.c.p. los servicios de seguros y pensiones,C,C,P,C,142
+6621,Actividades de agentes y corredores de seguros,C,C,P,C,142
+6629,"Evaluación de riesgos y daños, y otras actividades de servicios auxiliares",C,C,P,C,142
+6630,fondos,C,C,P,C,142
+6810,bienes propios o arrendados,C,C,P,C,142
+6820,cambio de una retribución o por contrata,C,C,P,C,142
+6910,Actividades jurídicas,C,C,P,C,142
+6920,"de libros, auditoría financiera y asesoría tributaria empresarial; actividades de consultoría de gestión",C,C,P,C,142
+7010,empresarial,C,C,P,C,142
+7020,ingeniería; ensayos y análisis técnicos,C,C,P,C,142
+7110,y otras actividades conexas de consultoría técnica,C,C,P,C,142
+7120,Ensayos y análisis técnicos,C,C,P,C,142
+7210,experimental en el campo de las ciencias naturales y la ingeniería,C,C,P,C,142
+7220,experimental en el campo de las ciencias sociales y las humanidades,C,C,P,C,142
+7310,Publicidad,C,C,P,C,142
+7320,encuestas de opinión pública científicas y técnicas,C,C,P,C,142
+7410,Actividades especializadas de diseño,C,C,P,C,142
+7420,Actividades de fotografía Página,C,C,P,C,142
+7490,"Otras actividades profesionales, ACUERDOS",C,C,P,C,142
+7500,Actividades veterinarias,PH,PH,P,R,143
+7710,automotores personales y enseres domésticos,PH,PH,P,P,143
+7721,Alquiler y arrendamiento de equipo recreativo y deportivo,PH,C,P,P,143
+7722,Alquiler de videos y discos,C,C,P,P,143
+7729,Alquiler y arrendamiento de otros efectos personales y enseres domésticos n.c.p.,PH,PH,P,P,143
+7730,"de maquinaria, equipo y bienes tangibles n.c.p.",PH,PH,P,P,143
+7740,"y productos similares, excepto obras protegidas por derechos de autor",PH,PH,P,P,143
+7810,Actividades de agencias de empleo,PH,C,P,C,143
+7820,temporal,PH,C,P,C,143
+7830,"recurso humano operadores turísticos, servicios de reserva y actividades relacionadas operadores turísticos",PH,C,P,C,143
+7911,Actividades de las agencias de viaje,PH,C,P,C,143
+7912,Actividades de operadores turísticos,PH,C,P,C,143
+7990,relacionadas investigación privada,PH,C,P,C,143
+8010,Actividades de seguridad privada,PH,C,P,C,143
+8020,seguridad,PH,C,P,C,143
+8030,"investigadores privados paisajismo (jardines, zonas verdes)",PH,C,P,C,143
+8110,"instalaciones paisajismo (jardines, zonas verdes)",PH,C,P,C,143
+8121,Limpieza general interior de edificios,PH,C,P,C,143
+8129,Otras actividades de limpieza de edificios e instalaciones industriales,PH,C,P,C,143
+8130,de mantenimiento conexos de oficina y otras actividades de apoyo a las empresas de oficina,PH,C,P,C,143
+8211,Actividades combinadas de servicios administrativos de oficina,C,C,P,C,143
+8219,"Fotocopiado, preparación de documentos y otras actividades especializadas de apoyo a oficina",C,C,P,C,144
+8220,(Call center),C,C,P,C,144
+8230,eventos comerciales empresas n.c.p.,PH,R,P,C,144
+8291,Actividades de agencias de cobranza y oficinas de calificación crediticia,PH,C,P,C,144
+8292,Actividades de envase y empaque,PH,PH,P,C,144
+8299,Otras actividades de servicio de apoyo a las empresas n.c.p. planes de seguridad social de afiliación obligatoria de la política económica y social de la comunidad,PH,PH,P,C,144
+8411,Actividades legislativas de la administración pública,P,C,P,R,144
+8412,Actividades ejecutivas de la administración pública,P,C,P,R,144
+8413,"Regulación de las actividades de organismos que prestan servicios de salud, educativos, culturales y otros servicios sociales, excepto servicios de seguridad social",P,C,P,R,144
+8414,Actividades reguladoras y facilitadoras de la actividad económica,P,C,P,R,144
+8415,Actividades de los otros órganos de control en general,P,C,P,R,144
+8421,Relaciones exteriores,P,C,P,R,144
+8422,Actividades de defensa,P,C,P,R,144
+8423,Orden público y actividades de seguridad,P,C,P,R,144
+8424,Administración de justicia,P,C,P,R,144
+8430,social de afiliación obligatoria preescolar y básica primaria,P,C,P,R,144
+8511,Educación de la primera infancia,P,C,P,R,144
+8512,Educación preescolar,P,C,P,R,144
+8513,Educación básica primaria laboral,P,C,P,R,144
+8521,Educación básica secundaria,P,C,P,R,144
+8522,Educación media académica,P,C,P,R,144
+8523,Educación media técnica y de formación laboral,P,C,P,R,144
+8530,diferentes niveles de educación,P,C,P,R,144
+8541,Educación técnica profesional,P,C,P,R,144
+8542,Educación tecnológica Educación,P,C,P,R,144
+8543,Educación de instituciones universitarias o de escuelas tecnológicas,P,C,P,R,144
+8544,Educación de universidades,P,C,P,R,144
+8551,Formación académica no formal,P,C,P,R,144
+8552,Enseñanza deportiva y recreativa,P,C,P,R,144
+8553,Enseñanza cultural,P,C,P,R,144
+8559,Otros tipos de educación n.c.p.,P,C,P,R,144
+8560,humana,P,C,P,R,145
+8610,"con internación odontológica, sin internación",P,C,P,C,145
+8621,"Actividades de la práctica médica, sin internación",P,C,P,C,145
+8622,Actividades de la práctica odontológica relacionadas con la salud humana,P,C,P,C,145
+8691,Actividades de apoyo diagnóstico,P,C,P,C,145
+8692,Actividades de apoyo terapéutico,P,C,P,C,145
+8699,Otras actividades de atención de la salud humana Actividades de atención residencial medicalizada,P,C,P,C,145
+8710,medicalizada de tipo general,R,C,P,R,145
+8720,"para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas",R,R,R,R,145
+8730,para el cuidado de personas mayores y/o discapacitadas,R,C,P,R,145
+8790,instituciones con alojamiento Actividades de asistencia social sin alojamiento,R,R,R,R,145
+8810,alojamiento para personas mayores y discapacitadas,C,C,P,R,145
+8890,"sin alojamiento Actividades creativas, artísticas y de entretenimiento Actividades creativas, artísticas y de entretenimiento",C,C,P,R,145
+9001,Creación literaria,P,C,P,R,145
+9002,Creación musical,P,C,P,R,145
+9003,Creación teatral,P,C,P,R,145
+9004,Creación audiovisual,P,C,P,R,145
+9005,Artes plásticas y visuales,P,C,P,R,145
+9006,Actividades teatrales,P,C,P,R,145
+9007,Actividades de espectáculos musicales en vivo,P,R,P,R,145
+9008,"Otras actividades de espectáculos en vivo museos y otras actividades culturales museos y otras actividades culturales Actividades de bibliotecas, archivos, museos y otras actividades culturales",P,R,P,R,145
+9101,Actividades de bibliotecas y archivos,P,C,P,R,145
+9102,"Actividades y funcionamiento de museos, conservación de edificios y sitios históricos",P,C,P,R,145
+9103,"Actividades de jardines botánicos, zoológicos y reservas naturales apuestas",P,PH,PH,PH,145
+9200,apuestas,PH,PH,PH,PH,145
+9311,Gestión de instalaciones deportivas,P,C,P,C,146
+9312,Actividades de clubes deportivos,P,C,P,C,146
+9319,Otras actividades deportivas esparcimiento,P,C,P,C,146
+9321,"Actividades de parques de atracciones y parques temáticos Actividades de asociaciones empresariales y de empleadores, y asociaciones profesionales",P,R,P,R,146
+9411,Actividades de asociaciones empresariales y de empleadores,C,C,P,R,146
+9412,Actividades de asociaciones profesionales,C,C,P,R,146
+9420,empleados,C,C,P,R,146
+9491,Actividades de asociaciones religiosas,C,C,P,R,146
+9492,Actividades de asociaciones políticas,C,C,P,R,146
+9499,"Actividades de otras asociaciones n.c.p. computadores, efectos personales y enseres domésticos computadores y equipo de comunicaciones",C,C,P,R,146
+9511,Mantenimiento y reparación de computadores y de equipo periférico,PH,C,P,R,146
+9512,Mantenimiento y reparación de equipos de comunicación personales y enseres domésticos,PH,C,P,R,146
+9521,Mantenimiento y reparación de aparatos electrónicos de consumo,PH,C,P,R,146
+9522,Mantenimiento y reparación de aparatos y equipos domésticos y de jardinería,PH,C,P,R,146
+9523,Reparación de calzado y artículos de cuero,PH,C,P,R,146
+9524,Reparación de muebles y accesorios para el hogar,PH,R,P,R,146
+9529,Mantenimiento y reparación de otros efectos personales y enseres domésticos Otras actividades de servicios personales personales,PH,R,P,R,146
+9601,"Lavado y limpieza, incluso la limpieza en seco, de productos textiles y de piel",PH,R,P,R,146
+9602,Peluquería y otros tratamientos de belleza,PH,C,P,C,146
+9603,Pompas fúnebres y actividades relacionadas,P,PH,P,R,146
+9609,Otras actividades de servicios personales n.c.p. como empleadores de personal doméstico,PH,PH,PH,R,146
+9700,Actividades de los hogares individuales como empleadores de personal doméstico,PH,C,P,R,146
+9900,"entidades extraterritoriales usos que no se encuentren la zona urbana y de expansión urbana apertura y funcionamiento con venta y consumo (100) metros a la redonda Queda prohibido la apertura comercio con venta y consumo las carrera 33 y 31 entre calles PARA USOS recomendaciones: locativas y otras pautas: ruido o la música no trasciendan de los elementos de fachada metálicas o puertas plegables; sonoras (bafles) al interior de bafles en terrazas o sobre de visitantes sobre las parqueaderos privados en la misma de saturación (especialmente, venta y consumo de licor) a de cada uso dentro de la en términos de cantidad o -mejor- por frente de cuadra) permitidos, aunque resulta de locales con usos distintos pisos de los inmuebles, para las relaciones entre el",R,C,P,R,147

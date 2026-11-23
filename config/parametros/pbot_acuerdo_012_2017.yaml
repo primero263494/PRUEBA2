@@ -233,3 +233,41 @@ ambiental:
   pendiente_plan_manejo_max: {valor: 0.60, fuente: {norma: Acuerdo 012 de 2017, articulo: "19 (Acuerdo Cornare 265/2011)"}}
   retiro_ptar_villa_maria_residencial: {valor: 200, unidad: m, fuente: {norma: Manual de trámites interno, articulo: "2.5"}, nota: "Del manual interno; verificar fuente normativa."}
   arqueologia_preventiva_area_minima: {valor: 10000, unidad: m², fuente: {norma: Acuerdo 012 de 2017, articulo: "205"}}
+
+usos_urbanos:
+  tabla_usos:
+    valor: usos_urbanos_art123.csv
+    nota: >-
+      326 clases CIIU Rev. 4 A.C. con su categoría en cada área de actividad
+      (Uso social obligado, Residencial, Comercio y servicios, Artesanal),
+      extraídas por coordenadas de la tabla del art. 123 (págs. 132–147).
+      SC = sin clasificación en la tabla: se entiende no permitido (par. 1).
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "120 a 123"}
+  convenciones:
+    valor: {P: Principal, C: Complementario, R: Restringido, PH: Prohibido, SC: "Sin clasificación (no permitido, par. 1)"}
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "121 y 123"}
+  areas_actividad:
+    valor:
+      uso_social_obligado: Equipamientos y espacio público, incluye parques lineales La Cimarrona y La Madera.
+      residencial: Vivienda en todas sus tipologías; usos distintos a vivienda no superan el 30 % en nuevos desarrollos.
+      comercio_servicios: Actividad económica de escala municipal y zonal; la vivienda no puede ser inferior al 20 %.
+      artesanal: Cerámica, forja, carpintería y similares a pequeña y mediana escala.
+      ambiental: Suelos de protección urbanos asociados a fuentes hídricas (parques lineales).
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "119"}
+  max_otros_usos_en_residencial: {valor: 0.30, unidad: fracción de la edificabilidad, fuente: {norma: Acuerdo 012 de 2017, articulo: "119"}}
+  min_vivienda_en_comercio: {valor: 0.20, unidad: fracción, fuente: {norma: Acuerdo 012 de 2017, articulo: "119"}}
+  distancia_licor_a_colegios: {valor: 100, unidad: m, fuente: {norma: Acuerdo 012 de 2017, articulo: "123 par. 2"}}
+
+tratamientos_reglas:
+  desarrollo:
+    valor: Requiere plan parcial adoptado antes de loteo, urbanización o nuevas licencias de construcción; solo reformas y adiciones a lo existente.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "133"}
+  conservacion:
+    valor: Aprovechamientos de la tabla del art. 138; toda intervención requiere visto bueno de Planeación una vez surtida la declaratoria.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "134"}
+  mejoramiento_integral:
+    valor: Desarrollo predio a predio fuera de alto riesgo no mitigable, retiros a quebrada y líneas de alta tensión; urbanización con media o una manzana y 25 % para zonas verdes.
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "135"}
+  consolidacion:
+    valor: Aprovechamientos de la tabla del art. 138; mayor altura con plusvalía en lotes > 800 m² (máx. 8 pisos).
+    fuente: {norma: Acuerdo 012 de 2017, articulo: "128 y 138"}

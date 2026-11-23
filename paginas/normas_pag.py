@@ -31,6 +31,17 @@ def _normograma():
 
 
 def _cargar():
+    st.subheader("Normas base")
+    st.caption("Importa al buscador los textos del PBOT, Decreto 152, tarifas 2026, Ley 388 y Decreto 1077 "
+               "que vienen con el programa. Las ya importadas no se repiten.")
+    if st.button("Cargar normas base"):
+        with st.spinner("Importando textos (puede tardar un minuto)…"):
+            r = normas.cargar_base(usuario()["usuario"])
+        if r:
+            for x in r:
+                st.success(f"{x['nombre']}: {x['articulos']} artículos")
+        else:
+            st.info("Las normas base ya estaban cargadas.")
     st.subheader("Cargar norma")
     modo, explicacion = lectura.modo_efectivo()
     st.caption(f"Lectura de escaneos: **{modo}** — {explicacion}")

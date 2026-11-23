@@ -10,8 +10,8 @@ y producir conceptos técnicos de la Secretaría de Planeación.
 | Módulo | Estado |
 | --- | --- |
 | 0. Parámetros normativos, normas, cartografía, usuarios, auditoría, configuración | Listo (esta versión) |
-| 1. Consulta normativa (fichas por zona, cesiones explicadas) | Siguiente |
-| 2. Expedientes y trámites | Pendiente |
+| 1. Consulta normativa (buscador, fichas por zona/predio, usos del suelo, cesiones con ejemplo, por tipo de suelo) | Listo |
+| 2. Expedientes y trámites | Siguiente |
 | 3. Gestión documental | Pendiente |
 | 5. Listas de chequeo | Pendiente |
 | 6. Calculadoras (IO/IC, cuadro de áreas, cesiones, plusvalía, liquidación) | Pendiente |
@@ -30,7 +30,8 @@ queda con usuario, fecha y motivo.
 
 ```
 app.py                  entrada
-config/parametros/      nacional, nsr10, pbot, d152, tarifas (+ CSV art. 138)
+config/parametros/      nacional, nsr10, pbot, d152, tarifas (+ CSV art. 138 y usos art. 123)
+config/normas_base/     textos de PBOT, D152, tarifas, Ley 388 y Decreto 1077 para el buscador
 config/ajustes.yaml     lectura de escaneos (local/IA/auto), DWG (ODA/LibreDWG), repositorio
 core/                   bd, usuarios, auditoría, parámetros, NSR-10, lectura, normas, cartografía, conversores
 paginas/                pantallas Streamlit

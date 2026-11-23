@@ -1,0 +1,28 @@
+# Textos de las normas entregadas por la Secretaría, ya extraídos (texto
+# digital u OCR). El botón "Cargar normas base" de la página Normas los
+# importa al buscador. Los textos legales colombianos son de dominio público.
+- archivo: acuerdo_012_2017_pbot.txt
+  nombre: Acuerdo 012 de 2017 (PBOT)
+  ambito: municipal
+  disciplina: urbanistica
+  version: "Acuerdo 17-oct-2017"
+- archivo: decreto_152_2018_ocr.txt
+  nombre: Decreto 152 de 2018 (Manual de Urbanismo)
+  ambito: municipal
+  disciplina: urbanistica
+  version: "23-nov-2018 (OCR del escaneado)"
+- archivo: decreto_001_2026_tarifas_ocr.txt
+  nombre: Decreto 001 de 2026 (Tarifas)
+  ambito: municipal
+  disciplina: tributaria
+  version: "08-ene-2026 (OCR del escaneado)"
+- archivo: ley_388_1997.txt
+  nombre: Ley 388 de 1997
+  ambito: nacional
+  disciplina: urbanistica
+  version: "Compilación Función Pública 2026-04-21"
+- archivo: decreto_1077_2015.txt
+  nombre: Decreto 1077 de 2015
+  ambito: nacional
+  disciplina: urbanistica
+  version: "Integrada a 2023-12-05"

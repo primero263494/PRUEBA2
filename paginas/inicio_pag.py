@@ -24,12 +24,15 @@ def mostrar():
             f"Av = {P.valor('nsr10.amenaza_sismica_municipio.Av')}, zona "
             f"{P.valor('nsr10.amenaza_sismica_municipio.zona_amenaza')} ({sismo.fuente}).")
 
+    if not normas.listar():
+        st.info("Para buscar en los textos de la norma: Normas → Cargar → **Cargar normas base**.")
     faltan = cartografia.roles_faltantes()
     if faltan:
         st.warning("Cartografía por cargar: " + ", ".join(cartografia.ROLES[r][0] for r in faltan) +
                    ". Vaya a Cartografía → Cargar capa.")
     st.markdown(
-        "**Módulos disponibles:** parámetros normativos, normas y normograma, cartografía y cruce del predio, "
-        "configuración, usuarios y auditoría. **En desarrollo:** consulta normativa avanzada, expedientes, "
+        "**Módulos disponibles:** consulta normativa (buscador, fichas por zona, usos del suelo, cesiones), "
+        "parámetros normativos, normas y normograma, cartografía y cruce del predio, configuración, usuarios y "
+        "auditoría. **En desarrollo:** expedientes, "
         "gestión documental, listas de chequeo, calculadoras, análisis de planos e informes."
     )
