@@ -1,0 +1,111 @@
+# =============================================================================
+# LISTAS DE CHEQUEO — ítems de revisión por sección y secciones por trámite.
+# Los documentos exigidos se agregan solos desde tramites.yaml (documentos).
+# "auto" indica de dónde el programa toma una sugerencia de estado:
+#   verificacion:<Ítem de la verificación del módulo 2>
+# El revisor siempre confirma: la sugerencia no reemplaza su criterio.
+# =============================================================================
+
+metadatos:
+  norma: Manual de trámites interno (caps. 2 y 3), PBOT, Decreto 152 de 2018, NSR-10
+  prevalencia: 0
+
+secciones:
+  valor:
+    viabilidad:
+      nombre: Determinantes territoriales (filtro de viabilidad)
+      items:
+        - {id: v_clasificacion, texto: "Clase de suelo y perímetro verificados (urbano, expansión, rural, suburbano)", fuente: "PBOT arts. 65–75; planos CG_003, CG_004, CG_016"}
+        - {id: v_plan_parcial, texto: "Suelo de expansión o tratamiento de desarrollo: plan parcial adoptado", fuente: "PBOT art. 133", auto: "verificacion:Plan parcial"}
+        - {id: v_eep, texto: "Sin cruce con áreas protegidas (RFPR Cañones, DRMI Cerros de San Nicolás, DRMI Viaho-Guayabal)", fuente: "PBOT arts. 16–21"}
+        - {id: v_pendientes, texto: "Pendiente < 75 %; si 25–60 % en suelo urbano/expansión, plan de manejo de suelos", fuente: "PBOT art. 19 (Acuerdos Cornare 250 y 265 de 2011)"}
+        - {id: v_rondas, texto: "Respeta rondas hídricas (La Cimarronas TR100 + 20 m; La Madera 40 m; rurales según orden)", fuente: "PBOT art. 19; D152 art. 40"}
+        - {id: v_riesgo, texto: "No está en riesgo alto no mitigable; si amenaza media/alta, estudios de detalle y mitigación", fuente: "PBOT arts. 56–63 y 265; planos CG_007–CG_009"}
+        - {id: v_patrimonio, texto: "Revisado BIC, centro histórico y áreas de influencia patrimonial", fuente: "PBOT arts. 38–52"}
+        - {id: v_arqueologia, texto: "Programa de arqueología preventiva (ICANH) si el área ≥ 10.000 m²", fuente: "PBOT art. 205", auto: "verificacion:Arqueología preventiva"}
+        - {id: v_redes, texto: "Factibilidad de servicios y retiros a redes y a la PTAR", fuente: "PBOT arts. 22–25 y 89–92; manual 2.5"}
+        - {id: v_energia, texto: "Distancias de seguridad a líneas eléctricas (RETIE)", fuente: "D152 art. 72"}
+    normativa:
+      nombre: Cumplimiento de la norma urbanística
+      items:
+        - {id: n_campos, texto: "Datos completos del solicitante, predio y trámite", fuente: "Decreto 1077 art. 2.2.6.1.2.1.7", auto: "verificacion:Campos obligatorios"}
+        - {id: n_uso, texto: "Uso permitido en el área de actividad", fuente: "PBOT arts. 119–123", auto: "verificacion:Uso permitido"}
+        - {id: n_io, texto: "Índice de ocupación dentro del máximo del polígono", fuente: "PBOT arts. 137–138", auto: "verificacion:Índice de ocupación"}
+        - {id: n_ic, texto: "Índice de construcción dentro del máximo", fuente: "PBOT art. 138; D152 art. 39", auto: "verificacion:Índice de construcción"}
+        - {id: n_altura, texto: "Número de pisos y altura (incluye semisótano ≤ 1,50 m)", fuente: "PBOT arts. 138, 179 y 193", auto: "verificacion:Altura"}
+        - {id: n_densidad, texto: "Densidad habitacional", fuente: "PBOT art. 138", auto: "verificacion:Densidad"}
+        - {id: n_lote, texto: "Área y frente mínimos de lote para la tipología", fuente: "PBOT art. 165; D152 art. 57"}
+        - {id: n_cesiones, texto: "Cesiones tipo A, B y C calculadas y localizadas o compensadas", fuente: "PBOT arts. 143–147"}
+        - {id: n_parqueos, texto: "Parqueaderos privados y de visitantes", fuente: "PBOT arts. 144 par. 2, 149–152; D152 arts. 85–90"}
+    arquitectura:
+      nombre: Revisión de planos arquitectónicos
+      items:
+        - {id: a_rotulo, texto: "Rótulo, localización, linderos, nomenclatura y cotas coinciden; firmas y matrículas vigentes", fuente: "Manual 3.2"}
+        - {id: a_cuadro_areas, texto: "Cuadro de áreas coherente (sumas, áreas por piso y por uso)", fuente: "Manual 3.2; PBOT art. 137"}
+        - {id: a_retiros, texto: "Retiros frontales, laterales, posteriores y a medianería según tipo de fachada", fuente: "PBOT arts. 182–184; D152 art. 62"}
+        - {id: a_patios, texto: "Patios y vacíos: lado ≥ 3 m y área mínima según pisos", fuente: "D152 art. 52"}
+        - {id: a_iluminacion, texto: "Iluminación y ventilación natural de espacios habitables", fuente: "PBOT art. 191; D152 arts. 51–52"}
+        - {id: a_escaleras, texto: "Escaleras (2c + h = 0,64 m; c ≤ 0,18; h ≥ 0,28; anchos mínimos)", fuente: "D152 art. 54"}
+        - {id: a_circulaciones, texto: "Puertas, circulaciones, salidas y rampas", fuente: "D152 art. 55"}
+        - {id: a_accesibilidad, texto: "Accesibilidad para personas con movilidad reducida", fuente: "PBOT art. 188; D152 art. 53"}
+        - {id: a_mansarda, texto: "Mansarda ≤ 70 % del piso inferior", fuente: "D152 art. 57 par. 5"}
+        - {id: a_ochava, texto: "Ochava en esquina (radio ≥ 2 m en todos los pisos) y voladizos", fuente: "D152 art. 23"}
+        - {id: a_anden, texto: "Andén en todo el frente: ancho libre ≥ 1,20 m, sin interrupciones por rampas", fuente: "D152 arts. 20–21"}
+        - {id: a_ascensor, texto: "Ascensor si supera 5 niveles", fuente: "D152 art. 56"}
+        - {id: a_seguridad, texto: "Seguridad contra incendio y evacuación", fuente: "PBOT art. 189; D152 art. 71"}
+    estructura:
+      nombre: Revisión estructural y geotécnica (NSR-10)
+      items:
+        - {id: e_concordancia, texto: "Ejes, niveles, alturas de entrepiso, vacíos y voladizos idénticos entre arquitectura y estructura", fuente: "Manual 3.3"}
+        - {id: e_sismo, texto: "Aa = 0,15, Av = 0,20, perfil de suelo, grupo de uso, sistema estructural y R declarados", fuente: "NSR-10 Título A; Apéndice A-4"}
+        - {id: e_derivas, texto: "Derivas ≤ 1 % de hpi (0,5 % en mampostería)", fuente: "NSR-10 Tabla A.6.4-1"}
+        - {id: e_separacion, texto: "Separación sísmica con edificaciones vecinas", fuente: "NSR-10 A.6.5; D152 art. 74"}
+        - {id: e_suelos, texto: "Estudio geotécnico (o apique según criterio) con sondeos mínimos para la categoría", fuente: "NSR-10 H.1.1.2, Tablas H.3.1-1 y H.3.2-1", auto: "verificacion:Estudio de suelos"}
+        - {id: e_cimentacion, texto: "Cimentación, cota de fundación y capacidad portante coinciden con el estudio de suelos", fuente: "NSR-10 Título H; manual 3.3"}
+        - {id: e_taludes, texto: "Estabilidad de taludes y muros de contención", fuente: "NSR-10 Tabla H.2.4-1"}
+        - {id: e_despieces, texto: "Despieces, cuantías, traslapos, ganchos, estribos y materiales (f'c, fy)", fuente: "NSR-10 Títulos C y D; manual 3.3"}
+        - {id: e_memorias, texto: "Memorias de cálculo firmadas y formatos de revisión", fuente: "Ley 400 de 1997; manual 4.2"}
+    urbanismo:
+      nombre: Revisión de urbanismo / parcelación
+      items:
+        - {id: u_amarre, texto: "Amarre a MAGNA-SIRGAS / Origen Nacional y cierre con linderos", fuente: "Manual 3.1"}
+        - {id: u_areas, texto: "Desglose área bruta → neta → útil", fuente: "Decreto 1077 art. 2.2.1.1; PBOT art. 137"}
+        - {id: u_vias_obligadas, texto: "Continuidad con vías obligadas del plan vial", fuente: "PBOT art. 78; planos CG_014/CG_015"}
+        - {id: u_secciones, texto: "Secciones viales mínimas (arteria 12 m, colectora 10,4 m, servicio 10 m, peatonal 8 m)", fuente: "D152 art. 15"}
+        - {id: u_sin_salida, texto: "Vías sin salida ≤ 80 m con retorno Ø 16 m o 9 × 18 m", fuente: "D152 art. 17"}
+        - {id: u_intersecciones, texto: "Intersecciones entre 60° y 90°; ejes a ≥ 33 m", fuente: "D152 art. 18"}
+        - {id: u_cesiones_localizacion, texto: "Áreas de cesión con acceso público, sin pendientes > 25 % ni zonas de riesgo", fuente: "PBOT art. 148"}
+        - {id: u_redes, texto: "Redes de servicios y alumbrado público", fuente: "D152 arts. 24–28"}
+    documentos:
+      nombre: Documentos exigidos
+      items: []          # se generan desde tramites.documentos
+    tramite_especial:
+      nombre: Requisitos propios del trámite
+      items:
+        - {id: t_reconocimiento, texto: "Edificación concluida a más tardar el 17-jul-2012", fuente: "Decreto 1077 art. 2.2.6.4.1.1", auto: "verificacion:Antigüedad de la edificación", solo: [reconocimiento]}
+        - {id: t_prorroga, texto: "Prórroga solicitada antes del vencimiento de la licencia", fuente: "Decreto 1077 art. 2.2.6.1.2.4.1", auto: "verificacion:Oportunidad de la prórroga", solo: [prorroga]}
+        - {id: t_subdivision, texto: "Predios resultantes ≥ área mínima; 5 o más exige parcelación (rural)", fuente: "PBOT art. 248", auto: "verificacion:Número de predios", solo: [subdivision]}
+        - {id: t_garaje_local, texto: "Cambio de garaje a local: frente ≥ 3,00 m y área ≥ 9,00 m² (visita técnica)", fuente: "Manual 4.2 núm. 5", solo: [adicion_modificacion_cambio_uso]}
+        - {id: t_valla, texto: "Valla informativa instalada y registrada", fuente: "Decreto 1077 art. 2.2.6.1.2.2.1 par. 1; manual 6", solo: [construccion_urbana, construccion_rural, urbanizacion, parcelacion]}
+  fuente: {norma: Manual de trámites interno, articulo: "Caps. 2 y 3"}
+
+secciones_por_tipo:
+  valor:
+    construccion_urbana: [viabilidad, normativa, arquitectura, estructura, documentos, tramite_especial]
+    construccion_rural: [viabilidad, normativa, arquitectura, estructura, documentos, tramite_especial]
+    urbanizacion: [viabilidad, normativa, urbanismo, documentos, tramite_especial]
+    parcelacion: [viabilidad, urbanismo, documentos, tramite_especial]
+    adicion_modificacion_cambio_uso: [normativa, arquitectura, estructura, documentos, tramite_especial]
+    subdivision: [viabilidad, documentos, tramite_especial]
+    cerramiento: [normativa, estructura, documentos]
+    reconocimiento: [viabilidad, normativa, arquitectura, estructura, documentos, tramite_especial]
+    legalizacion: [viabilidad, normativa, arquitectura, documentos]
+    prorroga: [documentos, tramite_especial]
+    recibo_obras_urbanismo: [urbanismo, documentos]
+    permiso_ventas: [documentos]
+    concepto_norma: [viabilidad, normativa]
+    concepto_uso: [normativa, documentos]
+    alineamiento: [viabilidad, urbanismo]
+    certificado_riesgo: [viabilidad]
+    aprobacion_ph: [arquitectura, documentos]
+  fuente: {norma: Manual de trámites interno, articulo: "4.2"}
