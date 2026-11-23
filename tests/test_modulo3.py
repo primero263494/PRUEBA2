@@ -70,16 +70,16 @@ def test_subir_versiones_duplicados_y_carpetas():
 def test_faltantes_y_verificacion_usa_fechas_de_documentos():
     exp, tr = _exp_tr(n_pisos=2, area_lote=200)
     f = {x["tipo"]: x["cargado"] for x in D.faltantes(exp, tr)}
-    assert "estudio_suelos|apique" in f and not f["fun"]
+    assert "apique" in f and "estudio_suelos" not in f and not f["fun"]     # 2 pisos urbanos → apique
     D.subir(_archivo("Certificado tradicion.pdf"), exp["id"], tr["id"], None, "f",
             fecha_expedicion=(HOY - timedelta(days=45)).isoformat())
     D.subir(_archivo("apique.pdf"), exp["id"], tr["id"], None, "f")
     f = {x["tipo"]: x["cargado"] for x in D.faltantes(exp, tr)}
-    assert f["cert_tradicion"] and f["estudio_suelos|apique"]
+    assert f["cert_tradicion"] and f["apique"]
     assert D.vencidos(exp, tr)[0]["edad_dias"] == 45
     res = V.verificar(exp, E.tramite(tr["id"]))
     estados = {r["item"]: r["estado"] for r in res}
-    assert estados["Certificado de tradición"] == V.NO_CUMPLE
+    assert estados["Vigencia: Certificado de tradición y libertad"] == V.NO_CUMPLE
     assert estados["Documentos exigidos"] == V.NO_CUMPLE
 
 

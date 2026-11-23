@@ -7,7 +7,91 @@ import streamlit as st
 
 from core import chequeo as C, db, expedientes as E
 from core import parametros as P
-from paginas.comun import puede, usuario
+from paginas.comun import campo_fecha, guardar_subidos, puede, usuario
+
+
+def _panel_paquete(tramite_id: int, editable: bool):
+    """Marca de 'paquete completo para revisión'."""
+    pq = C.paquete(tramite_id)
+    pend = pq["pendientes"]
+    if pq["completo"]:
+        st.success(f"📦 Paquete COMPLETO para revisión desde el {pq['fecha_completo']} (marcado por {pq['usuario']})."
+                   + (f" Observación: {pq['observacion']}" if pq["observacion"] else ""))
+    elif pend:
+        st.warning(f"📦 Paquete INCOMPLETO: faltan {len(pend)} documentos obligatorios por marcar como cumple.")
+    else:
+        st.info("📦 Todos los documentos obligatorios están en cumple o no aplica: puede marcar el paquete como completo.")
+    if not editable:
+        return
+    with st.expander("Marcar paquete completo para revisión" if not pq["completo"] else "Reabrir paquete"):
+        if not pq["completo"]:
+            c1, c2 = st.columns([1, 2])
+            fecha = campo_fecha(c1, "Fecha en que quedó completo", None, key=f"pqf{tramite_id}", obligatorio=True)
+            obs = c2.text_input("Observación", key=f"pqo{tramite_id}")
+            forzar = bool(pend) and st.checkbox("Marcar completo aunque falten documentos (exige observación)",
+                                                key=f"pqx{tramite_id}")
+            if pend:
+                st.caption("Pendientes: " + "; ".join(i["texto"].split(" — ")[0].replace("Documento: ", "") for i in pend))
+            if st.button("Marcar paquete completo", type="primary", key=f"pqb{tramite_id}", disabled=bool(pend) and not forzar):
+                try:
+                    C.marcar_paquete(tramite_id, True, usuario()["usuario"], fecha, obs, forzar=forzar)
+                    st.success("Paquete marcado completo. El trámite pasa a 'en revisión' si estaba radicado.")
+                    st.rerun()
+                except ValueError as e:
+                    st.error(str(e))
+        else:
+            obs = st.text_input("Motivo para reabrir", key=f"pqr{tramite_id}")
+            if st.button("Reabrir paquete", key=f"pqrb{tramite_id}") and obs.strip():
+                C.marcar_paquete(tramite_id, False, usuario()["usuario"], observacion=obs)
+                st.rerun()
+
+
+def _seccion_documentos(tramite_id: int, filas: list, sug: dict, editable: bool):
+    """Documentos: cumple / no cumple / no aplica con observación y, al lado, subir el archivo."""
+    from core import documentos as D
+    cat = D.catalogo()
+    a_clave = {v: k for k, v in C.ETIQUETAS.items()}
+    etiquetas = list(C.ETIQUETAS.values())
+    cambios = {}
+    for i in filas:
+        opciones = i["item_id"][4:].split("|")
+        c1, c2, c3, c4 = st.columns([5, 2, 4, 1.4])
+        icono = {"cumple": "✅", "no_cumple": "❌", "no_aplica": "➖", "pendiente": "⏳"}[i["estado"]]
+        c1.markdown(f"{icono} {i['texto']}")
+        if i["item_id"] in sug and i["estado"] == "pendiente":
+            c1.caption(f"Sugerencia: {C.ETIQUETAS[sug[i['item_id']][0]]} ({sug[i['item_id']][1]})")
+        est = c2.selectbox("Estado", etiquetas, index=etiquetas.index(C.ETIQUETAS[i["estado"]]), key=f"de{i['id']}",
+                           label_visibility="collapsed", disabled=not editable)
+        obs = c3.text_input("Observación", i["observacion"] or "", key=f"do{i['id']}", label_visibility="collapsed",
+                            placeholder="Observación", disabled=not editable)
+        cambios[i["id"]] = (a_clave[est], obs, i)
+        if editable:
+            with c4.popover("📎 Subir"):
+                tipo = opciones[0] if len(opciones) == 1 else st.selectbox(
+                    "Documento", opciones, format_func=lambda o: cat[o]["nombre"], key=f"dt{i['id']}")
+                arch = st.file_uploader("Archivo", key=f"df{i['id']}")
+                fecha = campo_fecha(st, "Fecha de expedición" + (" (obligatoria: vigencia 1 mes)" if cat[tipo].get("vigencia_dias") else ""),
+                                    None, key=f"dfe{i['id']}")
+                if st.button("Cargar", key=f"dfb{i['id']}", disabled=arch is None):
+                    try:
+                        r = C.subir_documento_item(i["id"], guardar_subidos([arch])[0], usuario()["usuario"], fecha,
+                                                   nombre_original=arch.name, tipo_documento=tipo)
+                        st.success(f"Cargado (versión {r['version']}). Ítem: {C.ETIQUETAS[r['estado']]}.")
+                        st.rerun()
+                    except (ValueError, KeyError) as e:
+                        st.error(str(e))
+    if editable and st.button("Guardar documentos", key=f"gsdoc{tramite_id}"):
+        errores = 0
+        for pk, (estado, obs, orig) in cambios.items():
+            if estado != orig["estado"] or (obs or "") != (orig["observacion"] or ""):
+                try:
+                    C.marcar(pk, estado, obs, usuario()["usuario"])
+                except ValueError as e:
+                    errores += 1
+                    st.error(f"{orig['texto'][:60]}…: {e}")
+        if not errores:
+            st.success("Documentos guardados.")
+            st.rerun()
 
 
 def panel_tramite(tramite_id: int):
@@ -24,6 +108,7 @@ def panel_tramite(tramite_id: int):
     st.progress(a["avance"])
 
     editable = puede("expedientes")
+    _panel_paquete(tramite_id, editable)
     sug = C.sugerencias(tramite_id)
     if editable and sug:
         c1, c2 = st.columns([3, 1])
@@ -43,6 +128,9 @@ def panel_tramite(tramite_id: int):
         hechos = sum(1 for i in filas if i["estado"] != "pendiente")
         with st.expander(f"{secciones.get(sec, {}).get('nombre', sec)} — {hechos}/{len(filas)}",
                          expanded=any(i["estado"] in ("pendiente", "no_cumple") for i in filas)):
+            if sec == "documentos":
+                _seccion_documentos(tramite_id, filas, sug, editable)
+                continue
             df = pd.DataFrame([{"id": i["id"], "Ítem": i["texto"], "Estado": C.ETIQUETAS[i["estado"]],
                                 "Observación": i["observacion"] or "",
                                 "Sugerencia": C.ETIQUETAS[sug[i["item_id"]][0]] if i["item_id"] in sug else "",
@@ -106,7 +194,8 @@ def mostrar():
     for f in filas:
         C.generar(f["id"])
         a = C.avance(f["id"])
-        resumen.append({"Trámite": f["id"], "Radicado": f["radicado"], "Solicitante": f["solicitante"],
+        pq = db.consultar("SELECT completo, fecha_completo FROM chequeo_paquete WHERE tramite_id=?", (f["id"],))
+        resumen.append({"Paquete": f"Completo {pq[0]['fecha_completo']}" if pq and pq[0]["completo"] else "Incompleto","Trámite": f["id"], "Radicado": f["radicado"], "Solicitante": f["solicitante"],
                         "Tipo": E.tipos()[f["tipo"]]["nombre"], "Estado": f["estado"], "Vence": f["fecha_limite"],
                         "Avance": f"{a['avance']:.0%}", "No cumple": a["no_cumple"], "Pendientes": a["pendiente"]})
     st.dataframe(pd.DataFrame(resumen), hide_index=True, use_container_width=True)

@@ -13,7 +13,7 @@ y producir conceptos técnicos de la Secretaría de Planeación.
 | 1. Consulta normativa (buscador, fichas por zona/predio, usos del suelo, cesiones con ejemplo, por tipo de suelo) | Listo |
 | 2. Expedientes y trámites (radicado, predio, trámites, eliminación con copia, verificación contra la norma, términos en días hábiles) | Listo |
 | 3. Gestión documental (carga por trámite, clasificación automática, versiones, vista previa PDF/imagen/Word/Excel/DXF, documentos exigidos, papelera) | Listo |
-| 5. Listas de chequeo (por tipo de trámite, cumple/no cumple/no aplica con observaciones, sugerencias automáticas, avance, Excel) | Listo |
+| 5. Listas de chequeo (por tipo de trámite, cumple/no cumple/no aplica con observaciones, subir el documento al lado de cada ítem, paquete completo para revisión, sugerencias automáticas, avance, Excel) | Listo |
 | 6. Calculadoras (científica, IO/IC con ficha y planos, cuadro de áreas con Excel/Word, cesiones, plusvalía paso a paso, liquidación) | Listo |
 | Análisis de planos (DXF/DWG, IFC, .e2k/.s2k/.f2k, Excel/CSV, AGS4, SIG, PDF/escaneo con OCR o IA; reglas por disciplina, cruce arquitectura–estructura–geotecnia–cartografía, corrección manual de datos, concepto borrador con norma y evidencia) | Listo |
 | 7. Informes (informe técnico de revisión y acta de observaciones en Word editable y PDF, plantilla institucional con logo, encabezado y firmas) | Listo — faltan logo y datos institucionales |
@@ -30,7 +30,7 @@ queda con usuario, fecha y motivo.
 
 ```
 app.py                  entrada
-config/parametros/      nacional, nsr10, pbot, d152, tarifas (+ CSV art. 138 y usos art. 123)
+config/parametros/      nacional, nsr10, pbot, d152, tarifas, requisitos de la Secretaría (+ CSV art. 138 y usos art. 123)
 config/normas_base/     textos de PBOT, D152, tarifas, Ley 388 y Decreto 1077 para el buscador
 config/ajustes.yaml     lectura de escaneos (local/IA/auto), DWG (ODA/LibreDWG), repositorio
 config/plantillas/      plantilla institucional de los informes (logo, encabezado, firmas)

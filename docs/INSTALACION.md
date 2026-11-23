@@ -61,6 +61,16 @@ del predio usa el rol, así que puede cargar las capas en cualquier orden.
   y márquela como verificada. El normograma avisa lo que lleva más de 6 meses
   sin verificar.
 
+## 6a. Requisitos por trámite
+
+Los documentos que se piden salen del listado de la Secretaría
+(`config/parametros/requisitos_secretaria.yaml`). Se consultan en Consulta
+normativa → Requisitos por trámite, se ven al crear un trámite y arman la
+sección de documentos de la lista de chequeo. En la lista, al lado de cada
+documento está el botón 📎 Subir (con la fecha de expedición en calendario);
+cuando todos los obligatorios están en cumple o no aplica, se marca
+"Paquete completo para revisión" y el trámite pasa a en revisión.
+
 ## 6b. Plantilla de informes
 
 Configuración → Plantilla de informes: suba el logo (PNG o JPG), escriba

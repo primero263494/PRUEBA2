@@ -97,7 +97,7 @@ tipos:
       nombre: Prórroga de licencia
       modalidades: [prorroga]
       campos: [licencia_anterior, fecha_vencimiento_licencia]
-      verificaciones: [prorroga]
+      verificaciones: [prorroga, documentos]
       vigencia: prorroga_meses
       fuente: "Decreto 1077 de 2015, art. 2.2.6.1.2.4.1; manual 4.2 núm. 10"
     recibo_obras_urbanismo:
@@ -125,30 +125,93 @@ tipos:
       nombre: Concepto de uso del suelo
       modalidades: [concepto]
       campos: [uso_principal]
-      verificaciones: [usos]
+      verificaciones: [usos, documentos]
       vigencia: null
       fuente: "Decreto 001 de 2026; Decreto 1077 de 2015, art. 2.2.6.1.3.1"
     alineamiento:
       nombre: Alineamiento (hilos)
       modalidades: [alineamiento]
       campos: []
-      verificaciones: []
+      verificaciones: [documentos]
       vigencia: null
       fuente: "Decreto 001 de 2026"
     certificado_riesgo:
       nombre: Certificado de riesgo del predio
       modalidades: [certificado]
       campos: []
-      verificaciones: []
+      verificaciones: [documentos]
       vigencia: null
       fuente: "Decreto 001 de 2026"
     aprobacion_ph:
       nombre: Aprobación de planos de propiedad horizontal
       modalidades: [ph]
       campos: [area_construida]
-      verificaciones: []
+      verificaciones: [documentos]
       vigencia: null
       fuente: "Decreto 1077 de 2015, art. 2.2.6.1.3.1; Decreto 001 de 2026"
+    desenglobe:
+      nombre: Certificado de desenglobe
+      modalidades: [certificado]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    nomenclatura:
+      nombre: Certificado de nomenclatura
+      modalidades: [certificado]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    nomenclatura_dian:
+      nombre: Certificado de nomenclatura DIAN
+      modalidades: [certificado]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    correccion_nomenclatura:
+      nombre: Corrección de nomenclatura
+      modalidades: [correccion]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    estrato:
+      nombre: Certificado de estrato
+      modalidades: [certificado]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    reclamo_estrato:
+      nombre: Reclamo de estratificación
+      modalidades: [reclamo]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    apertura_vanos:
+      nombre: Apertura de puertas y ventanas (vanos)
+      modalidades: [vanos]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    publicidad_exterior:
+      nombre: Publicidad visual exterior
+      modalidades: [publicidad]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
+    inscripcion_profesionales:
+      nombre: Inscripción de profesionales
+      modalidades: [inscripcion]
+      campos: []
+      verificaciones: [documentos]
+      vigencia: null
+      fuente: "Listado de requisitos de la Secretaría"
   fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.1.1 a 2.2.6.1.1.7 y 2.2.6.1.3.1"}
 
 campos:
@@ -171,6 +234,12 @@ campos:
     fecha_vencimiento_licencia: {etiqueta: Vencimiento de la licencia, unidad: fecha}
     fecha_cert_tradicion: {etiqueta: Expedición del certificado de tradición, unidad: fecha}
     fecha_paz_salvo: {etiqueta: Expedición del paz y salvo predial, unidad: fecha}
+    propiedad_horizontal: {etiqueta: Existe reglamento de propiedad horizontal, unidad: si_no}
+    apoderado: {etiqueta: Tramita un apoderado (no el titular), unidad: si_no}
+    en_parcelacion: {etiqueta: Predio dentro de una parcelación, unidad: si_no}
+    mansarda: {etiqueta: Tiene mansarda, unidad: si_no}
+    frente_local: {etiqueta: Frente del local (cambio de garaje a local), unidad: m}
+    area_local: {etiqueta: Área del local (cambio de garaje a local), unidad: m²}
   fuente: {norma: Manual de trámites interno, articulo: "4.1 y 4.2"}
 
 # =============================================================================
@@ -216,6 +285,30 @@ documentos:
       planos_record: {nombre: Planos récord, claves: [record], vigencia_dias: null}
       actas_empresas: {nombre: Actas de recibo de redes (EPM, La Cimarrona), claves: [acta de recibo, recibo de redes], vigencia_dias: null}
       presupuesto: {nombre: Presupuesto financiero firmado por contador, claves: [presupuesto], vigencia_dias: null}
+      certificado_catastro: {nombre: Certificado de catastro, claves: [catastro, certificado catastral, ficha catastral], vigencia_dias: 30}
+      informe_alineamiento: {nombre: Informe de alineamiento, claves: [alineamiento, hilos], vigencia_dias: null}
+      factibilidad_acueducto: {nombre: Factibilidad del servicio de acueducto, claves: [factibilidad acueducto, cimarrona, acueducto veredal], vigencia_dias: null}
+      factibilidad_energia: {nombre: Factibilidad del servicio de energía, claves: [factibilidad energia, factibilidad epm], vigencia_dias: null}
+      pago_tramite: {nombre: Recibo de pago del trámite, claves: [pago, recibo, consignacion, factura de pago], vigencia_dias: null}
+      pago_nomenclatura: {nombre: Pago del certificado de nomenclatura, claves: [pago nomenclatura], vigencia_dias: null}
+      solicitud_tramite: {nombre: Formato de solicitud de trámites en general, claves: [solicitud, formato de solicitud], vigencia_dias: null}
+      aprobacion_parcelacion: {nombre: Aprobación de diseños por la administración de la parcelación, claves: [administracion parcelacion, reglamento copropiedad, aprobacion parcelacion], vigencia_dias: null}
+      formato_memorias: {nombre: Formato de presentación de memorias de cálculo, claves: [formato memorias, presentacion memorias], vigencia_dias: null}
+      formato_revision_estructural: {nombre: Formato de revisión estructural, claves: [revision estructural, formato revision], vigencia_dias: null}
+      medio_magnetico: {nombre: Medio magnético con los diseños (DWG y PDF), claves: [medio magnetico, cd, usb], vigencia_dias: null}
+      firma_suelista: {nombre: Firma del ingeniero de suelos en planos de cimentación, claves: [suelista, cimentacion], vigencia_dias: null}
+      visita_tecnica: {nombre: Visita técnica / domiciliaria, claves: [visita], vigencia_dias: null}
+      informe_visita: {nombre: Informe de la visita técnica, claves: [informe de visita, informe visita], vigencia_dias: null}
+      plano_localizacion_cerramiento: {nombre: Plano de localización del cerramiento con dimensiones y material, claves: [localizacion cerramiento, plano cerramiento], vigencia_dias: null}
+      ubicacion_pozo_septico: {nombre: Ubicación del pozo séptico, claves: [ubicacion pozo], vigencia_dias: null}
+      levantamiento_hipoteca: {nombre: Documento de levantamiento de hipoteca (si tiene hipoteca), claves: [hipoteca], vigencia_dias: null}
+      planos_alinderamiento: {nombre: Planos de alinderamiento, claves: [alinderamiento, propiedad horizontal, ph], vigencia_dias: null}
+      declaracion_juramentada: {nombre: Manifestación bajo juramento de obra construida en su totalidad (licencia vencida), claves: [juramento, juramentada], vigencia_dias: null}
+      formato_reclamo_estrato: {nombre: Formato de reclamo de estrato socioeconómico, claves: [reclamo estrato, reclamo], vigencia_dias: null}
+      impuesto_predial: {nombre: Fotocopia de la factura del impuesto predial, claves: [impuesto predial, factura predial], vigencia_dias: null}
+      autorizacion_propietario: {nombre: Autorización escrita del propietario del predio, claves: [autorizacion propietario], vigencia_dias: null}
+      formato_publicidad: {nombre: Formato de publicidad visual exterior, claves: [publicidad, aviso, valla publicitaria], vigencia_dias: null}
+      formato_inscripcion_profesionales: {nombre: Formato de inscripción de profesionales, claves: [inscripcion profesionales, inscripcion], vigencia_dias: null}
       otro: {nombre: Otro documento, claves: [], vigencia_dias: null}
     fuente: {norma: Manual de trámites interno, articulo: "4.1 a 4.3"}
   base_comunes:

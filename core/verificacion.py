@@ -64,21 +64,45 @@ def _obligatorios(exp, tr, cat):
     return salida
 
 
-def _documentos(tr):
-    salida = []
-    dias = P.valor("tramites.general.vigencia_documentos_dias")
-    fuente = P.obtener("tramites.general.vigencia_documentos_dias").fuente
-    fr = _fecha(tr["fecha_radicacion"])
+def _documentos(exp, tr):
+    """Vigencia (p. ej. no superior a un mes) de los documentos exigidos que la tienen."""
     from core import documentos
-    for campo, nombre, tipo_doc in (("fecha_cert_tradicion", "Certificado de tradición", "cert_tradicion"),
-                                    ("fecha_paz_salvo", "Paz y salvo predial", "paz_salvo")):
-        f = _fecha(tr["datos"].get(campo)) or _fecha(documentos.fecha_documento(tr["id"], tipo_doc))
-        if not f:
-            salida.append(_r(nombre, NO_VERIF, "Sin fecha de expedición registrada.", fuente))
+    salida = []
+    fr = _fecha(tr["fecha_radicacion"])
+    cat = documentos.catalogo()
+    campos = {"cert_tradicion": "fecha_cert_tradicion", "paz_salvo": "fecha_paz_salvo"}
+    for req in documentos.requisitos(exp, tr):
+        for tipo_doc in req["tipo"].split("|"):
+            dias = cat.get(tipo_doc, {}).get("vigencia_dias")
+            if not dias:
+                continue
+            nombre = cat[tipo_doc]["nombre"]
+            fuente = req["fuente"] + " (fecha de expedición no superior a un mes)"
+            f = _fecha(tr["datos"].get(campos.get(tipo_doc))) or _fecha(documentos.fecha_documento(tr["id"], tipo_doc))
+            if not f:
+                if not req["opcional"]:
+                    salida.append(_r(f"Vigencia: {nombre}", NO_VERIF, "Sin fecha de expedición registrada.", fuente))
+            else:
+                edad = (fr - f).days
+                salida.append(_r(f"Vigencia: {nombre}", CUMPLE if 0 <= edad <= dias else NO_CUMPLE,
+                                 f"Expedido el {f.isoformat()}, {edad} días antes de la radicación (máx. {dias}).", fuente))
+    return salida
+
+
+def _cambio_uso_garaje(tr):
+    d = tr["datos"]
+    if tr.get("modalidad") != "cambio_de_uso" or (d.get("frente_local") is None and d.get("area_local") is None):
+        return []
+    salida = []
+    for campo, clave, nombre, unidad in (("frente_local", "cambio_uso_garaje_frente_minimo", "Frente del local", "m"),
+                                         ("area_local", "cambio_uso_garaje_area_minima", "Área del local", "m²")):
+        p = P.obtener(f"requisitos.criterios.{clave}")
+        v = _num(d.get(campo))
+        if v is None:
+            salida.append(_r(f"{nombre} (garaje a local)", NO_VERIF, "Dato no registrado (visita técnica).", p.fuente))
         else:
-            edad = (fr - f).days
-            salida.append(_r(nombre, CUMPLE if 0 <= edad <= dias else NO_CUMPLE,
-                             f"Expedido {edad} días antes de la radicación (máx. {dias}).", fuente))
+            salida.append(_r(f"{nombre} (garaje a local)", CUMPLE if v >= p.valor else NO_CUMPLE,
+                             f"{v:g} {unidad} · mínimo {p.valor:g} {unidad}", p.fuente))
     return salida
 
 
@@ -308,16 +332,17 @@ def _prorroga(tr):
                f"Radicada el {fr}; la licencia vence el {v}. Debe solicitarse antes del vencimiento.", p.fuente)]
 
 
-def _estudio_suelos(tr):
+def _estudio_suelos(exp, tr):
     if tr["tipo"] not in ("construccion_urbana", "construccion_rural"):
         return []
-    pisos = _num(tr["datos"].get("n_pisos"))
-    if pisos is not None and pisos <= 2:
-        p = P.obtener("nsr10.geotecnia.obligatoriedad")
-        return [_r("Estudio de suelos", REVISAR,
-                   "Vivienda de 1–2 pisos: la NSR-10 H.1.1.2 exige estudio geotécnico; el manual interno admite apique. "
-                   "Aplique el criterio que defina la Secretaría.", p.fuente)]
-    return []
+    from core import documentos
+    regla = "suelos_urbano" if tr["tipo"] == "construccion_urbana" else "suelos_rural"
+    doc, motivo = documentos._regla_suelos(regla, exp, tr)
+    nombre = {"estudio_suelos": "Se exige estudio de suelos según NSR-10", "apique": "Se exige apique según NSR-10"}.get(
+        doc, "Falta definir estudio de suelos o apique")
+    clave = "urbano_pisos_estudio_suelos" if regla == "suelos_urbano" else "rural_area_estudio_suelos"
+    return [_r("Estudio de suelos", INFO if "|" not in doc else REVISAR, f"{nombre}: {motivo}.",
+               P.obtener(f"requisitos.criterios.{clave}").fuente)]
 
 
 def _termino(tr):
@@ -338,8 +363,9 @@ def _documentos_cargados(exp, tr):
         f = documentos.faltantes(exp, tr)
     except Exception:
         return []
+    f = [x for x in f if not x["opcional"]]
     faltan = [x["nombre"] for x in f if not x["cargado"]]
-    fuente = "Manual de trámites interno, cap. 4.1 y 4.2"
+    fuente = f[0]["fuente"] if f else "Listado de requisitos de la Secretaría"
     return [_r("Documentos exigidos", CUMPLE if not faltan else NO_CUMPLE,
                ("Completos (" + str(len(f)) + ").") if not faltan else
                f"Faltan {len(faltan)} de {len(f)}: " + "; ".join(faltan), fuente)]
@@ -352,7 +378,8 @@ def verificar(expediente: dict, tramite: dict) -> list[dict]:
     v = set(cat.get("verificaciones", []))
     res = _obligatorios(expediente, tramite, cat)
     if "documentos" in v:
-        res += _documentos(tramite)
+        res += _documentos(expediente, tramite)
+        res += _cambio_uso_garaje(tramite)
         res += _documentos_cargados(expediente, tramite)
     if "plan_parcial" in v or expediente.get("clase_suelo") == "expansion":
         res += _plan_parcial(expediente, fila)
@@ -378,7 +405,7 @@ def verificar(expediente: dict, tramite: dict) -> list[dict]:
         res += _reconocimiento(tramite)
     if "prorroga" in v:
         res += _prorroga(tramite)
-    res += _estudio_suelos(tramite)
+    res += _estudio_suelos(expediente, tramite)
     res += _termino(tramite)
     return res
 

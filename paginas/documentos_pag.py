@@ -9,7 +9,7 @@ import pandas as pd
 import streamlit as st
 
 from core import db, documentos as D, expedientes as E, vista_previa
-from paginas.comun import confirmar_eliminacion, guardar_subidos, puede, usuario
+from paginas.comun import confirmar_eliminacion, guardar_subidos, puede, usuario, campo_fecha
 
 
 def _tam(b: int) -> str:
@@ -67,7 +67,9 @@ def panel_expediente(eid: int):
         f = D.faltantes(exp, t)
         ok = sum(1 for x in f if x["cargado"])
         with st.expander(f"Exigidos para #{t['id']} {E.tipos()[t['tipo']]['nombre']}: {ok} de {len(f)} cargados"):
-            st.dataframe(pd.DataFrame([{"Documento": x["nombre"], "Cargado": "Sí" if x["cargado"] else "Falta"} for x in f]),
+            st.dataframe(pd.DataFrame([{"Documento": x["nombre"] + (" (si aplica)" if x["opcional"] else ""),
+                                        "Cargado": "Sí" if x["cargado"] else ("—" if x["opcional"] else "Falta"),
+                                        "Nota": x["nota"]} for x in f]),
                          hide_index=True, use_container_width=True)
             for v in D.vencidos(exp, t):
                 st.warning(f"{cat[v['tipo_documento']]['nombre']}: expedido {v['edad_dias']} días antes de la radicación "
@@ -79,7 +81,7 @@ def panel_expediente(eid: int):
                                        type=D.extensiones(), accept_multiple_files=True, key=f"up{eid}")
             c1, c2 = st.columns(2)
             tid = c1.selectbox("Trámite", list(opciones_tr), format_func=opciones_tr.get, key=f"uptr{eid}")
-            fecha = c2.text_input("Fecha de expedición (AAAA-MM-DD, si aplica)", key=f"upf{eid}")
+            fecha = campo_fecha(c2, "Fecha de expedición (si aplica)", None, key=f"upf{eid}")
             asignaciones = {}
             if subidos:
                 st.caption("Tipo sugerido según el nombre del archivo; cámbielo si no corresponde.")
@@ -122,7 +124,7 @@ def panel_expediente(eid: int):
                                 format_func=lambda k: cat[k]["nombre"], key=f"rt{did}")
             tr = c2.selectbox("Trámite", list(opciones_tr), index=list(opciones_tr).index(doc["tramite_id"] or 0),
                               format_func=opciones_tr.get, key=f"rtr{did}")
-            fe = c3.text_input("Fecha de expedición", doc["fecha_expedicion"] or "", key=f"rfe{did}")
+            fe = campo_fecha(c3, "Fecha de expedición", doc["fecha_expedicion"], key=f"rfe{did}")
             obs = st.text_input("Observaciones", doc["observaciones"] or "", key=f"robs{did}")
             if st.button("Guardar cambios", key=f"rg{did}"):
                 D.editar(did, {"tipo_documento": tipo, "tramite_id": tr or None, "fecha_expedicion": fe or None,

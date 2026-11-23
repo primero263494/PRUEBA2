@@ -77,8 +77,116 @@ def sugerir_tipo(nombre_archivo: str) -> str:
     return mejor
 
 
+def lista_secretaria(expediente: dict | None, tramite: dict) -> tuple[str, dict] | None:
+    """Lista del listado de requisitos de la Secretaría que aplica al trámite (la primera que coincide)."""
+    try:
+        listas = P.valor("requisitos.listas")
+    except KeyError:
+        return None
+    clase = (expediente or {}).get("clase_suelo") or ""
+    for clave, l in listas.items():
+        if tramite["tipo"] not in l["tipos"]:
+            continue
+        if l.get("modalidades") and tramite.get("modalidad") not in l["modalidades"]:
+            continue
+        if l.get("clase_suelo") and clase not in l["clase_suelo"]:
+            continue
+        return clave, l
+    return None
+
+
+def _num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def _condicion(nombre: str, exp: dict, tr: dict) -> bool:
+    d = tr.get("datos") or {}
+    if nombre == "juridica":
+        return exp.get("tipo_persona") == "juridica"
+    if nombre in ("apoderado", "ph", "en_parcelacion"):
+        return bool(d.get({"ph": "propiedad_horizontal"}.get(nombre, nombre)))
+    if nombre == "lote_icanh":
+        return (_num(d.get("area_lote")) or 0) >= P.valor("pbot.ambiental.arqueologia_preventiva_area_minima")
+    if nombre == "urbano":
+        return exp.get("clase_suelo") in ("urbano", "expansion")
+    if nombre == "rural":
+        return exp.get("clase_suelo") in ("rural", "suburbano")
+    raise ValueError(f"Condición desconocida en requisitos_secretaria.yaml: {nombre}")
+
+
+def _regla_suelos(regla: str, exp: dict, tr: dict) -> tuple[str, str]:
+    """Estudio de suelos o apique según el listado de la Secretaría."""
+    d = tr.get("datos") or {}
+    pisos = _num(d.get("n_pisos"))
+    if regla == "suelos_urbano":
+        lim = P.valor("requisitos.criterios.urbano_pisos_estudio_suelos")
+        if pisos is None or pisos == 0:
+            return "estudio_suelos|apique", "Indique el número de pisos: 3 o más → estudio de suelos; 2 o menos → apique."
+        return ("estudio_suelos", f"{pisos:g} pisos ≥ {lim}") if pisos >= lim else ("apique", f"{pisos:g} pisos < {lim}")
+    area = _num(d.get("area_construida")) or 0
+    lim_area = P.valor("requisitos.criterios.rural_area_estudio_suelos")
+    motivos = []
+    if area >= lim_area:
+        motivos.append(f"área a construir {area:g} m² ≥ {lim_area:g}")
+    if pisos and pisos >= 2 and d.get("mansarda"):
+        motivos.append("dos niveles y mansarda")
+    if pisos and pisos >= 3:
+        motivos.append(f"{pisos:g} pisos")
+    if d.get("en_parcelacion"):
+        motivos.append("predio en parcelación")
+    if d.get("propiedad_horizontal"):
+        motivos.append("propiedad horizontal (si el reglamento lo establece)")
+    if motivos:
+        return "estudio_suelos", "; ".join(motivos)
+    if pisos is None or pisos == 0:
+        return "estudio_suelos|apique", "Indique pisos y área a construir para definir estudio o apique."
+    return "apique", f"Casa de {pisos:g} piso(s) sin mansarda, área {area:g} m² < {lim_area:g}"
+
+
+def requisitos(expediente: dict, tramite: dict) -> list[dict]:
+    """Requisitos documentales del trámite: [{tipo, nombre, opcional, nota, fuente}].
+
+    Usa el listado de requisitos de la Secretaría (requisitos_secretaria.yaml);
+    si el trámite no está en el listado, usa el manual (tramites.yaml)."""
+    cat = catalogo()
+    encontrada = lista_secretaria(expediente, tramite)
+    if encontrada is None:
+        return [{"tipo": r, "nombre": " o ".join(cat[o]["nombre"] for o in r.split("|")), "opcional": False, "nota": "",
+                 "fuente": P.obtener("tramites.documentos.requeridos_por_tipo").fuente}
+                for r in _requeridos_manual(expediente, tramite)]
+    clave, lista = encontrada
+    fuente = f"{P.obtener('requisitos.listas').fuente} — {lista['titulo']}"
+    salida = []
+    for r in lista["requisitos"]:
+        if r.get("cond") and not _condicion(r["cond"], expediente, tramite):
+            continue
+        doc, nota = r["doc"], r.get("nota", "")
+        if r.get("regla"):
+            doc, motivo = _regla_suelos(r["regla"], expediente, tramite)
+            nota = f"{nota} {motivo}".strip()
+            nombre = " o ".join(cat[o]["nombre"] for o in doc.split("|"))
+        else:
+            nombre = r.get("texto") or " o ".join(cat[o]["nombre"] for o in doc.split("|"))
+        salida.append({"tipo": doc, "nombre": nombre, "opcional": bool(r.get("opcional")), "nota": nota, "fuente": fuente})
+    # una misma clave no se repite
+    vistos, unicos = set(), []
+    for r in salida:
+        if r["tipo"] not in vistos:
+            vistos.add(r["tipo"])
+            unicos.append(r)
+    return unicos
+
+
 def requeridos(expediente: dict, tramite: dict) -> list[str]:
-    """Documentos exigidos para el trámite, con los condicionales del manual."""
+    """Claves de los documentos obligatorios ('a|b' = cualquiera)."""
+    return [r["tipo"] for r in requisitos(expediente, tramite) if not r["opcional"]]
+
+
+def _requeridos_manual(expediente: dict, tramite: dict) -> list[str]:
+    """Documentos exigidos según el manual de trámites (para trámites que no están en el listado)."""
     tipo = tramite["tipo"]
     base = (P.valor("tramites.documentos.base_reducida_prorroga") if tipo == "prorroga"
             else list(P.valor("tramites.documentos.base_comunes")))
@@ -87,15 +195,6 @@ def requeridos(expediente: dict, tramite: dict) -> list[str]:
     req = base + list(P.valor("tramites.documentos.requeridos_por_tipo").get(tipo, []))
     if expediente.get("tipo_persona") == "juridica":
         req.append("camara_comercio")
-    lote = tramite["datos"].get("area_lote") or 0
-    if tipo in ("urbanizacion", "parcelacion") and float(lote) >= P.valor("pbot.ambiental.arqueologia_preventiva_area_minima"):
-        req.append("icanh")
-    if tramite["datos"].get("propiedad_horizontal"):
-        req.append("autorizacion_copropiedad")
-    if tipo in ("construccion_urbana", "construccion_rural") and "estudio_suelos" in req:
-        pisos = float(tramite["datos"].get("n_pisos") or 0)
-        if 0 < pisos <= 2:     # criterio pendiente: se acepta estudio o apique
-            req[req.index("estudio_suelos")] = "estudio_suelos|apique"
     return list(dict.fromkeys(req))
 
 
@@ -214,16 +313,10 @@ def eliminar(did: int, usuario: str, motivo: str) -> dict:
 
 
 def faltantes(expediente: dict, tramite: dict) -> list[dict]:
-    """Compara lo exigido con lo cargado. Una alternativa 'a|b' se cumple con cualquiera."""
+    """Compara lo exigido con lo cargado. Una alternativa 'a|b' se cumple con cualquiera. Incluye los opcionales (opcional=True)."""
     cargados = {d["tipo_documento"] for d in listar(expediente["id"], tramite["id"])}
     cargados |= {d["tipo_documento"] for d in listar(expediente["id"]) if d["tramite_id"] is None}
-    cat = catalogo()
-    salida = []
-    for req in requeridos(expediente, tramite):
-        opciones = req.split("|")
-        ok = any(o in cargados for o in opciones)
-        salida.append({"tipo": req, "nombre": " o ".join(cat[o]["nombre"] for o in opciones), "cargado": ok})
-    return salida
+    return [{**r, "cargado": any(o in cargados for o in r["tipo"].split("|"))} for r in requisitos(expediente, tramite)]
 
 
 def vencidos(expediente: dict, tramite: dict) -> list[dict]:

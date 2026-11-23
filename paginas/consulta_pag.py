@@ -185,9 +185,50 @@ def _tab_buscar():
         st.info("Sin resultados. Si no ha importado los textos, vaya a Normas → Cargar normas base.")
 
 
+def _tab_requisitos():
+    """Requisitos documentales del listado de la Secretaría, con simulador de condiciones."""
+    from core import documentos as D, expedientes as E
+    st.caption("Listado de requisitos de la Secretaría de Planeación. Marque las condiciones del caso para ver "
+               "exactamente qué documentos se exigen (estudio de suelos o apique, cámara de comercio, PH, etc.).")
+    tipos = E.tipos()
+    c1, c2, c3 = st.columns(3)
+    tipo = c1.selectbox("Trámite", list(tipos), format_func=lambda k: tipos[k]["nombre"], key="req_tipo")
+    modalidad = c2.selectbox("Modalidad", tipos[tipo]["modalidades"], key="req_mod")
+    clase = c3.selectbox("Clase de suelo", ["urbano", "rural", "suburbano", "expansion"], key="req_clase",
+                         index=1 if tipo == "construccion_rural" else 0)
+    c1, c2, c3, c4 = st.columns(4)
+    juridica = c1.checkbox("Persona jurídica", key="req_jur")
+    datos = {"propiedad_horizontal": c2.checkbox("Propiedad horizontal", key="req_ph"),
+             "apoderado": c3.checkbox("Tramita apoderado", key="req_apo"),
+             "en_parcelacion": c4.checkbox("Predio en parcelación", key="req_parc")}
+    c1, c2, c3, c4 = st.columns(4)
+    datos["n_pisos"] = c1.number_input("Pisos", min_value=0, value=0, key="req_pisos") or None
+    datos["area_construida"] = c2.number_input("Área a construir (m²)", min_value=0.0, value=0.0, key="req_area") or None
+    datos["area_lote"] = c3.number_input("Área del lote (m²)", min_value=0.0, value=0.0, key="req_lote") or None
+    datos["mansarda"] = c4.checkbox("Mansarda", key="req_mans")
+    exp = {"tipo_persona": "juridica" if juridica else "natural", "clase_suelo": clase}
+    tr = {"tipo": tipo, "modalidad": modalidad, "datos": {k: v for k, v in datos.items() if v}}
+    lista = D.lista_secretaria(exp, tr)
+    reqs = D.requisitos(exp, tr)
+    if lista:
+        st.markdown(f"**{lista[1]['titulo']}**")
+        if lista[1].get("nota"):
+            st.caption(lista[1]["nota"])
+    else:
+        st.info("Este trámite no está en el listado de la Secretaría; se muestran los documentos del manual de trámites.")
+    vig = D.catalogo()
+    st.dataframe(pd.DataFrame([{"N.º": i, "Documento": r["nombre"], "Obligatorio": "Si aplica" if r["opcional"] else "Sí",
+                                "Vigencia": "Máx. 1 mes" if any(vig[o].get("vigencia_dias") for o in r["tipo"].split("|")) else "",
+                                "Nota": r["nota"]} for i, r in enumerate(reqs, 1)]), hide_index=True, use_container_width=True)
+    st.caption(f"Fuente: {reqs[0]['fuente'] if reqs else ''}")
+
+
 def mostrar():
     st.title("Consulta normativa")
-    t = st.tabs(["Buscar", "Ficha por zona o predio", "Usos del suelo", "Cesiones", "Por tipo de suelo"])
+    t = st.tabs(["Buscar", "Ficha por zona o predio", "Usos del suelo", "Cesiones", "Por tipo de suelo",
+                 "Requisitos por trámite"])
+    with t[5]:
+        _tab_requisitos()
     with t[0]:
         _tab_buscar()
     with t[1]:

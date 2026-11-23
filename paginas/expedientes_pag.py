@@ -6,7 +6,7 @@ import streamlit as st
 
 from core import consulta, expedientes as E, verificacion as V
 from core import parametros as P
-from paginas.comun import confirmar_eliminacion, puede, usuario
+from paginas.comun import confirmar_eliminacion, puede, usuario, campo_fecha
 
 COLOR = {V.CUMPLE: "#e5f4e4", V.NO_CUMPLE: "#fbebeb", V.REVISAR: "#f9eeda", V.NO_VERIF: "#f0efec", V.INFO: "#e7f1fb"}
 AREAS = {"": "(sin definir)", **consulta.AREAS}
@@ -21,8 +21,8 @@ def _form_expediente(prefijo: str, base: dict | None = None) -> dict:
     c1, c2, c3 = st.columns(3)
     datos = {
         "radicado": c1.text_input("Radicado", b.get("radicado") or E.siguiente_radicado(), key=f"{prefijo}rad"),
-        "fecha_radicacion": c2.date_input("Fecha de radicación", date.fromisoformat(b["fecha_radicacion"])
-                                          if b.get("fecha_radicacion") else date.today(), key=f"{prefijo}fr").isoformat(),
+        "fecha_radicacion": campo_fecha(c2, "Fecha de radicación", b.get("fecha_radicacion"), key=f"{prefijo}fr",
+                                        obligatorio=True),
         "estado": c3.selectbox("Estado", E.estados(), index=E.estados().index(b.get("estado", "radicado")), key=f"{prefijo}est"),
     }
     c1, c2, c3 = st.columns(3)
@@ -60,7 +60,10 @@ def _form_datos_tramite(prefijo: str, tipo: str, base: dict | None = None) -> di
     cat = E.tipos()[tipo]
     nombres = E.campos()
     visibles = list(dict.fromkeys(cat.get("campos", []) + ["area_otros_usos", "n_viviendas", "frente_lote", "seccion_via",
-                                                            "area_excluida_ic", "fecha_cert_tradicion", "fecha_paz_salvo"]))
+                                                            "area_excluida_ic", "fecha_cert_tradicion", "fecha_paz_salvo",
+                                                            "propiedad_horizontal", "apoderado"]
+                                  + (["en_parcelacion", "mansarda"] if tipo == "construccion_rural" else [])
+                                  + (["frente_local", "area_local"] if tipo == "adicion_modificacion_cambio_uso" else [])))
     datos = {}
     cols = st.columns(3)
     for i, c in enumerate(visibles):
@@ -70,7 +73,9 @@ def _form_datos_tramite(prefijo: str, tipo: str, base: dict | None = None) -> di
         col = cols[i % 3]
         clave = f"{prefijo}{c}"
         if c.startswith("fecha"):
-            v = col.text_input(f"{etiqueta}{obligatorio} (AAAA-MM-DD)", b.get(c, ""), key=clave)
+            v = campo_fecha(col, f"{etiqueta}{obligatorio}", b.get(c), key=clave)
+        elif unidad == "si_no":
+            v = col.checkbox(etiqueta, bool(b.get(c)), key=clave) or None
         elif c == "categoria_rural":
             v = col.selectbox(f"{etiqueta}{obligatorio}", list(CATEGORIAS_RURALES), format_func=CATEGORIAS_RURALES.get,
                               index=list(CATEGORIAS_RURALES).index(b.get(c, "")), key=clave)
@@ -83,6 +88,33 @@ def _form_datos_tramite(prefijo: str, tipo: str, base: dict | None = None) -> di
             v = v if v else None
         datos[c] = v if v not in ("",) else None
     return {k: v for k, v in datos.items() if v is not None}
+
+
+def _requisitos_previos(tipo):
+    """Muestra los documentos que pide el listado de la Secretaría antes de crear el trámite."""
+    from core import documentos as D
+    listas = P.valor("requisitos.listas")
+    aplicables = [l for l in listas.values() if tipo in l["tipos"]]
+    if not aplicables:
+        return
+    with st.expander("Documentos que pide la Secretaría para este trámite"):
+        cat = D.catalogo()
+        for l in aplicables:
+            extra = []
+            if l.get("modalidades"):
+                extra.append("modalidad " + ", ".join(l["modalidades"]))
+            if l.get("clase_suelo"):
+                extra.append("suelo " + ", ".join(l["clase_suelo"]))
+            st.markdown(f"**{l['titulo']}**" + (f" ({'; '.join(extra)})" if extra else ""))
+            st.markdown("\n".join(
+                f"{i}. {r.get('texto') or ' o '.join(cat[o]['nombre'] for o in r['doc'].split('|'))}"
+                + (" — *si aplica*" if r.get("opcional") else "") + (f" — *solo si: {COND.get(r['cond'], r['cond'])}*" if r.get("cond") else "")
+                for i, r in enumerate(l["requisitos"], 1)))
+
+
+COND = {"juridica": "persona jurídica", "apoderado": "tramita un apoderado", "ph": "hay propiedad horizontal",
+        "en_parcelacion": "predio en parcelación", "lote_icanh": "lote ≥ 10.000 m²", "urbano": "zona urbana",
+        "rural": "zona rural"}
 
 
 def _verificacion(exp, tr):
@@ -169,13 +201,14 @@ def _detalle(eid: int):
             tipos = E.tipos()
             tipo = st.selectbox("Tipo de trámite", list(tipos), format_func=lambda k: tipos[k]["nombre"], key="nuevo_tipo")
             st.caption(f"Fuente: {tipos[tipo]['fuente']}")
+            _requisitos_previos(tipo)
             c1, c2 = st.columns(2)
             modalidad = c1.selectbox("Modalidad", tipos[tipo]["modalidades"], key="nuevo_mod")
-            fr = c2.date_input("Fecha de radicación del trámite", date.today(), key="nuevo_fr")
+            fr = campo_fecha(c2, "Fecha de radicación del trámite", None, key="nuevo_fr", obligatorio=True)
             datos = _form_datos_tramite("n_", tipo)
             obs = st.text_area("Observaciones", key="nuevo_obs")
             if st.button("Agregar trámite", type="primary"):
-                E.agregar_tramite(eid, tipo, modalidad, datos, usuario()["usuario"], fr.isoformat(), obs)
+                E.agregar_tramite(eid, tipo, modalidad, datos, usuario()["usuario"], fr, obs)
                 st.success("Trámite agregado. Revise la verificación en la pestaña Trámites.")
                 st.rerun()
 

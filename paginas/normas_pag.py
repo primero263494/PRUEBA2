@@ -7,7 +7,7 @@ import streamlit as st
 
 from core import ajustes, lectura, normas
 from core import parametros as P
-from paginas.comun import confirmar_eliminacion, exigir, guardar_subidos, puede, usuario
+from paginas.comun import confirmar_eliminacion, exigir, guardar_subidos, puede, usuario, campo_fecha
 
 
 def _normograma():
@@ -52,7 +52,7 @@ def _cargar():
         c1, c2, c3 = st.columns(3)
         ambito = c1.selectbox("Ámbito", normas.AMBITOS)
         disciplina = c2.selectbox("Disciplina", normas.DISCIPLINAS)
-        version = c3.text_input("Versión / fecha", placeholder="Compilación 2026-04")
+        version = campo_fecha(c3, "Fecha de la versión o compilación", None, key="norma_version")
         forzar = st.selectbox("Forzar modo de lectura", ["(según Configuración)", "local", "ia"])
         if st.form_submit_button("Cargar") and archivo and nombre:
             rutas = guardar_subidos(archivo)

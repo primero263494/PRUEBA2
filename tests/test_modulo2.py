@@ -62,7 +62,7 @@ def test_verificacion_cumple():
     assert _estado(res, "Índice de construcción") == V.CUMPLE        # 2,4 ≤ 2,5
     assert _estado(res, "Altura") == V.CUMPLE
     assert _estado(res, "Uso permitido") == V.CUMPLE
-    assert _estado(res, "Certificado de tradición") == V.CUMPLE
+    assert _estado(res, "Vigencia: Certificado de tradición y libertad") == V.CUMPLE
     assert E.tramite(tid)["fecha_limite"] == calendario.sumar_dias_habiles(HOY, 45).isoformat()
 
 
@@ -77,7 +77,7 @@ def test_verificacion_incumple_y_ic_especial():
     assert _estado(res, "Índice de construcción") == V.NO_CUMPLE     # 3,5 con opción 2,5
     assert _estado(res, "Altura") == V.NO_CUMPLE                     # 9 > 5 + 3
     assert _estado(res, "Uso permitido") == V.NO_CUMPLE              # 1011 prohibido en residencial
-    assert _estado(res, "Certificado de tradición") == V.NO_CUMPLE
+    assert _estado(res, "Vigencia: Certificado de tradición y libertad") == V.NO_CUMPLE
     assert _estado(res, "Altura por sección vial") == V.NO_CUMPLE
     assert _estado(res, "Lote mínimo multifamiliar") == V.NO_CUMPLE
     from core import auth

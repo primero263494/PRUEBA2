@@ -158,6 +158,9 @@ def contenido_informe(tramite_id: int, conclusion: str = "", observaciones_extra
     av = chequeo.avance(tramite_id)
     b.append(("parrafo", f"Avance {av['avance']:.0%}: {av['cumple']} cumplen, {av['no_cumple']} no cumplen, "
                          f"{av['no_aplica']} no aplican y {av['pendiente']} pendientes de {av['total']} ítems."))
+    pq = chequeo.paquete(tramite_id)
+    b.append(("parrafo", f"Paquete documental: completo para revisión desde el {pq['fecha_completo']}."
+              if pq["completo"] else f"Paquete documental: incompleto ({len(pq['pendientes'])} documentos obligatorios pendientes)."))
     secciones = P.valor("listas.secciones")
     items = chequeo.items(tramite_id) if incluir_chequeo_completo else chequeo.observaciones(tramite_id)
     b.append(("tabla", ["Sección", "Ítem", "Estado", "Observación"],
@@ -179,7 +182,7 @@ def contenido_informe(tramite_id: int, conclusion: str = "", observaciones_extra
     obs += [f"{r['item']}: {r['detalle']} ({r['fuente']})" for r in ver if r["estado"] == V.NO_CUMPLE]
     if an:
         obs += an["concepto"]["observaciones"]
-    faltan = [x["nombre"] for x in documentos.faltantes(exp, tr) if not x["cargado"]]
+    faltan = [x["nombre"] for x in documentos.faltantes(exp, tr) if not x["cargado"] and not x["opcional"]]
     if faltan:
         obs.append("Documentos por aportar: " + "; ".join(faltan))
     if observaciones_extra.strip():
