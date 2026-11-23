@@ -8,7 +8,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from core import ajustes  # noqa: E402
 
 _tmp = Path(tempfile.mkdtemp()) / "prueba1.db"
-ajustes.ruta_bd = lambda: _tmp
+RUTA_BD = lambda: _tmp
+ajustes.ruta_bd = RUTA_BD
 
 from core import cesiones, consulta, db, normas  # noqa: E402
 

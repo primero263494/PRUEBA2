@@ -33,6 +33,6 @@ def mostrar():
     st.markdown(
         "**Módulos disponibles:** expedientes y trámites (con verificación contra la norma), gestión documental (carga, vista previa, documentos exigidos), listas de chequeo (con avance y sugerencias), calculadoras (científica, IO/IC, cuadro de áreas, cesiones, plusvalía, liquidación), consulta normativa (buscador, fichas por zona, usos del suelo, cesiones), "
         "parámetros normativos, normas y normograma, cartografía y cruce del predio, configuración, usuarios y "
-        "auditoría. **En desarrollo:** "
-        "análisis de planos completo e informes."
+        "auditoría, análisis de planos y estudios con concepto borrador, e informes en Word y PDF. "
+        "**Por completar en Configuración:** logo, encabezado y firmas de la plantilla de informes."
     )

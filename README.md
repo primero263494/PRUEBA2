@@ -15,8 +15,8 @@ y producir conceptos técnicos de la Secretaría de Planeación.
 | 3. Gestión documental (carga por trámite, clasificación automática, versiones, vista previa PDF/imagen/Word/Excel/DXF, documentos exigidos, papelera) | Listo |
 | 5. Listas de chequeo (por tipo de trámite, cumple/no cumple/no aplica con observaciones, sugerencias automáticas, avance, Excel) | Listo |
 | 6. Calculadoras (científica, IO/IC con ficha y planos, cuadro de áreas con Excel/Word, cesiones, plusvalía paso a paso, liquidación) | Listo |
-| Análisis de planos (DXF/DWG, IFC, .e2k/.s2k, PDF/OCR/IA, cruce) | Siguiente (versión inicial: verificación sísmica y geotécnica rápida) |
-| 7. Informes Word/PDF | Pendiente |
+| Análisis de planos (DXF/DWG, IFC, .e2k/.s2k/.f2k, Excel/CSV, AGS4, SIG, PDF/escaneo con OCR o IA; reglas por disciplina, cruce arquitectura–estructura–geotecnia–cartografía, corrección manual de datos, concepto borrador con norma y evidencia) | Listo |
+| 7. Informes (informe técnico de revisión y acta de observaciones en Word editable y PDF, plantilla institucional con logo, encabezado y firmas) | Listo — faltan logo y datos institucionales |
 
 ## Principio
 
@@ -33,8 +33,10 @@ app.py                  entrada
 config/parametros/      nacional, nsr10, pbot, d152, tarifas (+ CSV art. 138 y usos art. 123)
 config/normas_base/     textos de PBOT, D152, tarifas, Ley 388 y Decreto 1077 para el buscador
 config/ajustes.yaml     lectura de escaneos (local/IA/auto), DWG (ODA/LibreDWG), repositorio
-core/                   bd, usuarios, auditoría, parámetros, NSR-10, lectura, normas, cartografía, conversores
+config/plantillas/      plantilla institucional de los informes (logo, encabezado, firmas)
+core/                   bd, usuarios, auditoría, parámetros, NSR-10, lectura, normas, cartografía, conversores, informes
+core/planos/            lectores de planos y estudios, reglas, cruce y concepto
 paginas/                pantallas Streamlit
 datos/                  base de datos, normas, capas, expedientes (no se suben al repositorio)
-tests/                  pruebas
+tests/                  pruebas (python -m pytest tests) y archivos de ejemplo en tests/ejemplos
 ```

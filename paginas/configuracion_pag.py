@@ -54,3 +54,40 @@ def mostrar():
     if st.button("Guardar repositorio"):
         _guardar("repositorio.url", url)
         st.success("Guardado.")
+    plantilla_informes()
+
+
+def plantilla_informes():
+    """Editor de la plantilla institucional (logo, encabezado, pie y firmas)."""
+    import pandas as pd
+
+    from core import informes
+    from paginas.comun import guardar_subidos
+    st.subheader("Plantilla de informes")
+    pl = informes.plantilla()
+    logo = informes._ruta_logo(pl)
+    if logo:
+        st.image(str(logo), width=160)
+    else:
+        st.caption("Sin logo: los informes muestran [LOGO].")
+    sub = st.file_uploader("Logo (PNG o JPG)", type=["png", "jpg", "jpeg"])
+    if sub and st.button("Guardar logo"):
+        informes.guardar_logo(guardar_subidos([sub])[0], usuario()["usuario"])
+        st.success("Logo guardado.")
+        st.rerun()
+    c1, c2 = st.columns(2)
+    campos = {}
+    for i, (k, et) in enumerate([("entidad", "Entidad"), ("dependencia", "Dependencia"), ("nit", "NIT"),
+                                 ("direccion", "Dirección"), ("telefono", "Teléfono"), ("correo", "Correo"),
+                                 ("codigo_formato", "Código del formato"), ("version_formato", "Versión")]):
+        campos[k] = (c1 if i % 2 == 0 else c2).text_input(et, str(pl.get(k, "")))
+    campos["pie"] = st.text_area("Pie de página", pl.get("pie", ""))
+    st.markdown("**Firmas** (agregue o quite filas)")
+    firmas = st.data_editor(pd.DataFrame(pl.get("firmas", []), columns=["nombre", "cargo", "matricula"]),
+                            num_rows="dynamic", hide_index=True, use_container_width=True)
+    if st.button("Guardar plantilla"):
+        datos = {**pl, **campos,
+                 "firmas": [{k: ("" if pd.isna(v) else str(v)) for k, v in f.items()} for f in firmas.to_dict("records")
+                            if str(f.get("nombre") or "").strip()]}
+        informes.guardar_plantilla(datos, usuario()["usuario"])
+        st.success("Plantilla guardada.")

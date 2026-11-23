@@ -38,6 +38,8 @@ licencias:
   vigencia_meses_saneamiento: {valor: 12, nota: "No prorrogable.", fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.4.1"}}
   prorroga_meses: {valor: 12, nota: "Una sola vez. El Decreto 074 de 2025 permitió una segunda prórroga transitoria de 12 meses (hasta junio de 2026).", fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.4.1 (par. 7 transitorio, Decreto 074 de 2025)"}}
   plazo_pago_impuestos_dias_habiles: {valor: 30, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.6.8.2"}}
+  acta_observaciones_plazo_dias_habiles: {valor: 30, nota: "Una sola acta. Ampliable a solicitud de parte hasta 15 días hábiles más; durante el plazo se suspende el término.", fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.2.4"}}
+  acta_observaciones_ampliacion_dias_habiles: {valor: 15, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.2.4"}}
   documentos_solicitud: {valor: Los fija el Ministerio de Vivienda por resolución (FUN y anexos)., fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.6.1.2.1.7"}}
 
 reconocimiento:

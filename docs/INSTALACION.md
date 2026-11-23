@@ -41,6 +41,12 @@ Elija en Configuración → Conversión de DWG:
 - **LibreDWG**: libre (GPL); descargue `dwg2dxf.exe`.
 Escriba la ruta del ejecutable y guarde. En "Automático" intenta ODA y luego LibreDWG.
 
+### PDF idéntico al Word
+
+Los informes siempre salen en Word y PDF. Si instala LibreOffice
+(https://www.libreoffice.org), puede marcar "Generar el PDF desde el Word" y
+el PDF quedará igual al Word.
+
 ## 5. Cargar la cartografía
 
 Cartografía → Cargar capa. Suba cada plano del PBOT (shapefile en .zip, GeoJSON,
@@ -54,6 +60,27 @@ del predio usa el rol, así que puede cargar las capas en cualquier orden.
 - **Textos** (una ley nueva, un decreto que modifica): página Normas → Cargar,
   y márquela como verificada. El normograma avisa lo que lleva más de 6 meses
   sin verificar.
+
+## 6b. Plantilla de informes
+
+Configuración → Plantilla de informes: suba el logo (PNG o JPG), escriba
+entidad, dependencia, NIT, dirección, teléfono, correo, código y versión del
+formato, y las firmas (nombre, cargo y matrícula). Los cambios quedan en la
+auditoría.
+
+## 6c. Análisis de planos
+
+Análisis de planos → elija el trámite → marque los documentos o suba
+archivos → Leer archivos. Revise la tabla de datos extraídos y corrija lo
+que el programa leyó mal; el concepto se recalcula. Guarde el análisis para
+que aparezca en el informe técnico. El concepto es un borrador: lo firma el
+profesional competente.
+
+Formatos que se miden directamente: DXF, DWG (con ODA o LibreDWG), IFC,
+ETABS .e2k, SAP2000 .s2k, SAFE .f2k, Excel/CSV de derivas y sondeos, AGS4 y
+SIG. PDF, escaneos e imágenes se leen como texto (OCR local o IA). Para
+RVT, SKP, PLN, EDB, SDB y similares, pida al solicitante la exportación
+abierta que indica el programa.
 
 ## 7. Repositorio en línea (GitHub)
 

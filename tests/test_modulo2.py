@@ -9,7 +9,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from core import ajustes  # noqa: E402
 
 _tmp = Path(tempfile.mkdtemp()) / "prueba2.db"
-ajustes.ruta_bd = lambda: _tmp
+RUTA_BD = lambda: _tmp
+ajustes.ruta_bd = RUTA_BD
 
 from core import auditoria, calendario, db, documentos, expedientes as E, verificacion as V  # noqa: E402
 from core import parametros as P  # noqa: E402

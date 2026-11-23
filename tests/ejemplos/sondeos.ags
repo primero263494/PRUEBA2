@@ -1,0 +1,12 @@
+"GROUP","LOCA"
+"HEADING","LOCA_ID","LOCA_TYPE","LOCA_FDEP"
+"UNIT","","","m"
+"TYPE","ID","PA","2DP"
+"DATA","S-1","CP","6.50"
+"DATA","S-2","CP","6.00"
+"DATA","S-3","CP","5.50"
+
+"GROUP","GEOL"
+"HEADING","LOCA_ID","GEOL_TOP","GEOL_BASE","GEOL_DESC"
+"DATA","S-1","0.00","1.20","Relleno antrópico"
+"DATA","S-1","1.20","6.50","Limo arcilloso café, consistencia media"

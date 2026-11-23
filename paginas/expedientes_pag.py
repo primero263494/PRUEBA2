@@ -101,8 +101,11 @@ def _detalle(eid: int):
         st.error("Expediente no encontrado.")
         return
     st.subheader(f"Expediente {exp['radicado']} — {exp['solicitante']}")
-    t1, t5, t6, t2, t3, t4 = st.tabs(["Trámites", "Documentos", "Lista de chequeo", "Datos del expediente",
-                                      "Agregar trámite", "Historial"])
+    t1, t5, t6, t7, t2, t3, t4 = st.tabs(["Trámites", "Documentos", "Lista de chequeo", "Informes", "Datos del expediente",
+                                          "Agregar trámite", "Historial"])
+    with t7:
+        from paginas import informes_pag
+        informes_pag.panel_expediente(eid)
     with t6:
         from paginas import chequeo_pag
         chequeo_pag.panel_expediente(eid)

@@ -9,7 +9,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from core import ajustes  # noqa: E402
 
 _tmpdir = Path(tempfile.mkdtemp())
-ajustes.ruta_bd = lambda: _tmpdir / "prueba5.db"
+RUTA_BD = lambda: _tmpdir / "prueba5.db"
+ajustes.ruta_bd = RUTA_BD
 
 from core import documentos as D  # noqa: E402
 

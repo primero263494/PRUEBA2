@@ -9,7 +9,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from core import ajustes  # noqa: E402
 
 _tmpdir = Path(tempfile.mkdtemp())
-ajustes.ruta_bd = lambda: _tmpdir / "prueba6.db"
+RUTA_BD = lambda: _tmpdir / "prueba6.db"
+ajustes.ruta_bd = RUTA_BD
 
 from core import calc_cientifica as CC, calculadoras as K, db, expedientes as E  # noqa: E402
 

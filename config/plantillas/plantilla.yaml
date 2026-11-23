@@ -1,0 +1,16 @@
+# Plantilla institucional de los informes. Se edita desde Configuración →
+# Plantilla de informes (logo, encabezado, firmas). Los textos entre [ ] son
+# para completar por la Secretaría.
+entidad: Municipio de El Carmen de Viboral
+dependencia: Secretaría de Planeación y Desarrollo Territorial
+nit: "[NIT del municipio]"
+direccion: "[Dirección de la Secretaría]"
+telefono: "[Teléfono]"
+correo: "[correo@elcarmendeviboral-antioquia.gov.co]"
+logo: ""                 # ruta relativa a config/plantillas (se llena al subir el logo)
+codigo_formato: "[Código del formato, ej. F-PL-000]"
+version_formato: "01"
+pie: "Este documento es un informe técnico de revisión. Las cifras normativas citan su norma y artículo."
+firmas:
+  - {nombre: "[Nombre del revisor]", cargo: "Profesional revisor", matricula: "[M.P.]"}
+  - {nombre: "[Nombre del secretario(a)]", cargo: "Secretario(a) de Planeación y Desarrollo Territorial", matricula: ""}
