@@ -16,6 +16,7 @@ y producir conceptos técnicos de la Secretaría de Planeación.
 | 5. Listas de chequeo (por tipo de trámite, cumple/no cumple/no aplica con observaciones, subir el documento al lado de cada ítem, paquete completo para revisión, sugerencias automáticas, avance, Excel) | Listo |
 | 6. Calculadoras (científica, IO/IC con ficha y planos, cuadro de áreas con Excel/Word, cesiones, plusvalía paso a paso, liquidación) | Listo |
 | Análisis de planos (DXF/DWG, IFC, .e2k/.s2k/.f2k, Excel/CSV, AGS4, SIG, PDF/escaneo con OCR o IA; reglas por disciplina, cruce arquitectura–estructura–geotecnia–cartografía, corrección manual de datos, concepto borrador con norma y evidencia) | Listo |
+| Inicio por tareas y perfiles (propuesta C): buscador único, tareas por perfil, pendientes con siguiente paso y vencimiento, avisos | Listo |
 | 7. Informes (informe técnico de revisión y acta de observaciones en Word editable y PDF, plantilla institucional con logo, encabezado y firmas) | Listo — faltan logo y datos institucionales |
 
 ## Principio

@@ -61,6 +61,16 @@ del predio usa el rol, así que puede cargar las capas en cualquier orden.
   y márquela como verificada. El normograma avisa lo que lleva más de 6 meses
   sin verificar.
 
+## 6. Pantalla de inicio
+
+Al ingresar se ve el inicio por tareas:
+- **Buscador único:** radicado, matrícula, cédula catastral, dirección, código de polígono (S1-CN-1) o una pregunta de norma.
+- **Tareas grandes** según el perfil (Consulta, Funcionario, Administrador). Un administrador puede ver la pantalla de los otros perfiles sin cambiar sus permisos.
+- **Mis pendientes:** trámites abiertos ordenados por vencimiento (rojo: vence en 5 días hábiles o menos), con el siguiente paso; el botón abre la página con el trámite ya elegido. "Solo los míos" filtra por el responsable del expediente.
+- **Avisos del sistema:** lo que falta cargar o configurar.
+
+El menú lateral sigue disponible para ir a cualquier módulo.
+
 ## 6a. Requisitos por trámite
 
 Los documentos que se piden salen del listado de la Secretaría

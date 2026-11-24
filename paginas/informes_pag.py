@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 
 from core import db, expedientes as E, informes as I
-from paginas.comun import puede, usuario
+from paginas.comun import indice_foco, puede, usuario
 
 TIPOS = {"informe_tecnico": "Informe técnico de revisión", "acta_observaciones": "Acta de observaciones y correcciones"}
 
@@ -77,4 +77,4 @@ def mostrar():
         st.info("Aún no hay trámites.")
         return
     op = {f["id"]: f"#{f['id']} · {f['radicado']} · {f['solicitante']} · {E.tipos()[f['tipo']]['nombre']}" for f in filas}
-    panel_tramite(st.selectbox("Trámite", list(op), format_func=op.get))
+    panel_tramite(st.selectbox("Trámite", list(op), format_func=op.get, index=indice_foco(list(op))))

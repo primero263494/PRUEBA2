@@ -9,7 +9,7 @@ import streamlit as st
 from core import conversores, db, documentos as D, expedientes as E, lectura, sismo
 from core import parametros as P
 from core.planos import analisis as A, lectores
-from paginas.comun import guardar_subidos, puede, usuario
+from paginas.comun import guardar_subidos, indice_foco, puede, usuario
 
 COLOR = {"CUMPLE": "#e5f4e4", "NO CUMPLE": "#fbebeb", "REVISAR": "#f9eeda", "NO VERIFICABLE": "#f0efec", "INFO": "#e7f1fb"}
 DISCIPLINAS = ["arquitectonico", "estructural", "geotecnico", "topografico", "ambiental", "sig", "sin_clasificar"]
@@ -116,7 +116,7 @@ def mostrar():
                          "ORDER BY t.id DESC LIMIT 300")
     opciones = {0: "(sin trámite — análisis libre)"} | {f["id"]: f"#{f['id']} · {f['radicado']} · {E.tipos()[f['tipo']]['nombre']}"
                                                          for f in filas}
-    tid = st.selectbox("Trámite", list(opciones), format_func=opciones.get)
+    tid = st.selectbox("Trámite", list(opciones), format_func=opciones.get, index=indice_foco(list(opciones)))
     tr = E.tramite(tid) if tid else None
     exp = E.obtener(tr["expediente_id"]) if tr else None
 

@@ -75,3 +75,9 @@ def campo_fecha(contenedor, etiqueta: str, valor=None, key: str | None = None, o
     v = contenedor.date_input(etiqueta, value=valor, min_value=date(1900, 1, 1), max_value=date(2100, 12, 31),
                               format="DD/MM/YYYY", key=key, help=ayuda)
     return v.isoformat() if v else None
+
+
+def indice_foco(ids: list, clave: str = "tramite_foco") -> int:
+    """Índice del trámite elegido desde Inicio (si está en la lista); si no, el primero."""
+    foco = st.session_state.get(clave)
+    return ids.index(foco) if foco in ids else 0

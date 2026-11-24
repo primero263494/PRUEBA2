@@ -1,0 +1,10 @@
+# Colores institucionales de la interfaz (propuesta C)
+[theme]
+primaryColor = "#1F4E79"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F4F6F9"
+textColor = "#1B1F24"
+font = "sans serif"
+
+[server]
+maxUploadSize = 200

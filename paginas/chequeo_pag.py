@@ -7,7 +7,7 @@ import streamlit as st
 
 from core import chequeo as C, db, expedientes as E
 from core import parametros as P
-from paginas.comun import campo_fecha, guardar_subidos, puede, usuario
+from paginas.comun import campo_fecha, guardar_subidos, indice_foco, puede, usuario
 
 
 def _panel_paquete(tramite_id: int, editable: bool):
@@ -199,7 +199,8 @@ def mostrar():
                         "Tipo": E.tipos()[f["tipo"]]["nombre"], "Estado": f["estado"], "Vence": f["fecha_limite"],
                         "Avance": f"{a['avance']:.0%}", "No cumple": a["no_cumple"], "Pendientes": a["pendiente"]})
     st.dataframe(pd.DataFrame(resumen), hide_index=True, use_container_width=True)
-    tid = st.selectbox("Abrir lista", [f["id"] for f in filas],
+    ids_f = [f["id"] for f in filas]
+    tid = st.selectbox("Abrir lista", ids_f, index=indice_foco(ids_f),
                        format_func=lambda i: next(f"#{x['id']} · {x['radicado']} · {E.tipos()[x['tipo']]['nombre']}"
                                                   for x in filas if x["id"] == i))
     panel_tramite(tid)

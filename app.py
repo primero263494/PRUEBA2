@@ -85,9 +85,13 @@ def main():
 
     u = st.session_state["usuario"]
     visibles = [p for p in PAGINAS if p[2] is None or auth.puede(u["rol"], p[2])]
+    titulos = [p[0] for p in visibles]
+    if st.session_state.get("pagina") not in titulos:
+        st.session_state["pagina"] = "Inicio"
     with st.sidebar:
         st.markdown(f"**{u['nombre']}**  \n{u['rol'].capitalize()}")
-        eleccion = st.radio("Menú", [p[0] for p in visibles], label_visibility="collapsed")
+        st.button("⌂ Inicio", use_container_width=True, on_click=inicio_pag.ir_a, args=("Inicio",))
+        eleccion = st.radio("Menú", titulos, key="pagina", label_visibility="collapsed")
         if st.button("Salir"):
             st.session_state.clear()
             st.rerun()
