@@ -118,3 +118,18 @@ if __name__ == "__main__":
         if nombre.startswith("test_") and inspect.isfunction(f):
             f()
             print("ok", nombre)
+
+
+def test_cada_archivo_de_parametros_tiene_nombre_en_la_pagina():
+    """Evita el KeyError de Parámetros normativos al agregar un archivo nuevo."""
+    import ast
+    src = (Path(__file__).resolve().parents[1] / "paginas" / "parametros_pag.py").read_text(encoding="utf-8")
+    arbol = ast.parse(src)
+    nombres = next(ast.literal_eval(n.value) for n in arbol.body
+                   if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "NOMBRES")
+    opciones = next(ast.literal_eval(n.value) for n in arbol.body
+                    if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "OPCIONES_CLAVE")
+    from core import parametros as P
+    assert set(P.ARCHIVOS) <= set(nombres)
+    for clave in opciones:
+        assert P.obtener(clave).opciones, clave

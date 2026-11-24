@@ -15,6 +15,7 @@ NOMBRES = {
     "tarifas": "Tarifas 2026",
     "tramites": "Catálogo de trámites",
     "listas": "Listas de chequeo",
+    "requisitos": "Requisitos de la Secretaría",
 }
 
 # Parámetros con varias opciones normativas (decisiones de la Secretaría)
@@ -25,6 +26,7 @@ OPCIONES_CLAVE = [
     "pbot.indice_construccion_maximo",
     "pbot.plusvalia.tasa_participacion",
     "tarifas.bases.regla_redondeo",
+    "requisitos.criterios.criterio_suelos_baja_altura",
 ]
 
 
@@ -162,7 +164,7 @@ def mostrar():
             for p in pend:
                 st.markdown(f"- **{p.clave}** — {p.nota or 'sin valor'}  \n  _{p.fuente}_")
 
-    pestañas = st.tabs(["Opciones normativas", "Tarifas 2026"] + [NOMBRES[a] for a in P.ARCHIVOS])
+    pestañas = st.tabs(["Opciones normativas", "Tarifas 2026"] + [NOMBRES.get(a, a.capitalize()) for a in P.ARCHIVOS])
     with pestañas[0]:
         _seccion_opciones()
     with pestañas[1]:
