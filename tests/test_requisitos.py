@@ -148,3 +148,36 @@ def test_items_de_documentos_se_actualizan_al_cambiar_pisos():
     C.generar(tr["id"])
     ids = {i["item_id"] for i in C.items(tr["id"])}
     assert "doc:apique" in ids and "doc:estudio_suelos" not in ids
+
+
+def test_vigencia_un_mes_calendario():
+    # Resolución 462 de 2017: no superior a un mes calendario
+    assert D.vigencia("cert_tradicion", "2026-10-15", "2026-11-15")["vigente"]
+    assert not D.vigencia("cert_tradicion", "2026-10-15", "2026-11-16")["vigente"]
+    assert D.vigencia("cert_tradicion", "2026-01-31", "2026-02-28")["vigente"]      # fin de mes
+    assert D.vigencia("escritura", "2020-01-01", "2026-01-01") is None              # sin vigencia
+
+
+def test_liquidacion_de_certificados():
+    from core import calculadoras as K
+    r = K.liquidar_otra("certificado_estratificacion", 2)
+    assert r["total"] == 2 * K.otras_actuaciones()["certificado_estratificacion"]["decreto"]
+    assert K.TARIFA_SUGERIDA["alineamiento"] in K.otras_actuaciones()
+
+
+def test_parametros_resueltos_en_linea():
+    fs = P.valor("nsr10.geotecnia.fs_indirectos_capacidad_portante")
+    assert fs["CM + CV normal"] == 3.0 and fs["CM + CV normal + sismo seudoestático"] == 1.5
+    assert P.valor("nacional.cornare.acuerdo_392_densidad_parcelacion_viv_ha") == 3
+    claves = {p.clave for p in P.pendientes()}
+    assert "nsr10.geotecnia.fs_indirectos_capacidad_portante" not in claves
+    assert "nsr10.amenaza_sismica_municipio.microzonificacion" not in claves
+
+
+def test_apique_titulo_e_y_cerramiento():
+    exp, tr = _tr("construccion_urbana", "obra_nueva", n_pisos=2)
+    res = {r["item"]: r for r in V.verificar(exp, tr)}
+    assert res["Estudio de suelos"]["estado"] == V.INFO and "E.2.1.1" in res["Estudio de suelos"]["detalle"]
+    exp, tr = _tr("cerramiento", E.tipos()["cerramiento"]["modalidades"][0])
+    opc = {r["tipo"] for r in D.requisitos(exp, tr) if r["opcional"]}
+    assert {"planos_estructurales", "memorias_calculo"} <= opc

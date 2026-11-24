@@ -70,7 +70,7 @@ def _seccion_documentos(tramite_id: int, filas: list, sug: dict, editable: bool)
                 tipo = opciones[0] if len(opciones) == 1 else st.selectbox(
                     "Documento", opciones, format_func=lambda o: cat[o]["nombre"], key=f"dt{i['id']}")
                 arch = st.file_uploader("Archivo", key=f"df{i['id']}")
-                fecha = campo_fecha(st, "Fecha de expedición" + (" (obligatoria: vigencia 1 mes)" if cat[tipo].get("vigencia_dias") else ""),
+                fecha = campo_fecha(st, "Fecha de expedición" + (f" (obligatoria: {D.texto_vigencia(tipo)})" if D.tiene_vigencia(tipo) else ""),
                                     None, key=f"dfe{i['id']}")
                 if st.button("Cargar", key=f"dfb{i['id']}", disabled=arch is None):
                     try:

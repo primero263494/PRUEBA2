@@ -250,11 +250,11 @@ documentos:
   catalogo:
     valor:
       fun: {nombre: Formulario Único Nacional (FUN), claves: [fun, formulario unico, formulario], vigencia_dias: null}
-      paz_salvo: {nombre: Paz y salvo municipal (predial), claves: [paz y salvo, paz_salvo, pazysalvo, predial], vigencia_dias: 30}
-      cert_tradicion: {nombre: Certificado de tradición y libertad, claves: [tradicion, libertad, ctl, certificado de tradicion], vigencia_dias: 30}
+      paz_salvo: {nombre: Paz y salvo municipal (predial), claves: [paz y salvo, paz_salvo, pazysalvo, predial], vigencia_meses: 1}
+      cert_tradicion: {nombre: Certificado de tradición y libertad, claves: [tradicion, libertad, ctl, certificado de tradicion], vigencia_meses: 1}
       escritura: {nombre: Escritura pública, claves: [escritura], vigencia_dias: null}
       identificacion: {nombre: Cédula de los propietarios, claves: [cedula, cc ], vigencia_dias: null}
-      camara_comercio: {nombre: Certificado de existencia y representación legal, claves: [camara, existencia, representacion legal, rut], vigencia_dias: 30}
+      camara_comercio: {nombre: Certificado de existencia y representación legal, claves: [camara, existencia, representacion legal, rut], vigencia_meses: 1}
       poder: {nombre: Poder especial con firma original, claves: [poder], vigencia_dias: null}
       autorizacion_notificacion: {nombre: Autorización de notificación por correo, claves: [autorizacion, notificacion], vigencia_dias: null}
       profesionales: {nombre: Cédula y matrícula de los profesionales, claves: [matricula profesional, tarjeta profesional, copnia, cpnaa], vigencia_dias: null}
@@ -285,7 +285,7 @@ documentos:
       planos_record: {nombre: Planos récord, claves: [record], vigencia_dias: null}
       actas_empresas: {nombre: Actas de recibo de redes (EPM, La Cimarrona), claves: [acta de recibo, recibo de redes], vigencia_dias: null}
       presupuesto: {nombre: Presupuesto financiero firmado por contador, claves: [presupuesto], vigencia_dias: null}
-      certificado_catastro: {nombre: Certificado de catastro, claves: [catastro, certificado catastral, ficha catastral], vigencia_dias: 30}
+      certificado_catastro: {nombre: Certificado de catastro, claves: [catastro, certificado catastral, ficha catastral], vigencia_meses: 1}
       informe_alineamiento: {nombre: Informe de alineamiento, claves: [alineamiento, hilos], vigencia_dias: null}
       factibilidad_acueducto: {nombre: Factibilidad del servicio de acueducto, claves: [factibilidad acueducto, cimarrona, acueducto veredal], vigencia_dias: null}
       factibilidad_energia: {nombre: Factibilidad del servicio de energía, claves: [factibilidad energia, factibilidad epm], vigencia_dias: null}

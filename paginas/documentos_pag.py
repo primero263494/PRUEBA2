@@ -72,8 +72,7 @@ def panel_expediente(eid: int):
                                         "Nota": x["nota"]} for x in f]),
                          hide_index=True, use_container_width=True)
             for v in D.vencidos(exp, t):
-                st.warning(f"{cat[v['tipo_documento']]['nombre']}: expedido {v['edad_dias']} días antes de la radicación "
-                           f"(máximo {v['vigencia_dias']}).")
+                st.warning(f"{cat[v['tipo_documento']]['nombre']}: {v['detalle']}")
 
     if puede("expedientes"):
         with st.expander("Subir documentos", expanded=not D.listar(eid)):

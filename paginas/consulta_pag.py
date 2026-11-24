@@ -218,7 +218,7 @@ def _tab_requisitos():
         st.info("Este trámite no está en el listado de la Secretaría; se muestran los documentos del manual de trámites.")
     vig = D.catalogo()
     st.dataframe(pd.DataFrame([{"N.º": i, "Documento": r["nombre"], "Obligatorio": "Si aplica" if r["opcional"] else "Sí",
-                                "Vigencia": "Máx. 1 mes" if any(vig[o].get("vigencia_dias") for o in r["tipo"].split("|")) else "",
+                                "Vigencia": next((D.texto_vigencia(o) for o in r["tipo"].split("|") if D.tiene_vigencia(o)), ""),
                                 "Nota": r["nota"]} for i, r in enumerate(reqs, 1)]), hide_index=True, use_container_width=True)
     st.caption(f"Fuente: {reqs[0]['fuente'] if reqs else ''}")
 

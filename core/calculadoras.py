@@ -339,6 +339,34 @@ def liquidar_delineacion(lineas: list[dict]) -> dict:
     return {"pasos": pasos, "total": round(total)}
 
 
+# Trámite → tarifa de "otras actuaciones" del Decreto 001 de 2026 (solo las
+# equivalencias evidentes; para los demás el funcionario elige la tarifa).
+TARIFA_SUGERIDA = {
+    "alineamiento": "alineamiento_hilos",
+    "certificado_riesgo": "certificado_riesgo",
+    "concepto_uso": "concepto_uso_suelo",
+    "concepto_norma": "concepto_norma_urbanistica",
+    "nomenclatura": "asignacion_nomenclatura",
+    "estrato": "certificado_estratificacion",
+}
+
+
+def otras_actuaciones() -> dict:
+    return P.valor("tarifas.expensas.otras_actuaciones")
+
+
+def liquidar_otra(clave: str, cantidad: int = 1) -> dict:
+    """Liquida una tarifa fija de 'otras actuaciones' (valor del decreto × cantidad)."""
+    t = otras_actuaciones()[clave]
+    fuente = P.obtener("tarifas.expensas.otras_actuaciones").fuente
+    uvt = P.valor("tarifas.bases.uvt")
+    unit = t.get("decreto") or round(t["uvt"] * uvt)
+    v = unit * cantidad
+    nombre = clave.replace("_", " ").capitalize()
+    return {"pasos": [_paso(nombre, f"{t['uvt']} UVT (valor del decreto) × cantidad",
+                            f"${unit:,.0f} × {cantidad}", v, "$", fuente)], "total": v}
+
+
 def liquidar_expensa(tipo: str, area_neta: float = 0, unidades: int = 0) -> dict:
     smldv, smmlv = P.valor("tarifas.bases.smldv"), P.valor("tarifas.bases.smmlv")
     if tipo == "urbanizacion":

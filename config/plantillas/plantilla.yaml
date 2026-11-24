@@ -3,7 +3,7 @@
 # para completar por la Secretaría.
 entidad: Municipio de El Carmen de Viboral
 dependencia: Secretaría de Planeación y Desarrollo Territorial
-nit: "[NIT del municipio]"
+nit: "890.982.616-9"   # tomado de resoluciones de Cornare; confirmar
 direccion: "[Dirección de la Secretaría]"
 telefono: "[Teléfono]"
 correo: "[correo@elcarmendeviboral-antioquia.gov.co]"

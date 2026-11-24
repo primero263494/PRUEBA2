@@ -321,17 +321,53 @@ def faltantes(expediente: dict, tramite: dict) -> list[dict]:
     return [{**r, "cargado": any(o in cargados for o in r["tipo"].split("|"))} for r in requisitos(expediente, tramite)]
 
 
+def _sumar_meses(f: date, meses: int) -> date:
+    m = f.month - 1 + meses
+    a, m = f.year + m // 12, m % 12 + 1
+    ultimo = [31, 29 if a % 4 == 0 and (a % 100 or a % 400 == 0) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1]
+    return date(a, m, min(f.day, ultimo))
+
+
+def tiene_vigencia(tipo_documento: str) -> bool:
+    c = catalogo().get(tipo_documento, {})
+    return bool(c.get("vigencia_meses") or c.get("vigencia_dias"))
+
+
+def texto_vigencia(tipo_documento: str) -> str:
+    c = catalogo().get(tipo_documento, {})
+    if c.get("vigencia_meses"):
+        n = c["vigencia_meses"]
+        return f"máx. {n} mes{'es' if n > 1 else ''} calendario"
+    return f"máx. {c['vigencia_dias']} días" if c.get("vigencia_dias") else ""
+
+
+def vigencia(tipo_documento: str, fecha_expedicion: str | date, fecha_referencia: str | date) -> dict | None:
+    """¿El documento estaba vigente en la fecha de referencia (radicación)?
+
+    'Un mes' se cuenta como mes calendario (Resolución 462 de 2017: "no sea
+    superior a un mes calendario"): expedido el 15-oct sirve hasta el 15-nov.
+    Devuelve None si el tipo no tiene vigencia."""
+    c = catalogo().get(tipo_documento, {})
+    if not (c.get("vigencia_meses") or c.get("vigencia_dias")):
+        return None
+    fe = fecha_expedicion if isinstance(fecha_expedicion, date) else date.fromisoformat(str(fecha_expedicion)[:10])
+    fr = fecha_referencia if isinstance(fecha_referencia, date) else date.fromisoformat(str(fecha_referencia)[:10])
+    limite = _sumar_meses(fe, c["vigencia_meses"]) if c.get("vigencia_meses") else date.fromordinal(fe.toordinal() + c["vigencia_dias"])
+    edad = (fr - fe).days
+    ok = fe <= fr <= limite
+    return {"vigente": ok, "edad_dias": edad, "limite": limite.isoformat(), "regla": texto_vigencia(tipo_documento),
+            "detalle": f"Expedido el {fe.isoformat()}, {edad} días antes de la radicación; válido hasta el {limite.isoformat()} "
+                       f"({texto_vigencia(tipo_documento)})."}
+
+
 def vencidos(expediente: dict, tramite: dict) -> list[dict]:
-    """Documentos con vigencia (p. ej. 30 días) expedidos antes de lo permitido respecto a la radicación."""
-    cat = catalogo()
-    fr = date.fromisoformat(tramite["fecha_radicacion"][:10])
+    """Documentos con vigencia (p. ej. un mes calendario) que no estaban vigentes en la radicación."""
     salida = []
     for d in listar(expediente["id"], tramite["id"]):
-        vig = cat.get(d["tipo_documento"], {}).get("vigencia_dias")
-        if vig and d["fecha_expedicion"]:
-            edad = (fr - date.fromisoformat(d["fecha_expedicion"][:10])).days
-            if edad > vig or edad < 0:
-                salida.append({**d, "edad_dias": edad, "vigencia_dias": vig})
+        if d["fecha_expedicion"]:
+            v = vigencia(d["tipo_documento"], d["fecha_expedicion"], tramite["fecha_radicacion"])
+            if v and not v["vigente"]:
+                salida.append({**d, **v})
     return salida
 
 

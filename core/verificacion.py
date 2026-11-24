@@ -73,19 +73,17 @@ def _documentos(exp, tr):
     campos = {"cert_tradicion": "fecha_cert_tradicion", "paz_salvo": "fecha_paz_salvo"}
     for req in documentos.requisitos(exp, tr):
         for tipo_doc in req["tipo"].split("|"):
-            dias = cat.get(tipo_doc, {}).get("vigencia_dias")
-            if not dias:
+            if not documentos.tiene_vigencia(tipo_doc):
                 continue
             nombre = cat[tipo_doc]["nombre"]
-            fuente = req["fuente"] + " (fecha de expedición no superior a un mes)"
+            fuente = req["fuente"] + " · Resolución 462 de 2017 art. 1 (no superior a un mes calendario)"
             f = _fecha(tr["datos"].get(campos.get(tipo_doc))) or _fecha(documentos.fecha_documento(tr["id"], tipo_doc))
             if not f:
                 if not req["opcional"]:
                     salida.append(_r(f"Vigencia: {nombre}", NO_VERIF, "Sin fecha de expedición registrada.", fuente))
             else:
-                edad = (fr - f).days
-                salida.append(_r(f"Vigencia: {nombre}", CUMPLE if 0 <= edad <= dias else NO_CUMPLE,
-                                 f"Expedido el {f.isoformat()}, {edad} días antes de la radicación (máx. {dias}).", fuente))
+                v = documentos.vigencia(tipo_doc, f, fr)
+                salida.append(_r(f"Vigencia: {nombre}", CUMPLE if v["vigente"] else NO_CUMPLE, v["detalle"], fuente))
     return salida
 
 
@@ -297,7 +295,10 @@ def _arqueologia(tr):
     lote = _num(tr["datos"].get("area_lote"))
     p = P.obtener("pbot.ambiental.arqueologia_preventiva_area_minima")
     if lote and lote >= p.valor:
-        return [_r("Arqueología preventiva", REVISAR, f"Lote de {lote:,.0f} m² ≥ {p.valor:,} m²: exigir programa ICANH.", p.fuente)]
+        return [_r("Arqueología preventiva", REVISAR,
+                   f"Lote de {lote:,.0f} m² ≥ {p.valor:,} m² (PBOT). Por norma nacional el programa ICANH solo es obligatorio si "
+                   "el proyecto requiere licencia ambiental o tiene Plan de Manejo Ambiental (Decreto 1080 art. 2.6.5.2 mod. "
+                   "Decreto 138 de 2019; Ley 397 art. 11 mod. Decreto Ley 2106 de 2019). Confirme si aplica.", p.fuente)]
     return []
 
 
@@ -343,8 +344,9 @@ def _estudio_suelos(exp, tr):
     clave = "urbano_pisos_estudio_suelos" if regla == "suelos_urbano" else "rural_area_estudio_suelos"
     estado = REVISAR if "|" in doc else INFO
     if doc == "apique":
-        estado = REVISAR
-        motivo += ". Ojo: la NSR-10 H.1.1.2 exige estudio geotécnico; el apique sale del listado de la Secretaría"
+        motivo += (". Válido solo para casas de uno y dos pisos del Título E en terreno con condiciones adecuadas: se aporta "
+                   "la investigación mínima E.2.1.1; si muestra condiciones inadecuadas se exige el estudio del Título H "
+                   "(Resolución 462 de 2017 art. 5 par. 2, mod. Resolución 1025 de 2021)")
     return [_r("Estudio de suelos", estado, f"{nombre}: {motivo}.", P.obtener(f"requisitos.criterios.{clave}").fuente)]
 
 

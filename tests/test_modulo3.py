@@ -87,7 +87,10 @@ def test_juridica_e_icanh():
     eid = E.crear(dict(solicitante="Constructora", tipo_persona="juridica", clase_suelo="expansion"), "f")
     tid = E.agregar_tramite(eid, "urbanizacion", "desarrollo", {"area_lote": 12000}, "f")
     req = D.requeridos(E.obtener(eid), E.tramite(tid))
-    assert "camara_comercio" in req and "icanh" in req
+    assert "camara_comercio" in req
+    # ICANH: aparece como "si aplica" (norma nacional: solo con licencia ambiental o PMA)
+    todos = {r["tipo"]: r for r in D.requisitos(E.obtener(eid), E.tramite(tid))}
+    assert "icanh" not in req and todos["icanh"]["opcional"]
 
 
 def test_editar_mueve_y_eliminar_a_papelera():

@@ -63,6 +63,18 @@ suelo_rural_suburbano:
   calzada_desaceleracion_ancho_min: {valor: 8, unidad: m, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.2.2.2.3"}}
   accesos_calzada_cada: {valor: 300, unidad: m, fuente: {norma: Decreto 1077 de 2015, articulo: "2.2.2.2.2.3"}}
 
+cornare:
+  acuerdo_392_densidad_parcelacion_viv_ha:
+    valor: 3
+    unidad: viviendas/ha
+    nota: "Parcelación de vivienda campestre. Coincide con el PBOT art. 245 (3 viv/ha)."
+    fuente: {norma: Acuerdo Cornare 392 de 2019, articulo: "4 (citado en Resolución Cornare RE-04653-2024)"}
+  acuerdo_392_densidad_condominio_viv_ha:
+    valor: 4
+    unidad: viviendas/ha
+    nota: "Parcelación de vivienda campestre bajo la figura de condominio."
+    fuente: {norma: Acuerdo Cornare 392 de 2019, articulo: "4 (citado en Resolución Cornare RE-04653-2024)"}
+
 normograma:
   # Registro de normas con fecha de consulta. Use la página "Normas" para
   # cargar versiones nuevas; el programa marca en rojo lo que lleve más de
@@ -72,6 +84,9 @@ normograma:
     - {norma: Decreto 1077 de 2015, version: "Integrada a 2023-12-05", modificaciones: "Posteriores: Decreto 073/2025 (art. 303 Ley 2294/2023), Decreto 074/2025 (2.ª prórroga transitoria de licencias), Decreto 584/2025 (valor VIS), Decreto 670/2025, Decreto 1107/2026 (concurso de curadores)", url: "https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=73841", verificado: "2026-11-23"}
     - {norma: Decreto 1783 de 2021, version: "Original", modificaciones: "Modifica 1077 en licencias (modalidades, requisitos, revisión)", url: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=175086", verificado: "2026-11-23"}
     - {norma: Decreto 1333 de 2020, version: "Original", modificaciones: "Reconocimiento de edificaciones (Cap. 4, Tít. 6, 1077)", url: "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=143009", verificado: "2026-11-23"}
-    - {norma: NSR-10, version: "Decreto 926/2010 + modificaciones", modificaciones: "Entre otros: Decretos 092/2011, 1711/2021, 1401/2023", url: "https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf", verificado: "2026-11-23"}
+    - {norma: NSR-10, version: "Decreto 926/2010 + modificaciones", modificaciones: "Decretos 2525/2010, 092/2011, 340/2012, 945/2017, 2113/2019, 1711/2021, 1401/2023 y 1580/2023", url: "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/pdf/decreto_0926_2010.pdf", verificado: "2026-11-24"}
+    - {norma: Resolución 462 de 2017 (MinVivienda), version: "Modificada por la Resolución 1025 de 2021", modificaciones: "Documentos de la solicitud de licencia: certificado de tradición máx. un mes calendario; casas Título E: investigación mínima E.2.1.1 en lugar de estudio geotécnico (art. 5 par. 2)", url: "https://minvivienda.gov.co/node/46736", verificado: "2026-11-24"}
+    - {norma: Decreto 1080 de 2015 (Cultura), version: "Parte VI modificada por el Decreto 138 de 2019", modificaciones: "Art. 2.6.5.2: programa de arqueología preventiva solo en proyectos con licencia ambiental o equivalentes, o a solicitud del titular. Ley 397 art. 11 modificada por el Decreto Ley 2106 de 2019 art. 131 (incluye proyectos con Plan de Manejo Ambiental)", url: "https://normativa.colpensiones.gov.co/colpensiones/docs/decreto_1080_2015_pr006.htm", verificado: "2026-11-24"}
+    - {norma: Decreto Ley 019 de 2012, version: "Vigente", modificaciones: "Art. 185: radicación de documentos para enajenación de vivienda (modifica art. 71 Ley 962 de 2005); reglamentado en el Decreto 1077 art. 2.2.5.3.1", url: "https://cancilleria.gov.co/sites/default/files/Normograma/docs/pdf/decreto_1077_2015_pr030.pdf", verificado: "2026-11-24"}
     - {norma: Ley 400 de 1997 / Ley 1796 de 2016, version: "Vigente", modificaciones: "Revisión independiente de diseños estructurales y supervisión técnica", url: "", verificado: "pendiente"}
-    - {norma: Acuerdos Cornare 250, 251 y 265 de 2011; Acuerdo 392, version: "Pendiente de cargar", modificaciones: "Determinantes ambientales", url: "https://www.cornare.gov.co", verificado: "pendiente"}
+    - {norma: Acuerdos Cornare 250, 251 y 265 de 2011; 392 de 2019, version: "Referencias en resoluciones de Cornare 2023–2025", modificaciones: "251: rondas hídricas; 265: protección del suelo; 392: densidades rurales (parcelación 3 viv/ha, condominio 4 viv/ha). El texto completo de los acuerdos no está cargado", url: "https://www.cornare.gov.co/boletin_oficial/2024/noviembre/res/RE-04653-2024.pdf", verificado: "2026-11-24"}

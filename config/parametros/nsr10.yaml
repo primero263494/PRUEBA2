@@ -1,7 +1,8 @@
 # =============================================================================
 # NSR-10 — Reglamento Colombiano de Construcción Sismo Resistente
-# Decreto 926 de 2010 y sus modificaciones (entre otras: Decretos 092/2011,
-# 1711/2021 y 1401/2023).
+# Decreto 926 de 2010 y sus modificaciones: Decretos 2525/2010, 092/2011,
+# 340/2012, 945/2017, 2113/2019, 1711/2021, 1401/2023 y 1580/2023 (corrige el
+# anexo del 1401). Lista verificada en línea el 2026-11-24.
 #
 # Valores tomados del texto publicado en línea (Títulos A y H, versión que
 # hospeda el IDRD), consultados el 2026-11-23. Ninguno se escribió de memoria.
@@ -16,8 +17,14 @@ metadatos:
     titulo_a: https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf
     titulo_h: https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/8titulo-h-nsr-100.pdf
   modificaciones_conocidas:
+    - Decreto 2525 de 2010 (vigencia desde el 15-dic-2010)
+    - Decreto 092 de 2011 (modificaciones técnicas)
+    - Decreto 340 de 2012 (modificación parcial)
+    - Decreto 945 de 2017 (modificación parcial)
+    - Decreto 2113 de 2019 (incorpora el documento AIS-610)
     - Decreto 1711 de 2021 (modifica, entre otros, Apéndice A-4 para Supía y Apéndice F.4-A)
-    - Decreto 1401 de 2023 (modificación parcial)
+    - Decreto 1401 de 2023 (adopta la norma AIS 410-23, vulnerabilidad de viviendas de mampostería)
+    - Decreto 1580 de 2023 (corrige el anexo técnico del Decreto 1401)
     - Directiva Procuraduría 015 de 2026 (seguimiento a la actualización; NSR-10 sigue vigente)
   nota: >-
     En 2025 la AIS entregó el borrador AIS 100-24 a la Comisión Asesora
@@ -31,7 +38,7 @@ amenaza_sismica_municipio:
   zona_amenaza: {valor: Intermedia, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
   Ae: {valor: 0.11, nota: "Umbral de daño — para evaluación de edificaciones existentes.", fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
   Ad: {valor: 0.06, fuente: {norma: NSR-10, articulo: "Apéndice A-4, Antioquia"}}
-  microzonificacion: {valor: null, nota: "El municipio no tiene estudio de microzonificación cargado; se usan los valores del Apéndice A-4.", editable: true, fuente: {norma: NSR-10, articulo: "A.2.9 (microzonificación)"}}
+  microzonificacion: {valor: "No adoptada", nota: "No se encontró estudio de microzonificación sísmica adoptado para El Carmen de Viboral; se usan los valores del Apéndice A-4 (Aa 0,15; Av 0,20). Si el municipio adopta uno, cambie este parámetro.", editable: true, fuente: {norma: NSR-10, articulo: "A.2.9 (microzonificación)"}}
 
 municipios_vecinos_referencia:
   valor:
@@ -107,8 +114,8 @@ separacion_sismica_cubierta:
 geotecnia:
   obligatoriedad:
     valor: Estudio geotécnico definitivo obligatorio para todas las edificaciones urbanas y suburbanas.
-    nota: El manual interno admite apique para viviendas de 1–2 pisos; esa excepción no aparece en H.1.1.2. Confirmar criterio.
-    fuente: {norma: NSR-10, articulo: "H.1.1.2"}
+    nota: "Excepción nacional: para casas de uno y dos pisos del Título E en terreno con condiciones adecuadas no se exige el estudio geotécnico; se aporta la investigación mínima de E.2.1.1 (apique). Si esa investigación muestra condiciones inadecuadas, se exige el estudio del Título H (Resolución 462 de 2017, art. 5 par. 2, modificada por la Resolución 1025 de 2021)."
+    fuente: {norma: "NSR-10 / Resolución 462 de 2017 mod. Resolución 1025 de 2021", articulo: "H.1.1.2 / E.2.1.1 / art. 5 par. 2"}
   categorias_unidad_construccion:
     valor:
       Baja: {niveles_max: 3, carga_columna_max_kN: 800}
@@ -131,6 +138,13 @@ geotecnia:
     valor: {diseno: 1.05, construccion: 1.00}
     fuente: {norma: NSR-10, articulo: "Tabla H.2.4-1"}
   fs_indirectos_capacidad_portante:
-    valor: null
-    nota: "PENDIENTE: Tabla H.4.7-1 no se pudo leer completa en línea. Cargue el Título H en 'Normas' para completarla."
+    valor: {"CM + CV normal": 3.0, "CM + CV máxima": 2.5, "CM + CV normal + sismo seudoestático": 1.5}
+    nota: "FSICP mínimos para capacidad portante de cimientos superficiales y de punta de cimentaciones profundas."
     fuente: {norma: NSR-10, articulo: "Tabla H.4.7-1"}
+  fs_basicos_cimentaciones:
+    valor:
+      "CM + CV normal": {fsbm_diseno: 1.50, fsbm_construccion: 1.25, fsbum_diseno: 1.80, fsbum_construccion: 1.40}
+      "CM + CV máxima": {fsbm_diseno: 1.25, fsbm_construccion: 1.10, fsbum_diseno: 1.40, fsbum_construccion: 1.15}
+      "CM + CV normal + sismo seudoestático": {fsbm_diseno: 1.10, fsbm_construccion: 1.00, fsbum_diseno: null, fsbum_construccion: null}
+    nota: "FSBUM no se permite con sismo. Los parámetros sísmicos seudoestáticos de construcción son el 50 % de los de diseño."
+    fuente: {norma: NSR-10, articulo: "Tabla H.2.4-1"}

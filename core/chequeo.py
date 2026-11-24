@@ -219,15 +219,14 @@ def subir_documento_item(item_pk: int, origen, usuario: str, fecha_expedicion: s
         raise ValueError(f"El tipo {tipo} no corresponde a este ítem ({', '.join(opciones)}).")
     tr = E.tramite(it["tramite_id"])
     r = D.subir(origen, tr["expediente_id"], tr["id"], tipo, usuario, fecha_expedicion, nombre_original=nombre_original)
-    vig = D.catalogo()[tipo].get("vigencia_dias")
     estado, obs = "cumple", f"Documento cargado: {nombre_original or r['ruta']}"
-    if vig and fecha_expedicion:
-        from datetime import date
-        edad = (date.fromisoformat(tr["fecha_radicacion"][:10]) - date.fromisoformat(fecha_expedicion[:10])).days
-        if edad > vig or edad < 0:
-            estado, obs = "no_cumple", f"Documento cargado pero no vigente: expedido {edad} días antes de la radicación (máx. {vig})."
-    elif vig and not fecha_expedicion:
-        estado, obs = "pendiente", "Documento cargado; falta la fecha de expedición para verificar la vigencia."
+    if D.tiene_vigencia(tipo):
+        if fecha_expedicion:
+            v = D.vigencia(tipo, fecha_expedicion, tr["fecha_radicacion"])
+            if not v["vigente"]:
+                estado, obs = "no_cumple", f"Documento cargado pero no vigente. {v['detalle']}"
+        else:
+            estado, obs = "pendiente", "Documento cargado; falta la fecha de expedición para verificar la vigencia."
     marcar(item_pk, estado, obs, usuario)
     return {**r, "estado": estado}
 

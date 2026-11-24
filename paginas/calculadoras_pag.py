@@ -275,10 +275,21 @@ def _liquidacion():
         r2 = K.liquidar_expensa(tipo, an, int(un))
         _tabla(r2["pasos"])
         total += r2["total"]
+    st.markdown("**Certificados y otras actuaciones** (tarifa fija)")
+    otras = ["(ninguna)"] + list(K.otras_actuaciones())
+    sugerida = K.TARIFA_SUGERIDA.get(E.tramite(tid)["tipo"]) if tid else None
+    c1, c2 = st.columns([3, 1])
+    otra = c1.selectbox("Tarifa", otras, index=otras.index(sugerida) if sugerida in otras else 0,
+                        format_func=lambda k: k.replace("_", " ").capitalize(), key="liq_otra")
+    cant = c2.number_input("Cantidad", 1, 1000, 1, key="liq_cant")
+    if otra != "(ninguna)":
+        r3 = K.liquidar_otra(otra, int(cant))
+        _tabla(r3["pasos"])
+        total += r3["total"]
     st.metric("Total liquidado", _pesos(total))
     st.caption(f"UVT {P.valor('tarifas.bases.uvt'):,} · SMMLV {P.valor('tarifas.bases.smmlv'):,} · "
                "Decreto 001 de 2026. Las tarifas con nota se revisan en Parámetros → Tarifas.")
-    _guardar(tid, "liquidacion", {"lineas": lin, "expensa": tipo, "area_neta": an, "unidades": un}, {"total": total}, "liq")
+    _guardar(tid, "liquidacion", {"lineas": lin, "expensa": tipo, "area_neta": an, "unidades": un, "otra": otra, "cantidad": cant}, {"total": total}, "liq")
 
 
 def mostrar():
