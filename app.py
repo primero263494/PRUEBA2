@@ -4,7 +4,7 @@ Ejecutar:  streamlit run app.py   (o doble clic en iniciar.bat)
 """
 import streamlit as st
 
-from core import auth, calculadoras, chequeo, db, documentos, expedientes, informes
+from core import auth, borradores, calculadoras, chequeo, db, documentos, expedientes, informes, respaldo, sesiones
 from core.planos import analisis as analisis_planos
 
 st.set_page_config(page_title="Trámites urbanísticos · El Carmen de Viboral",
@@ -17,6 +17,8 @@ chequeo.migrar()
 calculadoras.migrar()
 analisis_planos.migrar()
 informes.migrar()
+sesiones.migrar()
+borradores.migrar()
 
 from paginas import (auditoria_pag, informes_pag, calculadoras_pag, cartografia_pag, chequeo_pag, configuracion_pag, consulta_pag,  # noqa: E402
                      documentos_pag, expedientes_pag, inicio_pag, normas_pag, parametros_pag, planos_pag, usuarios_pag)
@@ -40,9 +42,31 @@ PAGINAS = [
 ]
 
 
+def _restaurar_respaldo(clave: str):
+    """Subir un respaldo .zip y reemplazar los datos actuales."""
+    arch = st.file_uploader("Respaldo (.zip descargado desde Configuración → Respaldo)", type=["zip"], key=clave)
+    if arch is not None:
+        try:
+            info = respaldo.validar(arch.getvalue())
+            st.write(f"Respaldo del {info['fecha']} con {info['archivos']} archivos.")
+            if st.button("Restaurar este respaldo", type="primary", key=clave + "_b"):
+                respaldo.restaurar(arch.getvalue())
+                st.session_state.clear()
+                st.query_params.clear()
+                st.success("Datos restaurados. Ingrese con su usuario.")
+                st.rerun()
+        except Exception as e:
+            st.error(str(e))
+
+
 def pantalla_primer_administrador():
     st.title("Configuración inicial")
-    st.info("No hay usuarios. Cree la cuenta del administrador.")
+    st.warning(f"La base de datos está vacía (creada el {sesiones.base_creada()}). Si ya había trabajado en el programa, "
+               "el servidor se reinició y borró los datos: es lo que pasa en Streamlit Cloud, cuyo disco no es "
+               "permanente. Restaure su último respaldo o, si es la primera vez, cree el administrador.")
+    with st.expander("Restaurar un respaldo", expanded=True):
+        _restaurar_respaldo("restaurar_inicial")
+    st.info("Primera vez: cree la cuenta del administrador.")
     with st.form("primer_admin"):
         usuario = st.text_input("Usuario")
         nombre = st.text_input("Nombre completo")
@@ -70,6 +94,7 @@ def pantalla_ingreso():
             datos = auth.verificar(u, c)
             if datos:
                 st.session_state["usuario"] = datos
+                st.query_params["s"] = sesiones.crear(datos["id"])
                 st.rerun()
             else:
                 st.error("Usuario o contraseña incorrectos.")
@@ -80,8 +105,14 @@ def main():
         pantalla_primer_administrador()
         return
     if "usuario" not in st.session_state:
-        pantalla_ingreso()
-        return
+        # reconexión: la pestaña perdió su memoria pero la dirección conserva el código de sesión
+        recuperado = sesiones.validar(st.query_params.get("s"))
+        if recuperado:
+            st.session_state["usuario"] = recuperado
+        else:
+            st.query_params.clear()
+            pantalla_ingreso()
+            return
 
     u = st.session_state["usuario"]
     visibles = [p for p in PAGINAS if p[2] is None or auth.puede(u["rol"], p[2])]
@@ -93,6 +124,8 @@ def main():
         st.button("⌂ Inicio", use_container_width=True, on_click=inicio_pag.ir_a, args=("Inicio",))
         eleccion = st.radio("Menú", titulos, key="pagina", label_visibility="collapsed")
         if st.button("Salir"):
+            sesiones.cerrar(st.query_params.get("s"))
+            st.query_params.clear()
             st.session_state.clear()
             st.rerun()
     dict((p[0], p[1]) for p in visibles)[eleccion]()

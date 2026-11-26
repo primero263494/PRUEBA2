@@ -61,6 +61,24 @@ del predio usa el rol, así que puede cargar las capas en cualquier orden.
   y márquela como verificada. El normograma avisa lo que lleva más de 6 meses
   sin verificar.
 
+## Respaldo de los datos
+
+Configuración → Respaldo de los datos → Preparar respaldo → Descargar. El .zip
+tiene la base de datos y todos los archivos subidos. Para recuperarlo:
+Configuración → Restaurar (o, si el programa aparece vacío, en la pantalla de
+Configuración inicial).
+
+**Streamlit Cloud no guarda los datos de forma permanente:** cuando el
+servidor se reinicia (al subir cambios a GitHub, tras horas sin uso o por una
+falla) el disco vuelve a quedar como en el repositorio y se pierde todo lo
+creado. Úselo para pruebas y descargue un respaldo al terminar cada jornada.
+Para trabajar con trámites reales, instale el programa en el computador de la
+oficina (instalar.bat) y haga respaldos periódicos.
+
+Si la conexión se corta, el programa recupera la sesión sola (por 12 horas) y
+los formularios de nuevo expediente y nuevo trámite se guardan como borrador
+mientras se escriben.
+
 ## 6. Pantalla de inicio
 
 Al ingresar se ve el inicio por tareas:

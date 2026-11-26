@@ -127,7 +127,13 @@ def pendientes(usuario: dict | None = None, solo_mios: bool = False, limite: int
 # --------------------------------------------------------------------- avisos
 def avisos() -> list[dict]:
     """Lo que falta configurar o cargar: [{texto, pagina}]."""
+    from core import respaldo
     salida = []
+    if respaldo.en_la_nube():
+        u = respaldo.ultimo()
+        salida.append({"texto": "Está en Streamlit Cloud: los datos se borran cuando el servidor se reinicia. "
+                                "Descargue un respaldo al terminar cada jornada" +
+                                (f" (último: {u})." if u else " (aún no hay ninguno)."), "pagina": "Configuración"})
     pend = P.pendientes()
     if pend:
         salida.append({"texto": f"{len(pend)} parámetros normativos pendientes de dato.", "pagina": "Parámetros normativos"})

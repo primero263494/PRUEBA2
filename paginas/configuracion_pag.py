@@ -1,7 +1,7 @@
 """Página: configuración (lectura de escaneos, conversión DWG, repositorio)."""
 import streamlit as st
 
-from core import ajustes, auditoria, conversores, lectura
+from core import ajustes, auditoria, conversores, lectura, respaldo
 from paginas.comun import usuario
 
 
@@ -11,8 +11,42 @@ def _guardar(ruta, valor):
     return cambio
 
 
+def _respaldo():
+    st.subheader("Respaldo de los datos")
+    if respaldo.en_la_nube():
+        st.warning("El programa está en Streamlit Cloud: cuando el servidor se reinicia (actualización, inactividad o "
+                   "falla) se borran la base de datos y los archivos subidos. Descargue un respaldo al terminar cada "
+                   "jornada y restáurelo si encuentra el programa vacío.")
+    st.caption("El respaldo es un .zip con la base (expedientes, usuarios, auditoría, cálculos, informes) y los archivos "
+               "subidos. Último respaldo: " + (respaldo.ultimo() or "ninguno") + ".")
+    if st.button("Preparar respaldo"):
+        contenido, nombre = respaldo.crear()
+        st.session_state["respaldo_listo"] = (contenido, nombre)
+        auditoria.registrar(usuario()["usuario"], "crear", "respaldo", nombre)
+    if st.session_state.get("respaldo_listo"):
+        contenido, nombre = st.session_state["respaldo_listo"]
+        st.download_button(f"Descargar {nombre} ({len(contenido) / 1e6:.1f} MB)", contenido, nombre, "application/zip",
+                           type="primary")
+    with st.expander("Restaurar un respaldo (reemplaza todos los datos actuales)"):
+        arch = st.file_uploader("Respaldo .zip", type=["zip"], key="restaurar_conf")
+        if arch is not None:
+            try:
+                info = respaldo.validar(arch.getvalue())
+                st.write(f"Respaldo del {info['fecha']} con {info['archivos']} archivos.")
+                confirma = st.text_input("Escriba RESTAURAR para confirmar")
+                if st.button("Restaurar", type="primary", disabled=confirma.strip().upper() != "RESTAURAR"):
+                    respaldo.restaurar(arch.getvalue())
+                    st.session_state.clear()
+                    st.query_params.clear()
+                    st.rerun()
+            except Exception as e:
+                st.error(str(e))
+    st.divider()
+
+
 def mostrar():
     st.title("Configuración")
+    _respaldo()
     a = ajustes.cargar()
 
     st.subheader("Lectura de escaneos")

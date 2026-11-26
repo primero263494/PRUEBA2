@@ -109,6 +109,7 @@ class _ColumnConfig:
 
 st = types.ModuleType("streamlit")
 st.session_state = _Estado()
+st.query_params = _Estado()
 st.column_config = _ColumnConfig()
 for nombre in ("title", "header", "subheader", "markdown", "write", "caption", "info", "warning", "error", "success",
                "dataframe", "table", "json", "metric", "image", "code", "divider", "text", "latex", "plotly_chart",

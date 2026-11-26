@@ -64,3 +64,17 @@ def test_buscador_con_texto():
         st.session_state["buscador_inicio"] = texto
         inicio_pag.mostrar()
     st.session_state["buscador_inicio"] = ""
+
+
+def test_nuevo_expediente_con_borrador():
+    from core import borradores
+    from paginas import expedientes_pag
+    borradores.guardar("admin", "nuevo_expediente", {"solicitante": "Borrador", "fecha_radicacion": "2026-11-20",
+                                                     "clase_suelo": "urbano", "estrato": 2})
+    st.session_state["usuario"] = {"id": 1, "usuario": "admin", "nombre": "Admin Prueba", "rol": "administrador"}
+    for k in [k for k in st.session_state if str(k).startswith("n_")] + ["vista_exp"]:
+        st.session_state.pop(k, None)
+    expedientes_pag.mostrar()
+    assert st.session_state["vista_exp"] == "Nuevo expediente"
+    assert st.session_state["n_sol"] == "Borrador"
+    st.session_state["vista_exp"] = "Buscar"

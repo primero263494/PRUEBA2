@@ -4,7 +4,7 @@ from datetime import date
 import pandas as pd
 import streamlit as st
 
-from core import consulta, expedientes as E, verificacion as V
+from core import borradores, consulta, expedientes as E, verificacion as V
 from core import parametros as P
 from paginas.comun import confirmar_eliminacion, puede, usuario, campo_fecha
 
@@ -198,23 +198,91 @@ def _detalle(eid: int):
 
     with t3:
         if puede("expedientes"):
+            yo = usuario().get("usuario", "")
+            clave_b = f"nuevo_tramite_{eid}"
+            bt = borradores.obtener(yo, clave_b) or {}
             tipos = E.tipos()
+            if bt and "nuevo_tipo" not in st.session_state and bt.get("tipo") in tipos:
+                st.session_state["nuevo_tipo"] = bt["tipo"]
+                if bt.get("modalidad") in tipos[bt["tipo"]]["modalidades"]:
+                    st.session_state["nuevo_mod"] = bt["modalidad"]
+                st.session_state["nuevo_obs"] = bt.get("obs", "")
+            if bt:
+                c1, c2 = st.columns([4, 1])
+                c1.info(f"Se recuperó el trámite que estaba llenando (borrador del {bt['_fecha_borrador']}).")
+                c2.button("Empezar de cero", key="desc_tram", on_click=_descartar_borrador, args=(yo, clave_b, "t_"))
             tipo = st.selectbox("Tipo de trámite", list(tipos), format_func=lambda k: tipos[k]["nombre"], key="nuevo_tipo")
             st.caption(f"Fuente: {tipos[tipo]['fuente']}")
             _requisitos_previos(tipo)
             c1, c2 = st.columns(2)
             modalidad = c1.selectbox("Modalidad", tipos[tipo]["modalidades"], key="nuevo_mod")
             fr = campo_fecha(c2, "Fecha de radicación del trámite", None, key="nuevo_fr", obligatorio=True)
-            datos = _form_datos_tramite("n_", tipo)
+            datos = _form_datos_tramite("t_", tipo, bt.get("datos") if bt.get("tipo") == tipo else None)
             obs = st.text_area("Observaciones", key="nuevo_obs")
+            actual = {"tipo": tipo, "modalidad": modalidad, "datos": datos, "obs": obs}
+            if datos or obs:
+                if actual != {k: bt.get(k) for k in actual}:
+                    borradores.guardar(yo, clave_b, actual)
+                st.caption("Borrador guardado automáticamente.")
             if st.button("Agregar trámite", type="primary"):
-                E.agregar_tramite(eid, tipo, modalidad, datos, usuario()["usuario"], fr, obs)
+                E.agregar_tramite(eid, tipo, modalidad, datos, yo, fr, obs)
+                borradores.borrar(yo, clave_b)
+                _limpiar("t_")
+                for k in ("nuevo_tipo", "nuevo_mod", "nuevo_obs", "nuevo_fr"):
+                    st.session_state.pop(k, None)
                 st.success("Trámite agregado. Revise la verificación en la pestaña Trámites.")
                 st.rerun()
 
     with t4:
         h = E.historial(eid)
         st.dataframe(pd.DataFrame(h), hide_index=True, use_container_width=True) if h else st.info("Sin movimientos.")
+
+
+def _limpiar(prefijo: str):
+    for k in [k for k in st.session_state if str(k).startswith(prefijo)]:
+        del st.session_state[k]
+
+
+def _ir_a_expediente(eid: int):
+    st.session_state["vista_exp"] = "Buscar"
+    st.session_state["expediente_abierto"] = eid
+
+
+def _descartar_borrador(yo: str, clave: str, prefijo: str):
+    borradores.borrar(yo, clave)
+    _limpiar(prefijo)
+
+
+def _nuevo_expediente(yo: str, borrador: dict | None):
+    """Formulario de nuevo expediente con guardado automático del borrador."""
+    if borrador:
+        c1, c2 = st.columns([4, 1])
+        c1.info(f"Se recuperó lo que había escrito (borrador guardado el {borrador['_fecha_borrador']}).")
+        c2.button("Empezar de cero", on_click=_descartar_borrador, args=(yo, "nuevo_expediente", "n_"))
+    base = {k: v for k, v in (borrador or {}).items() if not k.startswith("_")}
+    datos = _form_expediente("n_", base or None)
+    # cada cambio se guarda: si la conexión se pierde o se cambia de página, no se pierde lo escrito
+    if any(datos.get(k) for k in ("solicitante", "documento", "direccion", "matricula", "cedula_catastral", "telefono")):
+        if {k: v for k, v in datos.items() if k != "radicado"} != {k: v for k, v in base.items() if k != "radicado"}:
+            borradores.guardar(yo, "nuevo_expediente", datos)
+        st.caption("Borrador guardado automáticamente.")
+    if st.button("Crear expediente", type="primary"):
+        if not datos.get("solicitante", "").strip():
+            st.error("Escriba el solicitante.")
+            return
+        try:
+            eid = E.crear(datos, yo)
+        except Exception as e:
+            st.error(str(e))
+            return
+        borradores.borrar(yo, "nuevo_expediente")
+        _limpiar("n_")
+        st.session_state["exp_creado"] = (eid, datos["radicado"])
+        st.rerun()
+    if st.session_state.get("exp_creado"):
+        eid, rad = st.session_state.pop("exp_creado")
+        st.success(f"Expediente {rad} creado.")
+        st.button("Abrir el expediente y agregar el trámite", type="primary", on_click=_ir_a_expediente, args=(eid,))
 
 
 def mostrar():
@@ -224,21 +292,16 @@ def mostrar():
         st.warning(f"{len(venc)} trámites vencen en 5 días hábiles o ya vencieron: " +
                    ", ".join(f"{v['radicado']} (#{v['id']}, {v['fecha_limite']})" for v in venc[:8]))
 
-    vista = st.radio("Vista", ["Buscar", "Nuevo expediente"], horizontal=True,
-                     index=0 if "expediente_abierto" in st.session_state or not puede("expedientes") else 0)
+    yo = usuario().get("usuario", "")
+    borrador = borradores.obtener(yo, "nuevo_expediente")
+    if "vista_exp" not in st.session_state:
+        st.session_state["vista_exp"] = "Nuevo expediente" if borrador and puede("expedientes") else "Buscar"
+    vista = st.radio("Vista", ["Buscar", "Nuevo expediente"], horizontal=True, key="vista_exp")
     if vista == "Nuevo expediente":
         if not puede("expedientes"):
             st.warning("Su rol no puede crear expedientes.")
             return
-        with st.form("nuevo_expediente"):
-            datos = _form_expediente("n_")
-            if st.form_submit_button("Crear expediente", type="primary"):
-                try:
-                    eid = E.crear(datos, usuario()["usuario"])
-                    st.session_state["expediente_abierto"] = eid
-                    st.success(f"Expediente {datos['radicado']} creado. Agregue el trámite en la vista Buscar.")
-                except Exception as e:
-                    st.error(str(e))
+        _nuevo_expediente(yo, borrador)
         return
 
     c1, c2, c3 = st.columns([2, 1, 1])
